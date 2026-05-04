@@ -1917,6 +1917,177 @@
                 font-size: 1.8rem;
             }
         }
+        /* Demo Chat Cards */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .demo-card {
+            background: #1a1a2e;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .demo-header {
+            background: #2d2d44;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .demo-header .demo-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .demo-header .demo-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .demo-header .demo-dots span:nth-child(1) { background: #ff5f56; }
+        .demo-header .demo-dots span:nth-child(2) { background: #ffbd2e; }
+        .demo-header .demo-dots span:nth-child(3) { background: #27c93f; }
+
+        .demo-header .demo-title {
+            color: #a0a0b8;
+            font-size: 0.85rem;
+            margin-left: 8px;
+        }
+
+        .demo-chat {
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 220px;
+        }
+
+        .chat-msg {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .chat-msg.user {
+            justify-content: flex-end;
+        }
+
+        .chat-msg.ai {
+            justify-content: flex-start;
+        }
+
+        .chat-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .chat-bubble {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .user-bubble {
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .ai-bubble {
+            background: #2d2d44;
+            color: #e0e0f0;
+            border-bottom-left-radius: 4px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 4px 0;
+        }
+
+        .typing-indicator span {
+            width: 6px;
+            height: 6px;
+            background: #888;
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .demo-workflow {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .wf-step {
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            color: #a5b4fc;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .wf-arrow {
+            color: #6366f1;
+            font-size: 0.85rem;
+        }
+
+        .demo-checklist {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .demo-checklist label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #a5b4fc;
+            font-size: 0.8rem;
+        }
+
+        .demo-checklist input[type="checkbox"] {
+            accent-color: #27c93f;
+            width: 14px;
+            height: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -2033,6 +2204,87 @@
                     <li>Workflow tự động chạy 24/7</li>
                     <li>Chỉ cần duyệt kết quả, không cần thao tác</li>
                 </ul>
+            </div>
+        </div>
+
+        <!-- Demo Screenshots -->
+        <div class="section-title animate-on-scroll" style="margin-top: 60px;">
+            <h2>Xem AI Làm Việc Thực Tế</h2>
+            <p>Chỉ cần ra lệnh bằng tin nhắn — AI thực hiện ngay lập tức</p>
+        </div>
+        <div class="demo-grid animate-on-scroll">
+            <div class="demo-card">
+                <div class="demo-header">
+                    <div class="demo-dots"><span></span><span></span><span></span></div>
+                    <span class="demo-title">Claude AI Chat</span>
+                </div>
+                <div class="demo-chat">
+                    <div class="chat-msg user">
+                        <div class="chat-bubble user-bubble">Viết cho anh 5 bài post Facebook quảng cáo khoá học AI, tone chuyên nghiệp nhưng gần gũi</div>
+                    </div>
+                    <div class="chat-msg ai">
+                        <div class="chat-avatar">AI</div>
+                        <div class="chat-bubble ai-bubble">
+                            <div class="typing-indicator"><span></span><span></span><span></span></div>
+                            <p><strong>Bài 1:</strong> "Bạn có biết 78% công việc lặp lại có thể để AI làm thay? Khoá học Claude & OpenClaw giúp bạn..."</p>
+                            <p><strong>Bài 2:</strong> "Sáng nay mình chỉ mất 5 phút để tạo xong 1 landing page hoàn chỉnh. Bí quyết? Mình ra lệnh cho AI..."</p>
+                            <p style="color: var(--primary); font-size: 0.85rem;">... và 3 bài nữa &#10003;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <div class="demo-header">
+                    <div class="demo-dots"><span></span><span></span><span></span></div>
+                    <span class="demo-title">OpenClaw Automation</span>
+                </div>
+                <div class="demo-chat">
+                    <div class="chat-msg user">
+                        <div class="chat-bubble user-bubble">Tạo workflow: mỗi khi nhận email từ khách hàng → tóm tắt → gửi vào Slack #sales → reply tự động</div>
+                    </div>
+                    <div class="chat-msg ai">
+                        <div class="chat-avatar">AI</div>
+                        <div class="chat-bubble ai-bubble">
+                            <p>&#10003; Đã tạo workflow "Auto Email Handler"</p>
+                            <div class="demo-workflow">
+                                <span class="wf-step">Email đến</span>
+                                <span class="wf-arrow">→</span>
+                                <span class="wf-step">AI tóm tắt</span>
+                                <span class="wf-arrow">→</span>
+                                <span class="wf-step">Gửi Slack</span>
+                                <span class="wf-arrow">→</span>
+                                <span class="wf-step">Auto Reply</span>
+                            </div>
+                            <p style="color: #10b981; font-size: 0.85rem; margin-top: 8px;">Workflow đang chạy 24/7 &#x1F7E2;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <div class="demo-header">
+                    <div class="demo-dots"><span></span><span></span><span></span></div>
+                    <span class="demo-title">Claude AI Code</span>
+                </div>
+                <div class="demo-chat">
+                    <div class="chat-msg user">
+                        <div class="chat-bubble user-bubble">Tạo cho anh 1 trang web bán hàng có giỏ hàng, thanh toán QR, responsive mobile</div>
+                    </div>
+                    <div class="chat-msg ai">
+                        <div class="chat-avatar">AI</div>
+                        <div class="chat-bubble ai-bubble">
+                            <p>&#10003; Đã tạo xong trang web bán hàng:</p>
+                            <div class="demo-checklist">
+                                <div>&#10003; Giao diện responsive</div>
+                                <div>&#10003; Giỏ hàng + tính tổng</div>
+                                <div>&#10003; QR thanh toán VietQR</div>
+                                <div>&#10003; Deploy lên hosting</div>
+                            </div>
+                            <p style="color: var(--primary); font-size: 0.85rem; margin-top: 8px;">Hoàn thành trong 3 phút &#x26A1;</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
