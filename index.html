@@ -931,6 +931,355 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
         }
 
+        /* Pricing */
+        .pricing {
+            background: white;
+            padding: 100px 0;
+        }
+
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 48px;
+            background: #f1f5f9;
+            border-radius: 50px;
+            padding: 4px;
+            max-width: 340px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-toggle button {
+            flex: 1;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+            color: var(--gray);
+            font-family: inherit;
+        }
+
+        .pricing-toggle button.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .price-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 24px;
+            padding: 36px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .price-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .price-card.popular {
+            border-color: var(--primary);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+            transform: scale(1.03);
+        }
+
+        .price-card.popular:hover {
+            transform: scale(1.03) translateY(-4px);
+        }
+
+        .price-card .popular-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent), #f97316);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .price-card h3 {
+            font-size: 1.25rem;
+            color: var(--dark);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .price-card .price-desc {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .price-amount {
+            margin-bottom: 8px;
+        }
+
+        .price-original {
+            font-size: 1rem;
+            color: #94a3b8;
+            text-decoration: line-through;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .price-current {
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .price-current small {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        .price-save {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin: 12px 0 20px;
+        }
+
+        .price-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .price-features li {
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price-features li::before {
+            content: "&#10003;";
+            color: #10b981;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .price-card .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .enterprise-note {
+            text-align: center;
+            margin-top: 32px;
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
+            border-radius: 16px;
+        }
+
+        .enterprise-note p {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .enterprise-note strong {
+            color: var(--dark);
+        }
+
+        /* Payment */
+        .payment {
+            background: var(--light);
+            padding: 80px 0;
+        }
+
+        .payment-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .payment-card {
+            background: white;
+            border-radius: 20px;
+            padding: 36px;
+            border: 2px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+
+        .payment-card h3 {
+            font-size: 1.15rem;
+            color: var(--dark);
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-card h3 .icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .bank-info {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .bank-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .bank-row:last-child {
+            border-bottom: none;
+        }
+
+        .bank-row .label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .bank-row .value {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-btn {
+            background: rgba(99, 102, 241, 0.1);
+            border: none;
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .payment-note {
+            background: #fef3c7;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #92400e;
+            line-height: 1.6;
+        }
+
+        .payment-note strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .payment-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .payment-step {
+            text-align: center;
+            padding: 20px 16px;
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .payment-step .step-num {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .payment-step h4 {
+            font-size: 0.9rem;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .payment-step p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .price-card.popular {
+                transform: scale(1);
+            }
+
+            .price-card.popular:hover {
+                transform: translateY(-4px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .payment-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Quote Form */
         .quote {
             background: var(--light);
@@ -1156,7 +1505,8 @@
             <li><a href="#courses">Khoá học</a></li>
             <li><a href="#testimonials">Học viên nói gì</a></li>
             <li><a href="#faq">FAQ</a></li>
-            <li><a href="#quote" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Nhận báo giá</a></li>
+            <li><a href="#pricing">Học phí</a></li>
+            <li><a href="#register" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Đăng ký ngay</a></li>
         </ul>
     </div>
 </nav>
@@ -1168,7 +1518,7 @@
         <h1>Làm Chủ <span class="highlight">Claude AI</span> &<br><span class="highlight">OpenClaw</span> Trong 6 Tuần</h1>
         <p>Khoá học thực chiến giúp bạn khai thác toàn bộ sức mạnh của AI — tăng năng suất 10x, xây dựng sản phẩm AI, và bứt phá sự nghiệp</p>
         <div class="hero-buttons">
-            <a href="#quote" class="btn btn-cta">Nhận báo giá ngay</a>
+            <a href="#pricing" class="btn btn-cta">Xem học phí & Đăng ký</a>
             <a href="#courses" class="btn btn-outline" style="border-color: rgba(255,255,255,0.3); color: white;">Xem khoá học</a>
         </div>
         <div class="hero-trust">
@@ -1251,7 +1601,7 @@
                     <li>Tích hợp Claude vào workflow hàng ngày</li>
                     <li>Best practices & mẹo từ chuyên gia</li>
                 </ul>
-                <a href="#quote" class="course-cta">Nhận báo giá &rarr;</a>
+                <a href="#pricing" class="course-cta">Xem học phí &rarr;</a>
             </div>
             <div class="course-card featured animate-on-scroll">
                 <span class="popular-tag">Phổ biến nhất</span>
@@ -1265,7 +1615,7 @@
                     <li>RAG & Knowledge Base</li>
                     <li>Xây dựng AI Agent hoàn chỉnh</li>
                 </ul>
-                <a href="#quote" class="course-cta">Nhận báo giá &rarr;</a>
+                <a href="#pricing" class="course-cta">Xem học phí &rarr;</a>
             </div>
             <div class="course-card animate-on-scroll">
                 <span class="course-badge badge-basic">Cơ bản</span>
@@ -1278,7 +1628,7 @@
                     <li>Sử dụng templates có sẵn</li>
                     <li>Collaboration & sharing workflow</li>
                 </ul>
-                <a href="#quote" class="course-cta">Nhận báo giá &rarr;</a>
+                <a href="#pricing" class="course-cta">Xem học phí &rarr;</a>
             </div>
             <div class="course-card animate-on-scroll">
                 <span class="course-badge badge-advanced">Nâng cao</span>
@@ -1291,7 +1641,7 @@
                     <li>Performance optimization</li>
                     <li>Enterprise deployment & scaling</li>
                 </ul>
-                <a href="#quote" class="course-cta">Nhận báo giá &rarr;</a>
+                <a href="#pricing" class="course-cta">Xem học phí &rarr;</a>
             </div>
         </div>
     </div>
@@ -1445,12 +1795,208 @@
     <div class="container animate-on-scroll">
         <h2>Sẵn Sàng Bứt Phá Với AI?</h2>
         <p>Đừng để đối thủ đi trước bạn. Đăng ký ngay để nhận ưu đãi Early Bird giảm 30%.</p>
-        <a href="#quote" class="btn btn-cta">Nhận báo giá ngay</a>
+        <a href="#pricing" class="btn btn-cta">Xem học phí ngay</a>
     </div>
 </section>
 
-<!-- Quote Form -->
-<section class="quote" id="quote">
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <div class="section-label">Học phí</div>
+            <h2>Bảng Giá Khoá Học</h2>
+            <p>Đầu tư cho bản thân — nhận lại giá trị gấp nhiều lần</p>
+        </div>
+        <div class="pricing-toggle">
+            <button class="active" onclick="switchPricing('individual', this)">Cá nhân</button>
+            <button onclick="switchPricing('enterprise', this)">Doanh nghiệp</button>
+        </div>
+
+        <!-- Individual Pricing -->
+        <div id="pricing-individual">
+            <div class="pricing-grid">
+                <div class="price-card animate-on-scroll">
+                    <h3>Khoá Cơ Bản</h3>
+                    <p class="price-desc">Claude AI hoặc OpenClaw</p>
+                    <div class="price-amount">
+                        <span class="price-original">5.999.000đ</span>
+                        <div class="price-current">3.999.000<small>đ/khoá</small></div>
+                    </div>
+                    <div class="price-save">Tiết kiệm 2.000.000đ</div>
+                    <ul class="price-features">
+                        <li>4 tuần học (8 buổi)</li>
+                        <li>Video recording xem lại</li>
+                        <li>Bài tập thực hành</li>
+                        <li>Cộng đồng học viên</li>
+                        <li>Chứng chỉ hoàn thành</li>
+                    </ul>
+                    <a href="#register" class="btn btn-outline">Đăng ký ngay</a>
+                </div>
+
+                <div class="price-card popular animate-on-scroll">
+                    <div class="popular-badge">Phổ biến nhất</div>
+                    <h3>Combo Nâng Cao</h3>
+                    <p class="price-desc">Claude AI + OpenClaw Nâng cao</p>
+                    <div class="price-amount">
+                        <span class="price-original">19.999.000đ</span>
+                        <div class="price-current">13.999.000<small>đ/2 khoá</small></div>
+                    </div>
+                    <div class="price-save">Tiết kiệm 6.000.000đ</div>
+                    <ul class="price-features">
+                        <li>6 tuần/khoá (tổng 12 tuần)</li>
+                        <li>Video recording xem lại</li>
+                        <li>Dự án capstone + feedback 1-1</li>
+                        <li>Hỗ trợ qua Slack 3 tháng</li>
+                        <li>Chứng chỉ hoàn thành</li>
+                        <li>Cập nhật nội dung miễn phí</li>
+                    </ul>
+                    <a href="#register" class="btn btn-primary">Đăng ký ngay</a>
+                </div>
+
+                <div class="price-card animate-on-scroll">
+                    <h3>Trọn Bộ 4 Khoá</h3>
+                    <p class="price-desc">Cơ bản + Nâng cao, cả 2 nền tảng</p>
+                    <div class="price-amount">
+                        <span class="price-original">29.999.000đ</span>
+                        <div class="price-current">19.999.000<small>đ/4 khoá</small></div>
+                    </div>
+                    <div class="price-save">Tiết kiệm 10.000.000đ</div>
+                    <ul class="price-features">
+                        <li>Trọn bộ 4 khoá học</li>
+                        <li>Video recording trọn đời</li>
+                        <li>Dự án capstone + feedback 1-1</li>
+                        <li>Hỗ trợ qua Slack 6 tháng</li>
+                        <li>Chứng chỉ hoàn thành</li>
+                        <li>Ưu tiên khoá mới miễn phí</li>
+                    </ul>
+                    <a href="#register" class="btn btn-outline">Đăng ký ngay</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enterprise Pricing -->
+        <div id="pricing-enterprise" style="display: none;">
+            <div class="pricing-grid">
+                <div class="price-card animate-on-scroll">
+                    <h3>Nhóm 5-10 người</h3>
+                    <p class="price-desc">Phù hợp team nhỏ</p>
+                    <div class="price-amount">
+                        <div class="price-current">9.999.000<small>đ/người</small></div>
+                    </div>
+                    <div class="price-save">Giảm 15% so với cá nhân</div>
+                    <ul class="price-features">
+                        <li>Chọn khoá nâng cao bất kỳ</li>
+                        <li>Lịch học linh hoạt cho team</li>
+                        <li>Báo cáo tiến độ học viên</li>
+                        <li>Hỗ trợ kỹ thuật riêng</li>
+                        <li>Chứng chỉ cho từng người</li>
+                    </ul>
+                    <a href="#register" class="btn btn-outline">Liên hệ báo giá</a>
+                </div>
+
+                <div class="price-card popular animate-on-scroll">
+                    <div class="popular-badge">Tốt nhất cho DN</div>
+                    <h3>Nhóm 11-20 người</h3>
+                    <p class="price-desc">Phù hợp phòng ban</p>
+                    <div class="price-amount">
+                        <div class="price-current">7.999.000<small>đ/người</small></div>
+                    </div>
+                    <div class="price-save">Giảm 30% so với cá nhân</div>
+                    <ul class="price-features">
+                        <li>Chọn khoá nâng cao bất kỳ</li>
+                        <li>Nội dung tuỳ chỉnh theo ngành</li>
+                        <li>Báo cáo tiến độ chi tiết</li>
+                        <li>Account Manager riêng</li>
+                        <li>Chứng chỉ + báo cáo kết quả</li>
+                        <li>Hỗ trợ triển khai sau khoá</li>
+                    </ul>
+                    <a href="#register" class="btn btn-primary">Liên hệ báo giá</a>
+                </div>
+
+                <div class="price-card animate-on-scroll">
+                    <h3>20+ người</h3>
+                    <p class="price-desc">Enterprise / Toàn công ty</p>
+                    <div class="price-amount">
+                        <div class="price-current" style="font-size: 1.8rem;">Liên hệ<small> báo giá riêng</small></div>
+                    </div>
+                    <div class="price-save">Ưu đãi tốt nhất</div>
+                    <ul class="price-features">
+                        <li>Nội dung 100% tuỳ chỉnh</li>
+                        <li>Đào tạo on-site hoặc online</li>
+                        <li>Giảng viên riêng cho DN</li>
+                        <li>Hỗ trợ triển khai dài hạn</li>
+                        <li>Hoá đơn VAT</li>
+                        <li>Thanh toán linh hoạt</li>
+                    </ul>
+                    <a href="#register" class="btn btn-outline">Liên hệ ngay</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="enterprise-note animate-on-scroll">
+            <p>Hỗ trợ <strong>trả góp 0% lãi suất</strong> qua thẻ tín dụng cho tất cả các gói. Liên hệ để biết thêm chi tiết.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Payment -->
+<section class="payment" id="payment">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <div class="section-label">Thanh toán</div>
+            <h2>Hướng Dẫn Thanh Toán</h2>
+            <p>Thanh toán nhanh chóng qua chuyển khoản ngân hàng</p>
+        </div>
+        <div class="payment-wrapper">
+            <div class="payment-card animate-on-scroll">
+                <h3><span class="icon">&#x1F3E6;</span> Chuyển khoản ngân hàng</h3>
+                <div class="bank-info">
+                    <div class="bank-row">
+                        <span class="label">Ngân hàng</span>
+                        <span class="value">VIETINBANK</span>
+                    </div>
+                    <div class="bank-row">
+                        <span class="label">Số tài khoản</span>
+                        <span class="value">101872834062 <button class="copy-btn" onclick="copyText('101872834062', this)">Copy</button></span>
+                    </div>
+                    <div class="bank-row">
+                        <span class="label">Chủ tài khoản</span>
+                        <span class="value">NGUYEN VAN THUONG</span>
+                    </div>
+                    <div class="bank-row">
+                        <span class="label">Nội dung CK</span>
+                        <span class="value">[Họ tên] [Khoá học] <button class="copy-btn" onclick="copyText('[Họ tên] [Khoá học]', this)">Copy</button></span>
+                    </div>
+                </div>
+                <div class="payment-note">
+                    <strong>Lưu ý quan trọng:</strong>
+                    Vui lòng ghi đúng nội dung chuyển khoản để chúng tôi xác nhận nhanh nhất. Sau khi chuyển khoản, chụp màn hình gửi qua form đăng ký bên dưới hoặc liên hệ hotline để được xác nhận.
+                </div>
+            </div>
+
+            <div class="payment-steps animate-on-scroll">
+                <div class="payment-step">
+                    <div class="step-num">1</div>
+                    <h4>Chọn khoá học</h4>
+                    <p>Xem bảng giá và chọn gói phù hợp</p>
+                </div>
+                <div class="payment-step">
+                    <div class="step-num">2</div>
+                    <h4>Chuyển khoản</h4>
+                    <p>Thanh toán theo thông tin trên</p>
+                </div>
+                <div class="payment-step">
+                    <div class="step-num">3</div>
+                    <h4>Xác nhận & Học</h4>
+                    <p>Nhận link vào lớp trong 24h</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Registration Form -->
+<section class="quote" id="register">
     <div class="container">
         <div class="section-title animate-on-scroll">
             <div class="section-label">Đăng ký</div>
@@ -1534,6 +2080,27 @@
         e.preventDefault();
         document.getElementById('quoteForm').style.display = 'none';
         document.getElementById('formSuccess').style.display = 'block';
+    }
+
+    function switchPricing(type, btn) {
+        document.getElementById('pricing-individual').style.display = type === 'individual' ? 'block' : 'none';
+        document.getElementById('pricing-enterprise').style.display = type === 'enterprise' ? 'block' : 'none';
+        document.querySelectorAll('.pricing-toggle button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    function copyText(text, btn) {
+        navigator.clipboard.writeText(text).then(() => {
+            const original = btn.textContent;
+            btn.textContent = 'Copied!';
+            btn.style.background = '#10b981';
+            btn.style.color = 'white';
+            setTimeout(() => {
+                btn.textContent = original;
+                btn.style.background = '';
+                btn.style.color = '';
+            }, 2000);
+        });
     }
 
     // Smooth scroll
