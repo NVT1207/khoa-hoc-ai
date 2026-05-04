@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khoá Học Claude & OpenClaw - Từ Cơ Bản Đến Nâng Cao</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --dark: #1e1b4b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --radius: 12px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 16px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, #eef2ff 0%, #fce7f3 50%, #f0e7ff 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 60px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Section common */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About */
+        .about {
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+
+        .about-content p {
+            color: var(--gray);
+            margin-bottom: 16px;
+        }
+
+        .about-features {
+            list-style: none;
+        }
+
+        .about-features li {
+            padding: 8px 0;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .about-features li::before {
+            content: "✓";
+            display: inline-flex;
+            width: 24px;
+            height: 24px;
+            align-items: center;
+            justify-content: center;
+            background: #eef2ff;
+            color: var(--primary);
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-height: 350px;
+            justify-content: center;
+        }
+
+        .about-image h4 {
+            font-size: 1.3rem;
+        }
+
+        .about-image p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* Courses */
+        .courses {
+            background: var(--light);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .badge-basic {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .badge-advanced {
+            background: #fce7f3;
+            color: #be185d;
+        }
+
+        .course-card h3 {
+            font-size: 1.25rem;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .course-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .course-topics {
+            list-style: none;
+        }
+
+        .course-topics li {
+            padding: 6px 0;
+            color: #475569;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .course-topics li:last-child {
+            border-bottom: none;
+        }
+
+        /* Benefits */
+        .benefits {
+            background: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 32px 20px;
+        }
+
+        .benefit-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #eef2ff, #fce7f3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 1.8rem;
+        }
+
+        .benefit-item h3 {
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .benefit-item p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Instructor */
+        .instructor {
+            background: var(--light);
+        }
+
+        .instructor-card {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 48px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .instructor-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .instructor-card h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .instructor-card .role {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .instructor-card p {
+            color: var(--gray);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* FAQ */
+        .faq {
+            background: white;
+        }
+
+        .faq-list {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.05rem;
+        }
+
+        .faq-question::after {
+            content: "+";
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--gray);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding-top: 12px;
+        }
+
+        /* Quote Form */
+        .quote {
+            background: linear-gradient(135deg, var(--dark) 0%, #312e81 100%);
+            color: white;
+        }
+
+        .quote .section-title h2 {
+            color: white;
+        }
+
+        .quote .section-title p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .quote-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .form-group select option {
+            color: #334155;
+            background: white;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .quote-form .btn-primary {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .form-success h3 {
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+        }
+
+        .form-success p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Mobile menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-stats {
+                gap: 24px;
+                flex-wrap: wrap;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="container">
+        <div class="logo">AI Academy</div>
+        <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+        <ul class="nav-links">
+            <li><a href="#about">Giới thiệu</a></li>
+            <li><a href="#courses">Khoá học</a></li>
+            <li><a href="#benefits">Lợi ích</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#quote" class="btn btn-primary" style="padding: 8px 20px;">Nhận báo giá</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <h1>Làm Chủ <span>Claude AI</span> & <span>OpenClaw</span><br>Từ Cơ Bản Đến Nâng Cao</h1>
+        <p>Khoá học thực chiến giúp bạn khai thác toàn bộ sức mạnh của AI trong công việc và dự án thực tế</p>
+        <div class="hero-buttons">
+            <a href="#courses" class="btn btn-primary">Xem khoá học</a>
+            <a href="#quote" class="btn btn-outline">Nhận báo giá</a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Học viên</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">4.9/5</div>
+                <div class="stat-label">Đánh giá</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Hài lòng</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+    <div class="container">
+        <div class="section-title">
+            <h2>Tại Sao Chọn Chúng Tôi?</h2>
+            <p>Chương trình đào tạo được thiết kế bởi chuyên gia với kinh nghiệm thực tế</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-content">
+                <h3>Học AI đúng cách, ứng dụng ngay</h3>
+                <p>Khoá học tập trung vào thực hành, giúp bạn nắm vững cách sử dụng Claude và OpenClaw để tối ưu hoá quy trình làm việc, phát triển sản phẩm và tự động hoá tác vụ.</p>
+                <ul class="about-features">
+                    <li>Bài tập thực hành sau mỗi buổi học</li>
+                    <li>Dự án capstone cuối khoá</li>
+                    <li>Hỗ trợ 1-1 với giảng viên</li>
+                    <li>Cộng đồng học viên hỗ trợ lẫn nhau</li>
+                    <li>Cập nhật nội dung theo phiên bản mới nhất</li>
+                    <li>Chứng chỉ hoàn thành khoá học</li>
+                </ul>
+            </div>
+            <div class="about-image">
+                <h4>Phù hợp với mọi đối tượng</h4>
+                <p>Dù bạn là developer, product manager, marketer hay sinh viên — chúng tôi có lộ trình phù hợp cho bạn.</p>
+                <p>Từ prompt engineering cơ bản đến xây dựng ứng dụng AI phức tạp với API và agents.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Courses -->
+<section class="courses" id="courses">
+    <div class="container">
+        <div class="section-title">
+            <h2>Các Khoá Học</h2>
+            <p>Lộ trình học tập từ cơ bản đến nâng cao, phù hợp mọi trình độ</p>
+        </div>
+        <div class="courses-grid">
+            <div class="course-card">
+                <span class="course-badge badge-basic">Cơ bản</span>
+                <h3>Claude AI - Cơ Bản</h3>
+                <p>Nắm vững nền tảng sử dụng Claude cho công việc hàng ngày</p>
+                <ul class="course-topics">
+                    <li>Prompt engineering cơ bản</li>
+                    <li>Viết nội dung với Claude</li>
+                    <li>Phân tích dữ liệu & tóm tắt</li>
+                    <li>Tích hợp Claude vào workflow</li>
+                    <li>Best practices & tips</li>
+                </ul>
+            </div>
+            <div class="course-card">
+                <span class="course-badge badge-advanced">Nâng cao</span>
+                <h3>Claude AI - Nâng Cao</h3>
+                <p>Xây dựng ứng dụng AI mạnh mẽ với Claude API</p>
+                <ul class="course-topics">
+                    <li>Claude API & SDK</li>
+                    <li>Tool Use & Function Calling</li>
+                    <li>Multi-turn conversations</li>
+                    <li>RAG & Knowledge Base</li>
+                    <li>Xây dựng AI Agent</li>
+                </ul>
+            </div>
+            <div class="course-card">
+                <span class="course-badge badge-basic">Cơ bản</span>
+                <h3>OpenClaw - Cơ Bản</h3>
+                <p>Bắt đầu với OpenClaw và các tính năng cốt lõi</p>
+                <ul class="course-topics">
+                    <li>Giới thiệu OpenClaw platform</li>
+                    <li>Cài đặt & cấu hình</li>
+                    <li>Tạo và quản lý project</li>
+                    <li>Sử dụng templates có sẵn</li>
+                    <li>Collaboration & sharing</li>
+                </ul>
+            </div>
+            <div class="course-card">
+                <span class="course-badge badge-advanced">Nâng cao</span>
+                <h3>OpenClaw - Nâng Cao</h3>
+                <p>Master OpenClaw với workflows phức tạp và automation</p>
+                <ul class="course-topics">
+                    <li>Custom workflows & pipelines</li>
+                    <li>API integration nâng cao</li>
+                    <li>Automation & scheduling</li>
+                    <li>Performance optimization</li>
+                    <li>Enterprise deployment</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits -->
+<section class="benefits" id="benefits">
+    <div class="container">
+        <div class="section-title">
+            <h2>Lợi Ích Khi Tham Gia</h2>
+            <p>Không chỉ học kiến thức, mà còn xây dựng kỹ năng thực tế</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-icon">&#x1F680;</div>
+                <h3>Tăng năng suất 10x</h3>
+                <p>Tự động hoá công việc lặp đi lặp lại, tập trung vào việc quan trọng</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">&#x1F4BC;</div>
+                <h3>Nâng cao sự nghiệp</h3>
+                <p>Kỹ năng AI là lợi thế cạnh tranh lớn trong thị trường việc làm</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">&#x1F465;</div>
+                <h3>Cộng đồng mạnh</h3>
+                <p>Kết nối với hàng trăm chuyên gia và học viên cùng lĩnh vực</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">&#x1F3AF;</div>
+                <h3>Dự án thực tế</h3>
+                <p>Áp dụng ngay vào công việc với các bài tập và dự án capstone</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Instructor -->
+<section class="instructor" id="instructor">
+    <div class="container">
+        <div class="section-title">
+            <h2>Giảng Viên</h2>
+            <p>Học từ người có kinh nghiệm thực chiến</p>
+        </div>
+        <div class="instructor-card">
+            <div class="instructor-avatar">AI</div>
+            <h3>AI Academy Team</h3>
+            <p class="role">AI Engineers & Consultants</p>
+            <p>Đội ngũ giảng viên với nhiều năm kinh nghiệm trong lĩnh vực AI, đã triển khai hàng chục dự án AI cho doanh nghiệp từ startup đến enterprise. Chúng tôi không chỉ dạy lý thuyết mà chia sẻ kinh nghiệm thực tế từ các dự án đã thực hiện.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+    <div class="container">
+        <div class="section-title">
+            <h2>Câu Hỏi Thường Gặp</h2>
+            <p>Giải đáp những thắc mắc phổ biến của học viên</p>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Khoá học phù hợp với ai?</div>
+                <div class="faq-answer">Khoá học phù hợp với tất cả mọi người muốn ứng dụng AI vào công việc: developer, product manager, marketer, content creator, sinh viên. Khoá cơ bản không yêu cầu kiến thức lập trình, khoá nâng cao cần biết cơ bản về programming.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Thời gian học bao lâu?</div>
+                <div class="faq-answer">Mỗi khoá cơ bản kéo dài 4 tuần, khoá nâng cao 6 tuần. Mỗi tuần có 2 buổi học, mỗi buổi 2 tiếng. Bạn có thể học online theo lịch hoặc xem lại recording.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Có hỗ trợ sau khoá học không?</div>
+                <div class="faq-answer">Có! Sau khi hoàn thành khoá học, bạn được tham gia cộng đồng alumni, truy cập tài liệu cập nhật, và nhận hỗ trợ kỹ thuật trong 3 tháng.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Học phí bao nhiêu?</div>
+                <div class="faq-answer">Học phí tuỳ thuộc vào khoá học và gói đăng ký. Vui lòng điền form bên dưới để nhận báo giá chi tiết phù hợp với nhu cầu của bạn. Chúng tôi có chính sách ưu đãi cho nhóm và doanh nghiệp.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Thanh toán bằng hình thức nào?</div>
+                <div class="faq-answer">Chúng tôi hỗ trợ thanh toán qua chuyển khoản ngân hàng, ví điện tử (MoMo, ZaloPay), và thẻ tín dụng. Có thể trả góp cho các gói nâng cao.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quote Form -->
+<section class="quote" id="quote">
+    <div class="container">
+        <div class="section-title">
+            <h2>Nhận Báo Giá</h2>
+            <p>Điền thông tin để nhận báo giá chi tiết và tư vấn khoá học phù hợp</p>
+        </div>
+        <div class="quote-form" id="quoteForm">
+            <form onsubmit="submitForm(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Họ tên *</label>
+                        <input type="text" placeholder="Nguyễn Văn A" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại *</label>
+                        <input type="tel" placeholder="0901 234 567" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" placeholder="email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Khoá học quan tâm *</label>
+                    <select required>
+                        <option value="">-- Chọn khoá học --</option>
+                        <option>Claude AI - Cơ bản</option>
+                        <option>Claude AI - Nâng cao</option>
+                        <option>OpenClaw - Cơ bản</option>
+                        <option>OpenClaw - Nâng cao</option>
+                        <option>Combo: Claude + OpenClaw Cơ bản</option>
+                        <option>Combo: Claude + OpenClaw Nâng cao</option>
+                        <option>Trọn bộ 4 khoá</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Số lượng học viên</label>
+                    <select>
+                        <option>1 người (cá nhân)</option>
+                        <option>2-5 người (nhóm nhỏ)</option>
+                        <option>6-20 người (team)</option>
+                        <option>20+ người (doanh nghiệp)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ghi chú thêm</label>
+                    <textarea rows="3" placeholder="Yêu cầu đặc biệt, câu hỏi..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Gửi yêu cầu báo giá</button>
+            </form>
+        </div>
+        <div class="form-success" id="formSuccess">
+            <h3>Cảm ơn bạn!</h3>
+            <p>Chúng tôi đã nhận được yêu cầu và sẽ liên hệ bạn trong vòng 24 giờ với báo giá chi tiết.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <p>&copy; 2026 AI Academy. Khoá học Claude & OpenClaw.</p>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.querySelector('.nav-links').classList.toggle('active');
+    }
+
+    function toggleFaq(el) {
+        el.parentElement.classList.toggle('active');
+    }
+
+    function submitForm(e) {
+        e.preventDefault();
+        document.getElementById('quoteForm').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+            document.querySelector('.nav-links').classList.remove('active');
+        });
+    });
+</script>
+
+</body>
+</html>
