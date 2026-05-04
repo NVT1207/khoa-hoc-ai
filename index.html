@@ -2082,8 +2082,136 @@
             height: 14px;
         }
 
+        /* Messenger Demo Cards (Telegram & Zalo) */
+        .messenger-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .messenger-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .messenger-header {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .telegram-header { background: #1e88e5; }
+        .zalo-header { background: #0068ff; }
+
+        .messenger-back {
+            color: white;
+            font-size: 1.2rem;
+            cursor: default;
+        }
+
+        .messenger-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .tg-avatar { background: #7c4dff; }
+        .zalo-avatar { background: #00c853; }
+
+        .messenger-info { flex: 1; }
+        .messenger-name { color: white; font-weight: 600; font-size: 0.9rem; }
+        .messenger-status { color: rgba(255,255,255,0.7); font-size: 0.72rem; }
+        .messenger-icon { color: white; font-size: 1.1rem; }
+
+        .messenger-body {
+            background: #0e1621;
+            padding: 16px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: 240px;
+        }
+
+        .zalo-card .messenger-body { background: #e8ecf0; }
+
+        .msg-time {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #888;
+            padding: 4px 12px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            align-self: center;
+        }
+
+        .zalo-card .msg-time { background: rgba(0,0,0,0.06); color: #666; }
+
+        .msg { display: flex; }
+        .msg-out { justify-content: flex-end; }
+        .msg-in { justify-content: flex-start; }
+
+        .msg-bubble {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        .tg-out { background: #2b5278; color: #e0e0f0; border-bottom-right-radius: 4px; }
+        .tg-in { background: #1c2e3d; color: #e0e0f0; border-bottom-left-radius: 4px; }
+        .zalo-out { background: #d5e8ff; color: #1a1a1a; border-bottom-right-radius: 4px; }
+        .zalo-in { background: white; color: #1a1a1a; border-bottom-left-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+        .msg-meta {
+            font-size: 0.65rem;
+            color: #888;
+            text-align: right;
+            margin-top: 3px;
+            padding-right: 4px;
+        }
+
+        .messenger-footer {
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1a1a2e;
+        }
+
+        .zalo-card .messenger-footer { background: #f0f2f5; }
+
+        .messenger-label {
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #a0a0b8;
+        }
+
+        .zalo-card .messenger-label { color: #0068ff; }
+
+        .messenger-tag {
+            font-size: 0.72rem;
+            color: #27c93f;
+            background: rgba(39, 201, 63, 0.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .zalo-card .messenger-tag { background: rgba(0, 104, 255, 0.08); color: #0068ff; }
+
         @media (max-width: 768px) {
-            .demo-grid {
+            .demo-grid,
+            .messenger-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -2284,6 +2412,92 @@
                             <p style="color: var(--primary); font-size: 0.85rem; margin-top: 8px;">Hoàn thành trong 3 phút &#x26A1;</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messenger Demo: Telegram & Zalo -->
+        <div class="messenger-grid animate-on-scroll">
+            <div class="messenger-card telegram-card">
+                <div class="messenger-header telegram-header">
+                    <div class="messenger-back">&#8592;</div>
+                    <div class="messenger-avatar tg-avatar">AI</div>
+                    <div class="messenger-info">
+                        <div class="messenger-name">AI Assistant Bot</div>
+                        <div class="messenger-status">online</div>
+                    </div>
+                    <div class="messenger-icon">&#128222;</div>
+                </div>
+                <div class="messenger-body">
+                    <div class="msg-time">Hôm nay, 09:15</div>
+                    <div class="msg msg-out">
+                        <div class="msg-bubble out-bubble tg-out">Tóm tắt email quan trọng hôm nay và trả lời giúp anh email nào cần reply gấp</div>
+                        <div class="msg-meta">09:15 &#10003;&#10003;</div>
+                    </div>
+                    <div class="msg msg-in">
+                        <div class="msg-bubble in-bubble tg-in">
+                            <strong>&#128233; 3 email quan trọng hôm nay:</strong><br><br>
+                            1. <b>Khách hàng ABC</b> - Hỏi báo giá → Đã reply với bảng giá<br>
+                            2. <b>Đối tác XYZ</b> - Xác nhận meeting → Đã confirm 2PM<br>
+                            3. <b>Team nội bộ</b> - Báo cáo tuần → Đã trả lời nhận<br><br>
+                            &#9989; Đã xử lý xong 3/3 email trong 45 giây
+                        </div>
+                        <div class="msg-meta">09:15</div>
+                    </div>
+                    <div class="msg msg-out">
+                        <div class="msg-bubble out-bubble tg-out">Perfect! Giờ lên lịch post Facebook cho tuần này đi</div>
+                        <div class="msg-meta">09:16 &#10003;&#10003;</div>
+                    </div>
+                    <div class="msg msg-in">
+                        <div class="msg-bubble in-bubble tg-in">&#9989; Đã lên lịch 7 bài post (T2-CN). Anh muốn xem trước nội dung không?</div>
+                        <div class="msg-meta">09:16</div>
+                    </div>
+                </div>
+                <div class="messenger-footer">
+                    <span class="messenger-label">Telegram</span>
+                    <span class="messenger-tag">Ra lệnh bằng giọng nói &#127908;</span>
+                </div>
+            </div>
+
+            <div class="messenger-card zalo-card">
+                <div class="messenger-header zalo-header">
+                    <div class="messenger-back">&#8592;</div>
+                    <div class="messenger-avatar zalo-avatar">AI</div>
+                    <div class="messenger-info">
+                        <div class="messenger-name">Trợ Lý AI Kinh Doanh</div>
+                        <div class="messenger-status">Đang hoạt động</div>
+                    </div>
+                    <div class="messenger-icon">&#128379;</div>
+                </div>
+                <div class="messenger-body">
+                    <div class="msg-time">Hôm nay, 14:30</div>
+                    <div class="msg msg-out">
+                        <div class="msg-bubble out-bubble zalo-out">Khách hàng Nguyễn Văn A vừa hỏi giá sản phẩm X, trả lời giúp anh và gửi catalogue kèm ưu đãi tháng này</div>
+                        <div class="msg-meta">14:30</div>
+                    </div>
+                    <div class="msg msg-in">
+                        <div class="msg-bubble in-bubble zalo-in">
+                            &#9989; <b>Đã gửi cho khách Nguyễn Văn A:</b><br><br>
+                            &#128196; Bảng giá sản phẩm X: 2.500.000đ<br>
+                            &#127873; Ưu đãi tháng 6: Giảm 15%<br>
+                            &#128230; Catalogue đầy đủ (PDF)<br>
+                            &#128172; Tin nhắn chăm sóc cá nhân hoá<br><br>
+                            <em style="color: #27c93f;">Khách đã đọc và reply "Cảm ơn, để mình xem" &#128077;</em>
+                        </div>
+                        <div class="msg-meta">14:30</div>
+                    </div>
+                    <div class="msg msg-out">
+                        <div class="msg-bubble out-bubble zalo-out">Nhắc lại khách sau 2 tiếng nếu chưa đặt hàng nhé</div>
+                        <div class="msg-meta">14:31</div>
+                    </div>
+                    <div class="msg msg-in">
+                        <div class="msg-bubble in-bubble zalo-in">&#9200; Đã đặt lịch nhắc lại lúc 16:30. Anh yên tâm!</div>
+                        <div class="msg-meta">14:31</div>
+                    </div>
+                </div>
+                <div class="messenger-footer">
+                    <span class="messenger-label">Zalo</span>
+                    <span class="messenger-tag">Chăm sóc khách tự động &#128640;</span>
                 </div>
             </div>
         </div>
