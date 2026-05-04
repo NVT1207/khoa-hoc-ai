@@ -2038,7 +2038,7 @@
                         <option value="">-- Chọn khoá học --</option>
                         <option value="co-ban" data-price="6999000" data-original="9999000">Claude & OpenClaw - Cơ bản</option>
                         <option value="nang-cao" data-price="13999000" data-original="19999000">Claude & OpenClaw - Nâng cao</option>
-                        <option value="combo" data-price="17999000" data-original="29999000">Combo 2 khoá (Cơ bản + Nâng cao)</option>
+                        <option value="combo" data-price="17999000" data-original="26999000">Combo 2 khoá (Cơ bản + Nâng cao)</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -2142,17 +2142,47 @@
     function submitForm(e) {
         e.preventDefault();
         const name = document.getElementById('inputName').value;
+        const phone = document.getElementById('inputPhone').value;
+        const email = document.getElementById('inputEmail').value;
         const course = document.getElementById('inputCourse');
         const selected = course.options[course.selectedIndex];
-        const price = parseInt(selected.dataset.price);
-        const original = parseInt(selected.dataset.original);
+        const courseValue = selected.value;
+
+        // Check if this user already used the offer
+        const userKey = (phone + email).toLowerCase().replace(/\s/g, '');
+        const usedOffers = JSON.parse(localStorage.getItem('usedOffers') || '[]');
+        const isFirstTime = !usedOffers.includes(userKey);
+
+        let price, original;
+        if (isFirstTime) {
+            price = parseInt(selected.dataset.price);
+            original = parseInt(selected.dataset.original);
+            // Save to localStorage
+            usedOffers.push(userKey);
+            localStorage.setItem('usedOffers', JSON.stringify(usedOffers));
+        } else {
+            // Second time: full price, no discount
+            original = parseInt(selected.dataset.original);
+            price = original;
+        }
+
         const courseName = selected.text;
         const saving = original - price;
 
         document.getElementById('resultCourse').textContent = courseName;
         document.getElementById('resultOriginal').textContent = formatPrice(original);
         document.getElementById('resultPrice').textContent = formatPrice(price);
-        document.getElementById('resultSave').textContent = '-' + formatPrice(saving);
+
+        if (saving > 0) {
+            document.getElementById('resultSave').textContent = '-' + formatPrice(saving);
+            document.querySelector('.quote-row.highlight span').textContent = 'Giá ưu đãi Early Bird:';
+            document.getElementById('resultSave').parentElement.style.display = 'flex';
+            document.getElementById('resultOriginal').parentElement.style.display = 'flex';
+        } else {
+            document.querySelector('.quote-row.highlight span').textContent = 'Giá khoá học:';
+            document.getElementById('resultSave').parentElement.style.display = 'none';
+            document.getElementById('resultOriginal').parentElement.style.display = 'none';
+        }
 
         const transferText = name.toUpperCase().replace(/\s+/g, ' ').trim() + ' ' + courseName;
         document.getElementById('transferContent').textContent = transferText;
@@ -2166,7 +2196,15 @@
         document.getElementById('paymentFullscreen').style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        startCountdown(15 * 60);
+        if (isFirstTime) {
+            document.querySelector('.countdown-banner').style.display = 'block';
+            document.querySelector('.countdown-banner').classList.remove('countdown-expired');
+            document.querySelector('.countdown-warning').textContent = 'Thanh toán trong thời gian này để nhận giá ưu đãi!';
+            startCountdown(15 * 60);
+        } else {
+            document.querySelector('.countdown-banner').style.display = 'none';
+            clearInterval(countdownInterval);
+        }
     }
 
     function goBack() {
