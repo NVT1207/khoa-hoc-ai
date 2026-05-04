@@ -1280,6 +1280,65 @@
             }
         }
 
+        /* Fullscreen Payment */
+        .payment-fullscreen {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8fafc, #eef2ff);
+            padding: 20px;
+        }
+
+        .payment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 700px;
+            margin: 0 auto 24px;
+            padding: 16px 0;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .back-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .cancel-btn {
+            background: none;
+            border: 2px solid #ef4444;
+            color: #ef4444;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .cancel-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        .payment-body {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
         /* Countdown */
         .countdown-banner {
             background: linear-gradient(135deg, #dc2626, #b91c1c);
@@ -1668,6 +1727,7 @@
 <body>
 
 <!-- Navigation -->
+<div id="mainContent">
 <nav>
     <div class="container">
         <div class="logo">AI Academy</div>
@@ -1993,62 +2053,6 @@
                 <button type="submit" class="btn btn-primary">Nhận báo giá ngay</button>
             </form>
         </div>
-
-        <!-- Result: Báo giá + Countdown + QR -->
-        <div id="quoteResult" style="display: none;">
-            <div class="quote-wrapper" style="max-width: 750px;">
-                <!-- Countdown -->
-                <div class="countdown-banner">
-                    <div class="countdown-text">Ưu đãi này hết hạn sau:</div>
-                    <div class="countdown-timer" id="countdownTimer">
-                        <div class="countdown-item"><span id="cdMinutes">15</span><small>phút</small></div>
-                        <div class="countdown-item"><span id="cdSeconds">00</span><small>giây</small></div>
-                    </div>
-                    <div class="countdown-warning">Thanh toán trong thời gian này để nhận giá ưu đãi!</div>
-                </div>
-
-                <!-- Báo giá -->
-                <div class="quote-result-card">
-                    <h3>Báo Giá Dành Riêng Cho Bạn</h3>
-                    <div class="quote-detail">
-                        <div class="quote-row">
-                            <span>Khoá học:</span>
-                            <strong id="resultCourse"></strong>
-                        </div>
-                        <div class="quote-row">
-                            <span>Giá gốc:</span>
-                            <strong class="price-strike" id="resultOriginal"></strong>
-                        </div>
-                        <div class="quote-row highlight">
-                            <span>Giá ưu đãi Early Bird:</span>
-                            <strong class="price-highlight" id="resultPrice"></strong>
-                        </div>
-                        <div class="quote-row">
-                            <span>Bạn tiết kiệm:</span>
-                            <strong class="price-save-text" id="resultSave"></strong>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- QR Code thanh toán -->
-                <div class="qr-payment">
-                    <h3>Quét QR Để Thanh Toán Ngay</h3>
-                    <div class="qr-code" id="qrCode">
-                        <img id="qrImage" src="" alt="QR Code thanh toán" style="width: 100%; height: 100%; border-radius: 12px;">
-                    </div>
-                    <div class="bank-info-compact">
-                        <p><strong>VIETINBANK</strong></p>
-                        <p>STK: <strong>101872834062</strong> <button class="copy-btn" onclick="copyText('101872834062', this)">Copy</button></p>
-                        <p>CTK: <strong>NGUYEN VAN THUONG</strong></p>
-                        <p>Nội dung: <strong id="transferContent"></strong> <button class="copy-btn" onclick="copyTransfer()">Copy</button></p>
-                    </div>
-                    <div class="payment-note" style="margin-top: 16px;">
-                        <strong>Sau khi chuyển khoản:</strong>
-                        Chúng tôi sẽ xác nhận qua email/điện thoại và gửi link vào lớp trong vòng 1-2 giờ.
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 
@@ -2059,6 +2063,69 @@
         <p>&copy; 2026 AI Academy. Khoá học Claude & OpenClaw. All rights reserved.</p>
     </div>
 </footer>
+</div><!-- end mainContent -->
+
+<!-- Fullscreen Payment -->
+<div id="paymentFullscreen" style="display: none;">
+    <div class="payment-fullscreen">
+        <div class="payment-header">
+            <button class="back-btn" onclick="goBack()">&#8592; Quay lại</button>
+            <button class="cancel-btn" onclick="cancelPayment()">Huỷ giao dịch</button>
+        </div>
+        <div class="payment-body">
+            <!-- Countdown -->
+            <div class="countdown-banner">
+                <div class="countdown-text">Ưu đãi này hết hạn sau:</div>
+                <div class="countdown-timer" id="countdownTimer">
+                    <div class="countdown-item"><span id="cdMinutes">15</span><small>phút</small></div>
+                    <div class="countdown-item"><span id="cdSeconds">00</span><small>giây</small></div>
+                </div>
+                <div class="countdown-warning">Thanh toán trong thời gian này để nhận giá ưu đãi!</div>
+            </div>
+
+            <!-- Báo giá -->
+            <div class="quote-result-card">
+                <h3>Báo Giá Dành Riêng Cho Bạn</h3>
+                <div class="quote-detail">
+                    <div class="quote-row">
+                        <span>Khoá học:</span>
+                        <strong id="resultCourse"></strong>
+                    </div>
+                    <div class="quote-row">
+                        <span>Giá gốc:</span>
+                        <strong class="price-strike" id="resultOriginal"></strong>
+                    </div>
+                    <div class="quote-row highlight">
+                        <span>Giá ưu đãi Early Bird:</span>
+                        <strong class="price-highlight" id="resultPrice"></strong>
+                    </div>
+                    <div class="quote-row">
+                        <span>Bạn tiết kiệm:</span>
+                        <strong class="price-save-text" id="resultSave"></strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QR Code thanh toán -->
+            <div class="qr-payment">
+                <h3>Quét QR Để Thanh Toán Ngay</h3>
+                <div class="qr-code" id="qrCode">
+                    <img id="qrImage" src="" alt="QR Code thanh toán" style="width: 100%; height: 100%; border-radius: 12px;">
+                </div>
+                <div class="bank-info-compact">
+                    <p><strong>VIETINBANK</strong></p>
+                    <p>STK: <strong>101872834062</strong> <button class="copy-btn" onclick="copyText('101872834062', this)">Copy</button></p>
+                    <p>CTK: <strong>NGUYEN VAN THUONG</strong></p>
+                    <p>Nội dung: <strong id="transferContent"></strong> <button class="copy-btn" onclick="copyTransfer()">Copy</button></p>
+                </div>
+                <div class="payment-note" style="margin-top: 16px;">
+                    <strong>Sau khi chuyển khoản:</strong>
+                    Chúng tôi sẽ xác nhận qua email/điện thoại và gửi link vào lớp trong vòng 1-2 giờ.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     function toggleMenu() {
@@ -2094,12 +2161,28 @@
         const qrUrl = 'https://img.vietqr.io/image/ICB-101872834062-compact2.jpg?amount=' + price + '&addInfo=' + encodeURIComponent(transferText) + '&accountName=NGUYEN%20VAN%20THUONG';
         document.getElementById('qrImage').src = qrUrl;
 
-        document.getElementById('quoteForm').style.display = 'none';
-        document.getElementById('quoteResult').style.display = 'block';
+        // Hide everything, show only payment fullscreen
+        document.getElementById('mainContent').style.display = 'none';
+        document.getElementById('paymentFullscreen').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
 
         startCountdown(15 * 60);
+    }
 
-        document.getElementById('quoteResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    function goBack() {
+        document.getElementById('paymentFullscreen').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+        clearInterval(countdownInterval);
+        document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function cancelPayment() {
+        if (confirm('Bạn có chắc muốn huỷ giao dịch?')) {
+            document.getElementById('paymentFullscreen').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            clearInterval(countdownInterval);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
 
     function formatPrice(num) {
