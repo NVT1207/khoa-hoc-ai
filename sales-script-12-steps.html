@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kịch Bản Bán Hàng 12 Bước - Quine Studio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a0a; color: #fff; overflow: hidden; }
+
+        .slide-container { width: 100vw; height: 100vh; position: relative; }
+
+        .slide {
+            width: 100%; height: 100%;
+            display: none; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 50px 70px;
+            position: absolute; top: 0; left: 0;
+            animation: fadeIn 0.5s ease;
+            overflow-y: auto;
+        }
+        .slide.active { display: flex; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .slide-cover { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+        .slide-step { background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%); }
+
+        .logo { font-size: 18px; letter-spacing: 3px; color: #64ffda; margin-bottom: 30px; text-transform: uppercase; }
+        .slide-cover h1 { font-size: 48px; font-weight: 800; margin-bottom: 20px; background: linear-gradient(90deg, #fff, #64ffda); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; line-height: 1.3; }
+        .slide-cover .subtitle { font-size: 20px; color: #a0aec0; margin-bottom: 40px; text-align: center; }
+        .slide-cover .author { font-size: 16px; color: #718096; border-top: 1px solid #2d3748; padding-top: 20px; }
+
+        .step-number {
+            position: absolute; top: 30px; left: 50px;
+            font-size: 80px; font-weight: 900; color: rgba(100, 255, 218, 0.08);
+            line-height: 1;
+        }
+        .step-badge {
+            background: linear-gradient(135deg, #64ffda, #00bfa5);
+            color: #0a0a0a; padding: 6px 20px; border-radius: 20px;
+            font-size: 13px; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; margin-bottom: 16px;
+        }
+        .slide-step h2 { font-size: 36px; font-weight: 700; margin-bottom: 12px; text-align: center; }
+        .slide-step .step-desc { font-size: 16px; color: #a0aec0; margin-bottom: 30px; text-align: center; max-width: 650px; }
+
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; width: 100%; max-width: 1000px; }
+        .content-full { width: 100%; max-width: 900px; }
+
+        .card {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(100,255,218,0.1);
+            border-radius: 12px; padding: 22px;
+        }
+        .card h3 { font-size: 14px; color: #64ffda; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .card ul { list-style: none; }
+        .card li { padding: 7px 0; padding-left: 20px; position: relative; font-size: 14px; color: #cbd5e0; line-height: 1.6; }
+        .card li::before { content: '▸'; position: absolute; left: 0; color: #64ffda; }
+
+        .script-box {
+            background: rgba(100,255,218,0.05); border-left: 3px solid #64ffda;
+            padding: 18px 22px; border-radius: 0 8px 8px 0; margin-top: 12px;
+        }
+        .script-box .label { font-size: 11px; color: #64ffda; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+        .script-box p { font-size: 14px; color: #e2e8f0; line-height: 1.8; font-style: italic; }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(100,255,218,0.1), rgba(0,191,165,0.05));
+            border: 1px solid rgba(100,255,218,0.2); border-radius: 12px;
+            padding: 20px; text-align: center; margin-top: 18px;
+        }
+        .highlight-box .big { font-size: 24px; font-weight: 700; color: #64ffda; }
+
+        .nav { position: fixed; bottom: 25px; right: 35px; display: flex; gap: 10px; z-index: 100; }
+        .nav button {
+            width: 42px; height: 42px; border-radius: 50%; border: 1px solid #64ffda;
+            background: rgba(100,255,218,0.1); color: #64ffda; font-size: 18px;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .nav button:hover { background: #64ffda; color: #0a0a0a; }
+
+        .progress { position: fixed; top: 0; left: 0; height: 3px; background: #64ffda; transition: width 0.3s; z-index: 100; }
+        .slide-counter { position: fixed; bottom: 30px; left: 35px; font-size: 13px; color: #4a5568; }
+
+        .flow-diagram { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 20px; max-width: 900px; }
+        .flow-item {
+            background: rgba(100,255,218,0.08); border: 1px solid rgba(100,255,218,0.2);
+            padding: 8px 14px; border-radius: 8px; font-size: 12px; color: #64ffda;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .flow-item .num { background: #64ffda; color: #0a0a0a; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+
+        .pain-list { list-style: none; max-width: 800px; }
+        .pain-list li { padding: 10px 15px; margin: 6px 0; background: rgba(255,82,82,0.08); border-left: 3px solid #ff5252; border-radius: 0 8px 8px 0; font-size: 14px; color: #ffcdd2; }
+
+        @media (max-width: 768px) {
+            .slide { padding: 25px 20px; }
+            .slide-cover h1 { font-size: 28px; }
+            .slide-step h2 { font-size: 24px; }
+            .content-grid { grid-template-columns: 1fr; gap: 12px; }
+            .step-number { font-size: 50px; top: 15px; left: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress" id="progress"></div>
+    <div class="slide-counter" id="counter"></div>
+
+    <div class="slide-container">
+
+        <!-- SLIDE 0: COVER -->
+        <div class="slide slide-cover active">
+            <div class="logo">Quine Studio</div>
+            <h1>Kịch Bản Bán Hàng<br>12 Bước Chốt Sale</h1>
+            <p class="subtitle">Phương pháp Master Anh Đức — Áp dụng cho Quine Studio</p>
+            <p class="author">Tài liệu đào tạo nội bộ 2026</p>
+        </div>
+
+        <!-- SLIDE 1: TỔNG QUAN 12 BƯỚC -->
+        <div class="slide slide-step">
+            <span class="step-number">12</span>
+            <div class="step-badge">Tổng Quan</div>
+            <h2>12 Bước Bán Hàng Chốt Đơn</h2>
+            <p class="step-desc">Mỗi bước là 1 mắt xích — thiếu 1 bước = mất đơn</p>
+            <div class="flow-diagram">
+                <div class="flow-item"><span class="num">1</span> Khoét sâu nỗi đau</div>
+                <div class="flow-item"><span class="num">2</span> Câu chuyện Seeding</div>
+                <div class="flow-item"><span class="num">3</span> Uy tín</div>
+                <div class="flow-item"><span class="num">4</span> Cấu tạo → Tính năng → Lợi ích</div>
+                <div class="flow-item"><span class="num">5</span> Lợi ích của lợi ích</div>
+                <div class="flow-item"><span class="num">6</span> Xử lý từ chối trong tiềm thức</div>
+                <div class="flow-item"><span class="num">7</span> Báo giá (2 bước)</div>
+                <div class="flow-item"><span class="num">8</span> Quà tặng</div>
+                <div class="flow-item"><span class="num">9</span> Cam kết & Bảo đảm</div>
+                <div class="flow-item"><span class="num">10</span> Bằng chứng khách hàng</div>
+                <div class="flow-item"><span class="num">11</span> Giới hạn</div>
+                <div class="flow-item"><span class="num">12</span> CTA — Kêu gọi hành động</div>
+            </div>
+            <div class="highlight-box" style="max-width:500px;">
+                <p style="color:#a0aec0; font-size:12px;">NGUYÊN TẮC CỐT LÕI</p>
+                <p class="big">Cảm xúc mua → Logic biện minh</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: BƯỚC 1 - KHOÉT SÂU NỖI ĐAU -->
+        <div class="slide slide-step">
+            <span class="step-number">01</span>
+            <div class="step-badge">Bước 1</div>
+            <h2>Khoét Sâu Nỗi Đau</h2>
+            <p class="step-desc">Khách chỉ mua khi NỖI ĐAU đủ lớn — nhiệm vụ của bạn là làm họ CẢM NHẬN rõ nỗi đau đó</p>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Nỗi đau khách hàng Quine Studio</h3>
+                    <ul>
+                        <li>Làm thủ công mỗi ngày 5-8 tiếng, không có thời gian cho gia đình</li>
+                        <li>Thuê nhân sự nhưng vẫn phải kiểm tra, sửa sai liên tục</li>
+                        <li>Đối thủ đã dùng AI, mình vẫn làm tay → tụt hậu</li>
+                        <li>Chi phí vận hành cao, lợi nhuận ngày càng mỏng</li>
+                        <li>Muốn scale nhưng không biết cách, càng làm càng mệt</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Kỹ thuật khoét đau</h3>
+                    <ul>
+                        <li><strong>Câu hỏi gợi:</strong> "Mỗi ngày anh/chị mất bao nhiêu giờ cho việc này?"</li>
+                        <li><strong>Phóng đại hậu quả:</strong> "1 năm = 1.800 giờ bị lãng phí"</li>
+                        <li><strong>So sánh:</strong> "Trong khi anh/chị làm tay, đối thủ đã tự động hoá"</li>
+                        <li><strong>Tương lai đen:</strong> "Nếu 6 tháng nữa vẫn vậy thì sao?"</li>
+                        <li><strong>Đồng cảm:</strong> "Em hiểu, trước đây em cũng từng như vậy..."</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="script-box" style="max-width:900px; margin-top:15px;">
+                <div class="label">Kịch bản mẫu</div>
+                <p>"Anh/chị thử tính xem: mỗi ngày mất 4 giờ trả lời tin nhắn, 1 tháng = 120 giờ, 1 năm = 1.440 giờ. Tương đương gần 2 THÁNG làm việc liên tục không nghỉ — chỉ để trả lời tin nhắn thôi. Trong khi đó, đối thủ của anh/chị đang để AI làm việc này trong 0 giây..."</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: BƯỚC 2 - CÂU CHUYỆN SEEDING -->
+        <div class="slide slide-step">
+            <span class="step-number">02</span>
+            <div class="step-badge">Bước 2</div>
+            <h2>Câu Chuyện Seeding</h2>
+            <p class="step-desc">Kể câu chuyện để khách TỰ THẤY mình trong đó — không cần bán, họ tự muốn mua</p>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Cấu trúc câu chuyện</h3>
+                    <ul>
+                        <li><strong>Nhân vật:</strong> Giống khách hàng (cùng ngành, cùng vấn đề)</li>
+                        <li><strong>Vấn đề:</strong> Trước đây cũng khổ sở như khách</li>
+                        <li><strong>Bước ngoặt:</strong> Tìm thấy giải pháp (Quine Studio)</li>
+                        <li><strong>Kết quả:</strong> Cuộc sống thay đổi hoàn toàn</li>
+                        <li><strong>Bài học:</strong> "Giá mà biết sớm hơn..."</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Nguyên tắc kể</h3>
+                    <ul>
+                        <li>Kể như đang TÂM SỰ, không phải quảng cáo</li>
+                        <li>Chi tiết cụ thể: tên, ngành, con số</li>
+                        <li>Cảm xúc trước/sau rõ ràng</li>
+                        <li>Để khách tự hỏi: "Mình cũng muốn được vậy!"</li>
+                        <li>KHÔNG nhắc tên sản phẩm cho đến bước sau</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="script-box" style="max-width:900px; margin-top:15px;">
+                <div class="label">Kịch bản mẫu</div>
+                <p>"Tuần trước em vừa làm cho anh Minh bên bất động sản. Trước đó anh ấy thuê 2 bạn sales admin trả lời chat, mỗi tháng tốn 16 triệu, mà vẫn miss khách vào ban đêm. Sau khi setup xong, chatbot trả lời 24/7, tỷ lệ chốt tăng 40% — anh ấy cắt luôn 1 bạn admin, tiết kiệm 8 triệu/tháng mà hiệu quả hơn. Anh ấy bảo 'giá biết sớm hơn 6 tháng'..."</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: BƯỚC 3 - UY TÍN -->
+        <div class="slide slide-step">
+            <span class="step-number">03</span>
+            <div class="step-badge">Bước 3</div>
+            <h2>Uy Tín</h2>
+            <p class="step-desc">Khách cần tin NGƯỜI BÁN trước khi tin SẢN PHẨM</p>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Yếu tố xây uy tín</h3>
+                    <ul>
+                        <li><strong>Kinh nghiệm:</strong> "Đã triển khai cho 50+ doanh nghiệp"</li>
+                        <li><strong>Chuyên môn:</strong> Chứng chỉ, đào tạo, nghiên cứu AI</li>
+                        <li><strong>Khách hàng lớn:</strong> Logo/tên các brand đã làm việc</li>
+                        <li><strong>Truyền thông:</strong> Được báo chí/KOL nhắc tới</li>
+                        <li><strong>Cộng đồng:</strong> Group, fanpage với follower thật</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Cách thể hiện uy tín</h3>
+                    <ul>
+                        <li>Profile cá nhân chuyên nghiệp, có avatar rõ mặt</li>
+                        <li>Đăng case study thường xuyên (1-2 bài/tuần)</li>
+                        <li>Video chia sẻ kiến thức miễn phí → expert positioning</li>
+                        <li>Screenshot tin nhắn cảm ơn từ khách (xin phép)</li>
+                        <li>Nói bằng CON SỐ, không nói chung chung</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="script-box" style="max-width:900px; margin-top:15px;">
+                <div class="label">Kịch bản mẫu</div>
+                <p>"Bên em đã triển khai AI Automation cho hơn 50 doanh nghiệp trong 12 tháng qua — từ BĐS, giáo dục, thương mại điện tử đến F&B. Trung bình khách tiết kiệm 15-20 giờ/tuần sau khi setup. Em không hứa suông — tất cả đều có case study và kết quả đo lường được."</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: BƯỚC 4 - CẤU TẠO → TÍNH NĂNG → LỢI ÍCH -->
+        <div class="slide slide-step">
+            <span class="step-number">04</span>
+            <div class="step-badge">Bước 4</div>
+            <h2>Cấu Tạo → Tính Năng → Lợi Ích</h2>
+            <p class="step-desc">Không ai mua "sản phẩm" — họ mua KẾT QUẢ mà sản phẩm mang lại</p>
+            <div class="content-full">
+                <div class="card" style="margin-bottom:15px;">
+                    <h3>Công thức chuyển đổi</h3>
+                    <ul>
+                        <li><strong>Cấu tạo/Thành phần:</strong> Sản phẩm được làm từ gì? (công nghệ GPT-4, n8n, Make...)</li>
+                        <li><strong>Tính năng:</strong> Nó LÀM được gì? (Tự động trả lời, lọc lead, gửi email...)</li>
+                        <li><strong>Lợi ích:</strong> Khách ĐƯỢC gì? (Tiết kiệm thời gian, tăng doanh thu, giảm chi phí...)</li>
+                    </ul>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+                    <div class="card" style="border-color:rgba(255,152,0,0.3);">
+                        <h3 style="color:#ffb74d;">Cấu tạo</h3>
+                        <ul>
+                            <li>AI Claude / GPT-4 Turbo</li>
+                            <li>Nền tảng n8n / Make</li>
+                            <li>Database thông minh</li>
+                            <li>Tích hợp đa kênh</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color:rgba(33,150,243,0.3);">
+                        <h3 style="color:#64b5f6;">Tính năng</h3>
+                        <ul>
+                            <li>Chat 24/7 không cần người</li>
+                            <li>Tự lọc & phân loại khách</li>
+                            <li>Auto gửi báo giá</li>
+                            <li>Nhắc follow-up tự động</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color:rgba(76,175,80,0.3);">
+                        <h3 style="color:#81c784;">Lợi ích</h3>
+                        <ul>
+                            <li>Tiết kiệm 15-20h/tuần</li>
+                            <li>Giảm 50% chi phí nhân sự</li>
+                            <li>Không miss khách ban đêm</li>
+                            <li>Tăng 30-50% tỷ lệ chốt</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: BƯỚC 5 - LỢI ÍCH CỦA LỢI ÍCH -->
+        <div class="slide slide-step">
+            <span class="step-number">05</span>
+            <div class="step-badge">Bước 5</div>
+            <h2>Lợi Ích Của Lợi Ích</h2>
+            <p class="step-desc">Đào sâu hơn 1 tầng nữa — chạm vào KHAO KHÁT thật sự của khách</p>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Cách đào sâu</h3>
+                    <ul>
+                        <li>Lợi ích bề mặt: "Tiết kiệm 20 giờ/tuần"</li>
+                        <li>→ Lợi ích sâu hơn: "Có thời gian cho gia đình, con cái"</li>
+                        <li>Lợi ích bề mặt: "Tăng 50% doanh thu"</li>
+                        <li>→ Lợi ích sâu hơn: "Đủ tiền mua nhà, tự do tài chính"</li>
+                        <li>Lợi ích bề mặt: "Giảm nhân sự"</li>
+                        <li>→ Lợi ích sâu hơn: "Bớt stress quản lý, ngủ ngon hơn"</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Câu hỏi kích hoạt</h3>
+                    <ul>
+                        <li>"Nếu tiết kiệm được 20h/tuần, anh/chị sẽ làm gì?"</li>
+                        <li>"Doanh thu tăng thêm 30tr/tháng sẽ thay đổi cuộc sống thế nào?"</li>
+                        <li>"Anh/chị muốn cuộc sống 1 năm tới trông như thế nào?"</li>
+                        <li>→ Để KHÁCH TỰ NÓI ra khao khát, rồi liên kết với sản phẩm</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="script-box" style="max-width:900px; margin-top:15px;">
+                <div class="label">Kịch bản mẫu</div>
+                <p>"Tiết kiệm 20 giờ/tuần không chỉ là về công việc — mà là mỗi chiều thứ 7 anh/chị có thể đưa con đi chơi thay vì ngồi trả lời chat. Là mỗi tối không còn stress vì sáng mai đống việc chất đống. Là tự do chọn NGHỈ khi muốn nghỉ, không phải vì công việc ép..."</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: BƯỚC 6 - XỬ LÝ TỪ CHỐI TRONG TIỀM THỨC -->
+        <div class="slide slide-step">
+            <span class="step-number">06</span>
+            <div class="step-badge">Bước 6</div>
+            <h2>Xử Lý Từ Chối Trong Tiềm Thức</h2>
+            <p class="step-desc">Trả lời câu hỏi TRƯỚC KHI khách kịp hỏi — phá bỏ rào cản ngầm</p>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Các từ chối phổ biến (ngầm)</h3>
+                    <ul>
+                        <li>"Chắc đắt lắm" → Xử lý: so sánh chi phí cơ hội</li>
+                        <li>"Chắc phức tạp" → Xử lý: "Setup trong 3 ngày, không cần biết code"</li>
+                        <li>"Không biết có hiệu quả không" → Xử lý: cam kết hoàn tiền</li>
+                        <li>"Mình không rành công nghệ" → Xử lý: "Team em hỗ trợ A-Z"</li>
+                        <li>"Chắc chỉ phù hợp công ty lớn" → Xử lý: case study SME nhỏ</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Kỹ thuật xử lý ngầm</h3>
+                    <ul>
+                        <li><strong>Lồng vào câu chuyện:</strong> "Anh Minh lúc đầu cũng nghĩ đắt, nhưng..."</li>
+                        <li><strong>Đọc vị trước:</strong> "Chắc anh/chị đang nghĩ [X] đúng không?"</li>
+                        <li><strong>FAQ ẩn:</strong> Trả lời tất cả objection trong bài trình bày</li>
+                        <li><strong>Social proof:</strong> "90% khách ban đầu cũng lo [X]..."</li>
+                        <li><strong>Reframe:</strong> Đổi góc nhìn từ "chi phí" → "đầu tư"</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="script-box" style="max-width:900px; margin-top:15px;">
+                <div class="label">Kịch bản mẫu</div>
+                <p>"Nhiều anh/chị ban đầu lo là 'mình không rành công nghệ, setup chắc khó'. Nhưng thực tế bên em làm HẾT — anh/chị chỉ cần cung cấp thông tin sản phẩm, 3 ngày sau mọi thứ chạy tự động. Anh Minh bên BĐS 55 tuổi, không biết gì về AI, mà giờ bot chạy ngon lành 24/7."</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: BƯỚC 7 - BÁO GIÁ (2 BƯỚC) -->
+        <div class="slide slide-step">
+            <span class="step-number">07</span>
+            <div class="step-badge">Bước 7</div>
+            <h2>Báo Giá — 2 Bước</h2>
+            <p class="step-desc">KHÔNG BAO GIỜ báo giá trần trụi — luôn đặt giá trong BỐI CẢNH GIÁ TRỊ</p>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Bước 1: Neo giá cao (Anchor)</h3>
+                    <ul>
+                        <li>Đưa ra giá trị THẬT mà khách nhận được trước</li>
+                        <li>"Bình thường thuê 1 nhân sự làm việc này = 10-15 triệu/tháng"</li>
+                        <li>"Giá trị thực tế của hệ thống này nếu tự build = 50-80 triệu"</li>
+                        <li>"Doanh thu tăng thêm từ hệ thống = 30-50 triệu/tháng"</li>
+                        <li>→ Tạo mốc so sánh cao để giá thật trở nên RẺ</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Bước 2: Báo giá thật (Reveal)</h3>
+                    <ul>
+                        <li>Giá thật = nhỏ hơn nhiều so với anchor</li>
+                        <li>"Nhưng hôm nay anh/chị không cần trả 50 triệu..."</li>
+                        <li>"Không phải 30 triệu..."</li>
+                        <li>"Chỉ với [giá thật] — bằng 1/5 chi phí thuê người"</li>
+                        <li>Chia nhỏ: "Chỉ [X]đ/ngày — rẻ hơn 1 ly cà phê"</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="script-box" style="max-width:900px; margin-top:15px;">
+                <div class="label">Kịch bản mẫu</div>
+                <p>"Bình thường để có hệ thống chatbot + automation như vậy, anh/chị phải thuê dev build custom = 50-80 triệu, chưa kể phí maintain hàng tháng. Hoặc thuê 2 nhân sự trực chat = 16 triệu/tháng x 12 = gần 200 triệu/năm. Nhưng với Quine Studio, anh/chị chỉ đầu tư [giá] — bằng chưa đầy 1 tháng lương nhân sự, mà dùng được cả năm."</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: BƯỚC 8 - QUÀ TẶNG -->
+        <div class="slide slide-step">
+            <span class="step-number">08</span>
+            <div class="step-badge">Bước 8</div>
+            <h2>Quà Tặng</h2>
+            <p class="step-desc">Quà tặng tăng GIÁ TRỊ CẢM NHẬN — khách thấy nhận được NHIỀU HƠN số tiền bỏ ra</p>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Nguyên tắc tặng quà</h3>
+                    <ul>
+                        <li>Quà phải có GIÁ TRỊ THẬT (không tặng thứ vô nghĩa)</li>
+                        <li>Định giá quà rõ ràng: "Trị giá 2.000.000đ"</li>
+                        <li>Quà BỔ TRỢ cho sản phẩm chính (không lạc đề)</li>
+                        <li>Tặng CÓ ĐIỀU KIỆN: "Chỉ khi đăng ký hôm nay"</li>
+                        <li>Stack quà: nhiều món nhỏ → cảm giác "quá hời"</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Quà tặng Quine Studio</h3>
+                    <ul>
+                        <li>Template prompt AI cao cấp (trị giá 2tr)</li>
+                        <li>1 buổi tư vấn 1-1 tối ưu workflow (trị giá 3tr)</li>
+                        <li>Truy cập group VIP hỗ trợ trọn đời</li>
+                        <li>Video training "AI cho người mới" (trị giá 1.5tr)</li>
+                        <li>Bảo trì + update miễn phí 3 tháng đầu</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="script-box" style="max-width:900px; margin-top:15px;">
+                <div class="label">Kịch bản mẫu</div>
+                <p>"Ngoài hệ thống chính, anh/chị còn được TẶNG THÊM: Bộ template prompt AI trị giá 2 triệu + 1 buổi tư vấn riêng 1-1 trị giá 3 triệu + quyền truy cập group VIP hỗ trợ trọn đời. Tổng quà tặng trị giá hơn 6 triệu — hoàn toàn MIỄN PHÍ khi đăng ký hôm nay."</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: BƯỚC 9 - CAM KẾT & BẢO ĐẢM -->
+        <div class="slide slide-step">
+            <span class="step-number">09</span>
+            <div class="step-badge">Bước 9</div>
+            <h2>Cam Kết & Bảo Đảm</h2>
+            <p class="step-desc">Xoá bỏ RỦI RO cho khách — "Không hiệu quả = không mất tiền"</p>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Các loại cam kết</h3>
+                    <ul>
+                        <li><strong>Hoàn tiền 100%:</strong> "Không hài lòng trong 7 ngày = hoàn full"</li>
+                        <li><strong>Cam kết kết quả:</strong> "Nếu không tiết kiệm ít nhất 10h/tuần = hoàn tiền"</li>
+                        <li><strong>Làm lại miễn phí:</strong> "Chưa ưng = sửa đến khi ưng"</li>
+                        <li><strong>Bảo hành dài:</strong> "Bảo hành 6 tháng, hỗ trợ trọn đời"</li>
+                        <li><strong>Đảo ngược rủi ro:</strong> Rủi ro nằm ở BÊN BÁN, không phải khách</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Tại sao cam kết mạnh?</h3>
+                    <ul>
+                        <li>Khách hết lý do từ chối: "Có gì mất đâu"</li>
+                        <li>Thể hiện TỰ TIN vào sản phẩm</li>
+                        <li>Phân biệt với đối thủ (ít ai dám cam kết)</li>
+                        <li>Tạo cảm giác AN TOÀN khi quyết định</li>
+                        <li>Thực tế: tỷ lệ hoàn rất thấp (< 5%) nếu sản phẩm tốt</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="script-box" style="max-width:900px; margin-top:15px;">
+                <div class="label">Kịch bản mẫu</div>
+                <p>"Em cam kết: Nếu sau 7 ngày sử dụng mà anh/chị cảm thấy hệ thống KHÔNG giúp tiết kiệm thời gian như em nói — em hoàn lại 100% tiền, không hỏi lý do. Rủi ro hoàn toàn nằm ở phía em. Anh/chị không có gì để mất — chỉ có thể ĐƯỢC thêm."</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: BƯỚC 10 - BẰNG CHỨNG KHÁCH HÀNG -->
+        <div class="slide slide-step">
+            <span class="step-number">10</span>
+            <div class="step-badge">Bước 10</div>
+            <h2>Bằng Chứng Khách Hàng</h2>
+            <p class="step-desc">Lời BẠN nói = quảng cáo. Lời KHÁCH nói = sự thật</p>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Loại bằng chứng mạnh</h3>
+                    <ul>
+                        <li><strong>Screenshot chat:</strong> Khách nhắn cảm ơn, khoe kết quả</li>
+                        <li><strong>Video testimonial:</strong> Khách quay clip nói về trải nghiệm</li>
+                        <li><strong>Before/After:</strong> Số liệu trước và sau khi dùng</li>
+                        <li><strong>Case study:</strong> Chi tiết hành trình của 1 khách cụ thể</li>
+                        <li><strong>Số lượng:</strong> "500+ khách đã sử dụng"</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Cách trình bày hiệu quả</h3>
+                    <ul>
+                        <li>Chọn bằng chứng GIỐNG khách đang tư vấn (cùng ngành)</li>
+                        <li>Có CON SỐ cụ thể: "Tăng 47% doanh thu sau 2 tuần"</li>
+                        <li>Show ngay lúc đang nói chuyện (gửi ảnh/video)</li>
+                        <li>Nhiều bằng chứng → hiệu ứng đám đông</li>
+                        <li>"Hơn 50 doanh nghiệp đã tin tưởng lựa chọn..."</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="script-box" style="max-width:900px; margin-top:15px;">
+                <div class="label">Kịch bản mẫu</div>
+                <p>"Để em gửi anh/chị xem — đây là feedback từ chị Lan bên thời trang, cũng setup chatbot y hệt. Sau 2 tuần: tỷ lệ reply tăng từ 30% lên 95%, doanh thu tăng 35%. Đây là screenshot chat của chị ấy gửi em tuần trước. Và đây là thêm 5 case study khác cùng ngành nữa..."</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: BƯỚC 11 - GIỚI HẠN -->
+        <div class="slide slide-step">
+            <span class="step-number">11</span>
+            <div class="step-badge">Bước 11</div>
+            <h2>Giới Hạn</h2>
+            <p class="step-desc">Không có DEADLINE = không có HÀNH ĐỘNG. Tạo urgency để khách quyết định NGAY</p>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Các loại giới hạn</h3>
+                    <ul>
+                        <li><strong>Giới hạn thời gian:</strong> "Ưu đãi chỉ còn 48 giờ"</li>
+                        <li><strong>Giới hạn số lượng:</strong> "Chỉ nhận thêm 5 khách tháng này"</li>
+                        <li><strong>Giới hạn giá:</strong> "Sau ngày X giá sẽ tăng lên [Y]"</li>
+                        <li><strong>Giới hạn quà:</strong> "Quà tặng chỉ cho 10 người đầu tiên"</li>
+                        <li><strong>Giới hạn combo:</strong> "Combo này không bán lẻ sau đợt này"</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Nguyên tắc tạo giới hạn</h3>
+                    <ul>
+                        <li>Giới hạn phải CÓ LÝ DO hợp lý (không fake)</li>
+                        <li>"Em chỉ nhận 5 khách vì phải đảm bảo chất lượng hỗ trợ"</li>
+                        <li>"Giá ưu đãi vì đang launch, sau sẽ về giá gốc"</li>
+                        <li>FOMO: Sợ mất > Muốn được</li>
+                        <li>Nhắc lại giới hạn 2-3 lần trong conversation</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="script-box" style="max-width:900px; margin-top:15px;">
+                <div class="label">Kịch bản mẫu</div>
+                <p>"Em nói thật: tháng này em chỉ nhận thêm 5 khách setup nữa thôi — vì mỗi dự án em cần dành 3-5 ngày tập trung, nhận nhiều hơn thì không đảm bảo chất lượng. Hiện tại đã có 3 anh/chị đăng ký rồi, còn 2 slot. Giá ưu đãi này cũng chỉ áp dụng trong tuần này — tuần sau sẽ về giá gốc [Y]."</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: BƯỚC 12 - CTA KÊU GỌI HÀNH ĐỘNG -->
+        <div class="slide slide-step">
+            <span class="step-number">12</span>
+            <div class="step-badge">Bước 12</div>
+            <h2>CTA — Kêu Gọi Hành Động</h2>
+            <p class="step-desc">Nói RÕ khách cần làm gì NGAY BÂY GIỜ — đừng để họ phải đoán</p>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>CTA hiệu quả</h3>
+                    <ul>
+                        <li><strong>Cụ thể:</strong> "Nhắn 'OK' để em gửi link thanh toán"</li>
+                        <li><strong>Đơn giản:</strong> Chỉ 1 hành động, không cho nhiều lựa chọn</li>
+                        <li><strong>Ngay lập tức:</strong> "Bấm ngay", "Đăng ký ngay bây giờ"</li>
+                        <li><strong>Giảm ma sát:</strong> "Chỉ cần chuyển khoản, em lo hết phần còn lại"</li>
+                        <li><strong>Kèm lý do:</strong> "Đăng ký ngay để giữ slot + nhận quà"</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Sau CTA — Follow up</h3>
+                    <ul>
+                        <li>Nếu OK → Gửi thông tin thanh toán ngay lập tức</li>
+                        <li>Nếu im lặng 30 phút → Nhắn nhẹ: "Anh/chị cần em hỗ trợ gì thêm?"</li>
+                        <li>Nếu "để suy nghĩ" → Quay lại bước 6 (xử lý từ chối)</li>
+                        <li>Follow up tối đa 3 lần trong 48h</li>
+                        <li>Lần cuối: "Ưu đãi hết hạn lúc [X], em muốn giữ cho anh/chị"</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="script-box" style="max-width:900px; margin-top:15px;">
+                <div class="label">Kịch bản mẫu</div>
+                <p>"Vậy anh/chị chỉ cần nhắn cho em chữ 'ĐĂNG KÝ' — em sẽ gửi thông tin chuyển khoản. Sau khi nhận được, em bắt đầu setup ngay trong 24h. Tuần sau anh/chị đã có hệ thống chạy tự động rồi. Nhắn em ngay nhé — còn 2 slot cuối cùng!"</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 14: TỔNG KẾT -->
+        <div class="slide slide-cover">
+            <div class="logo">Quine Studio</div>
+            <h1>Tóm Tắt Quy Trình</h1>
+            <div style="max-width:750px; text-align:left; margin-top:20px;">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; font-size:13px; color:#a0aec0;">
+                    <div style="padding:10px 15px; background:rgba(255,82,82,0.08); border-left:3px solid #ff5252; border-radius:0 6px 6px 0;">1. Khoét sâu nỗi đau → Tạo CẢM XÚC</div>
+                    <div style="padding:10px 15px; background:rgba(255,152,0,0.08); border-left:3px solid #ff9800; border-radius:0 6px 6px 0;">7. Báo giá 2 bước → Neo cao, reveal thấp</div>
+                    <div style="padding:10px 15px; background:rgba(255,82,82,0.08); border-left:3px solid #ff5252; border-radius:0 6px 6px 0;">2. Seeding → Kể chuyện, gợi mong muốn</div>
+                    <div style="padding:10px 15px; background:rgba(255,152,0,0.08); border-left:3px solid #ff9800; border-radius:0 6px 6px 0;">8. Quà tặng → Tăng giá trị cảm nhận</div>
+                    <div style="padding:10px 15px; background:rgba(255,82,82,0.08); border-left:3px solid #ff5252; border-radius:0 6px 6px 0;">3. Uy tín → Tin NGƯỜI trước tin SP</div>
+                    <div style="padding:10px 15px; background:rgba(255,152,0,0.08); border-left:3px solid #ff9800; border-radius:0 6px 6px 0;">9. Cam kết → Xoá rủi ro cho khách</div>
+                    <div style="padding:10px 15px; background:rgba(255,82,82,0.08); border-left:3px solid #ff5252; border-radius:0 6px 6px 0;">4. Cấu tạo/Tính năng/Lợi ích → Logic</div>
+                    <div style="padding:10px 15px; background:rgba(255,152,0,0.08); border-left:3px solid #ff9800; border-radius:0 6px 6px 0;">10. Bằng chứng → Khách nói thay bạn</div>
+                    <div style="padding:10px 15px; background:rgba(255,82,82,0.08); border-left:3px solid #ff5252; border-radius:0 6px 6px 0;">5. Lợi ích của lợi ích → Chạm khao khát</div>
+                    <div style="padding:10px 15px; background:rgba(255,152,0,0.08); border-left:3px solid #ff9800; border-radius:0 6px 6px 0;">11. Giới hạn → Tạo FOMO, urgency</div>
+                    <div style="padding:10px 15px; background:rgba(255,82,82,0.08); border-left:3px solid #ff5252; border-radius:0 6px 6px 0;">6. Xử lý từ chối ngầm → Phá rào cản</div>
+                    <div style="padding:10px 15px; background:rgba(100,255,218,0.1); border-left:3px solid #64ffda; border-radius:0 6px 6px 0;">12. CTA → Chốt đơn, hành động ngay!</div>
+                </div>
+            </div>
+            <div class="highlight-box" style="max-width:600px; margin-top:25px;">
+                <p style="color:#a0aec0; font-size:12px;">MASTER ANH ĐỨC</p>
+                <p class="big">"Bán hàng = Dẫn dắt cảm xúc có hệ thống"</p>
+            </div>
+            <p class="author" style="margin-top:25px;">Quine Studio — Sales Playbook 2026</p>
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav">
+        <button onclick="prevSlide()">&#8592;</button>
+        <button onclick="nextSlide()">&#8594;</button>
+        <button onclick="toggleFullscreen()" title="Fullscreen" style="font-size:14px;">&#9974;</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const total = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + total) % total;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('progress').style.width = ((currentSlide / (total - 1)) * 100) + '%';
+            document.getElementById('counter').textContent = `${currentSlide + 1} / ${total}`;
+        }
+
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function prevSlide() { showSlide(currentSlide - 1); }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        let touchStartX = 0;
+        document.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+        document.addEventListener('touchend', e => {
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
+        });
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        showSlide(0);
+    </script>
+</body>
+</html>
