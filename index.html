@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -2216,6 +2217,76 @@
             }
         }
 
+        /* Confirm Payment Button */
+        .btn-confirm-payment {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+        }
+        .btn-confirm-payment:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(16, 185, 129, 0.5); }
+        .btn-confirm-payment:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        /* Thank You Page */
+        .thankyou-content {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            text-align: center;
+        }
+        .thankyou-icon { font-size: 4rem; margin-bottom: 16px; }
+        .thankyou-steps {
+            text-align: left;
+            margin: 30px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .thankyou-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 16px;
+        }
+        .thankyou-step .step-icon { font-size: 1.5rem; }
+        .thankyou-step strong { color: white; font-size: 0.95rem; }
+        .thankyou-step p { color: rgba(255,255,255,0.6); font-size: 0.85rem; margin: 4px 0 0; }
+        .btn-zalo-group {
+            display: block;
+            padding: 16px 32px;
+            background: #0068ff;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 12px;
+            text-decoration: none;
+            margin: 24px 0 16px;
+            transition: background 0.2s;
+        }
+        .btn-zalo-group:hover { background: #0050cc; }
+        .btn-back-home {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.6);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .btn-back-home:hover { border-color: rgba(255,255,255,0.4); color: white; }
+
     </style>
 </head>
 <body>
@@ -2828,14 +2899,70 @@
                 </div>
                 <div class="payment-note" style="margin-top: 16px;">
                     <strong>Sau khi chuyển khoản:</strong>
-                    Chúng tôi sẽ xác nhận qua email/điện thoại và gửi link vào lớp trong vòng 1-2 giờ.
+                    Bấm nút bên dưới để xác nhận. Bạn sẽ nhận email + link vào nhóm Zalo ngay lập tức.
                 </div>
+                <button onclick="confirmPayment()" class="btn-confirm-payment" id="btnConfirm">
+                    ✅ Tôi Đã Thanh Toán Xong
+                </button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Thank You Page -->
+<div id="thankYouPage" style="display: none;">
+    <div class="payment-fullscreen" style="background: linear-gradient(135deg, #0f0a2a 0%, #1e1050 100%);">
+        <div class="thankyou-content">
+            <div class="thankyou-icon">🎉</div>
+            <h2 style="color:white; font-size:1.8rem; margin-bottom:8px;">Cảm Ơn Bạn Đã Đăng Ký!</h2>
+            <p style="color:rgba(255,255,255,0.7); margin-bottom:30px;">Chúng tôi đã nhận được thông tin thanh toán của bạn.</p>
+
+            <div class="thankyou-steps">
+                <div class="thankyou-step">
+                    <span class="step-icon">📧</span>
+                    <div>
+                        <strong>Kiểm tra email</strong>
+                        <p>Email xác nhận đã được gửi đến <strong id="tyEmail"></strong></p>
+                    </div>
+                </div>
+                <div class="thankyou-step">
+                    <span class="step-icon">💬</span>
+                    <div>
+                        <strong>Tham gia nhóm Zalo</strong>
+                        <p>Vào nhóm để nhận tài liệu & lịch học</p>
+                    </div>
+                </div>
+                <div class="thankyou-step">
+                    <span class="step-icon">📅</span>
+                    <div>
+                        <strong>Chờ xác nhận</strong>
+                        <p>Bọn mình sẽ xác nhận thanh toán trong 1-2 giờ</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://zalo.me/g/LINK_NHOM_ZALO" target="_blank" class="btn-zalo-group">
+                Vào Nhóm Zalo Khoá Học →
+            </a>
+
+            <button onclick="backToHome()" class="btn-back-home">← Về trang chủ</button>
+        </div>
+    </div>
+</div>
+
 <script>
+    // ===== CONFIG: Anh cần thay các giá trị này =====
+    const CONFIG = {
+        GOOGLE_SHEET_URL: 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', // Thay bằng URL Apps Script
+        EMAILJS_PUBLIC_KEY: 'YOUR_EMAILJS_PUBLIC_KEY', // Thay bằng public key EmailJS
+        EMAILJS_SERVICE_ID: 'YOUR_SERVICE_ID', // Thay bằng service ID
+        EMAILJS_TEMPLATE_ID: 'YOUR_TEMPLATE_ID', // Thay bằng template ID
+        ZALO_GROUP_LINK: 'https://zalo.me/g/LINK_NHOM_ZALO' // Thay bằng link nhóm Zalo
+    };
+
+    // Store form data for confirmPayment
+    let currentFormData = {};
+
     function toggleMenu() {
         document.querySelector('.nav-links').classList.toggle('active');
     }
@@ -2913,6 +3040,9 @@
             document.querySelector('.countdown-banner').style.display = 'none';
             clearInterval(countdownInterval);
         }
+
+        // Store for confirmPayment
+        currentFormData = { name, phone, email, courseName, price, original, saving, transferText };
     }
 
     function goBack() {
@@ -2929,6 +3059,56 @@
             clearInterval(countdownInterval);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+    }
+
+    function confirmPayment() {
+        const btn = document.getElementById('btnConfirm');
+        btn.disabled = true;
+        btn.textContent = '⏳ Đang xử lý...';
+
+        const data = currentFormData;
+        const timestamp = new Date().toLocaleString('vi-VN');
+
+        // 1. Send to Google Sheets
+        fetch(CONFIG.GOOGLE_SHEET_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: data.name,
+                phone: data.phone,
+                email: data.email,
+                course: data.courseName,
+                price: data.price,
+                timestamp: timestamp
+            })
+        }).catch(() => {});
+
+        // 2. Send email via EmailJS
+        if (CONFIG.EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+            emailjs.send(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, {
+                to_name: data.name,
+                to_email: data.email,
+                course_name: data.courseName,
+                price: formatPrice(data.price),
+                zalo_link: CONFIG.ZALO_GROUP_LINK
+            }).catch(() => {});
+        }
+
+        // 3. Show thank you page
+        setTimeout(() => {
+            document.getElementById('paymentFullscreen').style.display = 'none';
+            document.getElementById('thankYouPage').style.display = 'block';
+            document.getElementById('tyEmail').textContent = data.email;
+            clearInterval(countdownInterval);
+            window.scrollTo({ top: 0 });
+        }, 1000);
+    }
+
+    function backToHome() {
+        document.getElementById('thankYouPage').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function formatPrice(num) {
