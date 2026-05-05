@@ -2217,6 +2217,38 @@
             }
         }
 
+        /* Gifts Section */
+        .gifts-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #0f0a2a 0%, #1e1050 100%);
+        }
+        .gifts-section .section-label { color: var(--accent); }
+        .gifts-section h2 { color: white; }
+        .gifts-section p { color: rgba(255,255,255,0.7); }
+        .gifts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 32px;
+        }
+        .gift-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .gift-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+        .gift-icon { font-size: 2rem; margin-bottom: 12px; }
+        .gift-card h3 { color: white; font-size: 1rem; margin-bottom: 8px; }
+        .gift-card p { color: rgba(255,255,255,0.6); font-size: 0.85rem; margin: 0; }
+        .gift-value {
+            margin-top: 12px;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
         /* Confirm Payment Button */
         .btn-confirm-payment {
             display: block;
@@ -2630,6 +2662,55 @@
                     <li>Enterprise deployment & scaling</li>
                 </ul>
                 <a href="#register" class="course-cta">Xem học phí &rarr;</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quà Tặng -->
+<section class="gifts-section" id="gifts">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <div class="section-label">Quà tặng</div>
+            <h2>Đăng Ký Hôm Nay — Nhận Ngay Bộ Quà Trị Giá 5.000.000đ</h2>
+            <p>Tất cả đều MIỄN PHÍ khi đăng ký bất kỳ khoá nào</p>
+        </div>
+        <div class="gifts-grid animate-on-scroll">
+            <div class="gift-card">
+                <div class="gift-icon">📋</div>
+                <h3>100+ Prompt Templates</h3>
+                <p>Bộ prompt chuyên nghiệp cho Content, Marketing, Sales, HR, Kế toán — dùng ngay, không cần nghĩ</p>
+                <div class="gift-value">Trị giá 1.500.000đ</div>
+            </div>
+            <div class="gift-card">
+                <div class="gift-icon">🤖</div>
+                <h3>Bộ Automation Templates</h3>
+                <p>5 workflow tự động hoá có sẵn: xử lý email, lên lịch content, chăm sóc khách, báo cáo, quản lý task</p>
+                <div class="gift-value">Trị giá 2.000.000đ</div>
+            </div>
+            <div class="gift-card">
+                <div class="gift-icon">🎥</div>
+                <h3>Video Replay Trọn Đời</h3>
+                <p>Toàn bộ buổi học được ghi hình, xem lại không giới hạn — học bất cứ lúc nào, ở đâu</p>
+                <div class="gift-value">Trị giá 500.000đ</div>
+            </div>
+            <div class="gift-card">
+                <div class="gift-icon">💬</div>
+                <h3>Group Hỗ Trợ VIP Vĩnh Viễn</h3>
+                <p>Tham gia cộng đồng học viên + giảng viên, hỏi đáp 24/7, cập nhật kiến thức mới liên tục</p>
+                <div class="gift-value">Vô giá</div>
+            </div>
+            <div class="gift-card">
+                <div class="gift-icon">📞</div>
+                <h3>Hỗ Trợ 1-1 Trong 30 Ngày</h3>
+                <p>Được mentor cá nhân hỗ trợ riêng qua Zalo trong 30 ngày đầu sau khoá học</p>
+                <div class="gift-value">Trị giá 1.000.000đ</div>
+            </div>
+            <div class="gift-card">
+                <div class="gift-icon">🔄</div>
+                <h3>Cập Nhật Miễn Phí Trọn Đời</h3>
+                <p>AI thay đổi liên tục — bạn sẽ được cập nhật bài giảng mới, tính năng mới hoàn toàn miễn phí</p>
+                <div class="gift-value">Vô giá</div>
             </div>
         </div>
     </div>
