@@ -2501,6 +2501,125 @@
             padding: 18px 40px;
         }
 
+        /* Guarantee Section */
+        .guarantee-section {
+            padding: 60px 0;
+            background: white;
+        }
+        .guarantee-box {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border: 3px dashed #10b981;
+            border-radius: 20px;
+            padding: 48px 32px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .guarantee-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .guarantee-box h2 {
+            color: #064e3b;
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+        }
+        .guarantee-box p {
+            color: #065f46;
+            font-size: 1rem;
+            margin-bottom: 24px;
+        }
+        .guarantee-reasons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 480px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .guarantee-reason {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #064e3b;
+        }
+        .gr-icon { flex-shrink: 0; }
+
+        /* Process Section */
+        .process-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #eef2ff 0%, #fce7f3 100%);
+        }
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+            position: relative;
+        }
+        .process-step {
+            background: white;
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
+            transition: transform 0.3s;
+        }
+        .process-step:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 50px rgba(99, 102, 241, 0.2);
+        }
+        .process-num {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+        .process-icon {
+            font-size: 2.5rem;
+            margin: 16px 0 12px;
+        }
+        .process-step h3 {
+            font-size: 1.05rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        .process-step p {
+            color: var(--gray);
+            font-size: 0.88rem;
+            margin-bottom: 12px;
+        }
+        .process-time {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #dcfce7;
+            color: #166534;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
         /* Form highlight when package selected */
         .form-highlight {
             animation: formPulse 2s ease;
@@ -2595,6 +2714,7 @@
             <li><a href="#about">Giới thiệu</a></li>
             <li><a href="#pain">Nỗi đau thời gian</a></li>
             <li><a href="#courses">Bảng giá</a></li>
+            <li><a href="#process">Quy trình</a></li>
             <li><a href="#testimonials">Khách hàng nói gì</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#register" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Đăng ký ngay</a></li>
@@ -3228,6 +3348,47 @@
     </div>
 </section>
 
+<!-- Quy trình setup -->
+<section class="process-section" id="process">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <div class="section-label">Quy trình setup</div>
+            <h2>Nhận Trợ Lý AI Chỉ Trong 4 Bước</h2>
+            <p>Đơn giản, nhanh chóng — bạn không cần làm gì phức tạp, bọn mình lo hết</p>
+        </div>
+        <div class="process-grid animate-on-scroll">
+            <div class="process-step">
+                <div class="process-num">01</div>
+                <div class="process-icon">📝</div>
+                <h3>Đăng ký & Thanh toán</h3>
+                <p>Điền form → quét QR thanh toán → xác nhận. Tất cả trong 2 phút.</p>
+                <div class="process-time">~2 phút</div>
+            </div>
+            <div class="process-step">
+                <div class="process-num">02</div>
+                <div class="process-icon">💬</div>
+                <h3>Tư vấn 1-1 qua Zalo</h3>
+                <p>Team liên hệ ngay, hỏi về công việc cụ thể của bạn để tuỳ chỉnh AI phù hợp.</p>
+                <div class="process-time">~30 phút</div>
+            </div>
+            <div class="process-step">
+                <div class="process-num">03</div>
+                <div class="process-icon">⚙️</div>
+                <h3>Setup Trợ Lý AI</h3>
+                <p>Bọn mình setup xong trên Telegram/Zalo của bạn. Huấn luyện AI theo nghiệp vụ riêng.</p>
+                <div class="process-time">1-2 ngày</div>
+            </div>
+            <div class="process-step">
+                <div class="process-num">04</div>
+                <div class="process-icon">🚀</div>
+                <h3>Bắt đầu sử dụng ngay</h3>
+                <p>Hướng dẫn cách ra lệnh → bạn dùng được ngay. Hỗ trợ 24/7 nếu có vấn đề.</p>
+                <div class="process-time">Trọn đời</div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Quà Tặng -->
 <section class="gifts-section" id="gifts">
     <div class="container">
@@ -3530,11 +3691,36 @@
     </div>
 </section>
 
+<!-- Guarantee -->
+<section class="guarantee-section">
+    <div class="container">
+        <div class="guarantee-box animate-on-scroll">
+            <div class="guarantee-badge">🛡️ Cam kết hoàn tiền</div>
+            <h2>Hoàn Tiền 100% Nếu Không Hài Lòng Trong 7 Ngày Đầu</h2>
+            <p>Setup xong, dùng thử 7 ngày. Không hài lòng? Hoàn tiền 100% — không hỏi lý do. Rủi ro = 0.</p>
+            <div class="guarantee-reasons">
+                <div class="guarantee-reason">
+                    <span class="gr-icon">✅</span>
+                    <span>Bảo mật thông tin — không chia sẻ data với bất kỳ ai</span>
+                </div>
+                <div class="guarantee-reason">
+                    <span class="gr-icon">✅</span>
+                    <span>Bạn có thể huỷ bất cứ lúc nào trong 7 ngày đầu</span>
+                </div>
+                <div class="guarantee-reason">
+                    <span class="gr-icon">✅</span>
+                    <span>Không ràng buộc cam kết — thoải mái trải nghiệm</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CTA Section -->
 <section class="cta-section">
     <div class="container animate-on-scroll">
         <h2>Sẵn Sàng Có Trợ Lý AI Riêng?</h2>
-        <p>Đừng để công việc lặp cướp thời gian của bạn thêm 1 ngày nào nữa. Setup trợ lý AI ngay hôm nay — ưu đãi giảm 10 triệu gói 1 năm.</p>
+        <p>Đừng để công việc lặp cướp thời gian của bạn thêm 1 ngày nào nữa. Setup 1-2 ngày, dùng ngay cả đời.</p>
         <a href="#register" class="btn btn-cta">Đăng Ký Setup Ngay</a>
     </div>
 </section>
@@ -3628,7 +3814,7 @@
                         <strong class="price-strike" id="resultOriginal"></strong>
                     </div>
                     <div class="quote-row highlight">
-                        <span>Giá ưu đãi Early Bird:</span>
+                        <span>Giá ưu đãi hôm nay:</span>
                         <strong class="price-highlight" id="resultPrice"></strong>
                     </div>
                     <div class="quote-row">
@@ -3781,7 +3967,7 @@
 
         if (saving > 0) {
             document.getElementById('resultSave').textContent = '-' + formatPrice(saving);
-            document.querySelector('.quote-row.highlight span').textContent = 'Giá ưu đãi Early Bird:';
+            document.querySelector('.quote-row.highlight span').textContent = 'Giá ưu đãi hôm nay:';
             document.getElementById('resultSave').parentElement.style.display = 'flex';
             document.getElementById('resultOriginal').parentElement.style.display = 'flex';
         } else {
