@@ -2651,6 +2651,51 @@
             .modal-header h2 { font-size: 1.3rem; }
         }
 
+        /* Waiting for payment */
+        .waiting-payment {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .waiting-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(245, 158, 11, 0.2);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            flex-shrink: 0;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .waiting-text strong {
+            display: block;
+            font-size: 1rem;
+            color: #92400e;
+            margin-bottom: 4px;
+        }
+        .waiting-text p {
+            font-size: 0.88rem;
+            color: #78350f;
+            margin: 0;
+        }
+        .waiting-payment.success {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-color: #10b981;
+        }
+        .waiting-payment.success .waiting-spinner {
+            border-color: rgba(16, 185, 129, 0.2);
+            border-top-color: #10b981;
+        }
+        .waiting-payment.success .waiting-text strong { color: #065f46; }
+        .waiting-payment.success .waiting-text p { color: #047857; }
+
         /* Confirm Payment Button */
         .btn-confirm-payment {
             display: block;
@@ -3834,12 +3879,16 @@
                     <p>Nội dung: <strong id="transferContent"></strong> <button class="copy-btn" onclick="copyTransfer()">Copy</button></p>
                 </div>
                 <div class="payment-note" style="margin-top: 16px;">
-                    <strong>Sau khi chuyển khoản:</strong>
-                    Bấm nút bên dưới để xác nhận. Bạn sẽ nhận email + link vào nhóm Zalo ngay lập tức.
+                    <strong>💡 Lưu ý:</strong>
+                    Chuyển khoản đúng số tiền và nội dung ở trên. Hệ thống sẽ TỰ ĐỘNG phát hiện và chuyển bạn qua trang xác nhận.
                 </div>
-                <button onclick="confirmPayment()" class="btn-confirm-payment" id="btnConfirm">
-                    ✅ Tôi Đã Thanh Toán Xong
-                </button>
+                <div class="waiting-payment" id="waitingPayment">
+                    <div class="waiting-spinner"></div>
+                    <div class="waiting-text">
+                        <strong>Đang chờ bạn chuyển khoản...</strong>
+                        <p>Sau khi chuyển xong, hệ thống sẽ tự động xác nhận trong vài giây</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -3999,7 +4048,9 @@
             document.getElementById('resultOriginal').parentElement.style.display = 'none';
         }
 
-        const transferText = name.toUpperCase().replace(/\s+/g, ' ').trim() + ' ' + courseName;
+        // Generate unique order code for SePay matching
+        const orderCode = 'QTAI' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2, 6).toUpperCase();
+        const transferText = orderCode + ' ' + name.toUpperCase().replace(/\s+/g, ' ').trim();
         document.getElementById('transferContent').textContent = transferText;
 
         // QR Code VietQR
@@ -4023,13 +4074,17 @@
         }
 
         // Store for confirmPayment
-        currentFormData = { name, phone, email, courseName, price, original, saving, transferText };
+        currentFormData = { name, phone, email, courseName, price, original, saving, transferText, orderCode };
+
+        // Start auto-detect payment
+        startPaymentPolling(orderCode, price);
     }
 
     function goBack() {
         document.getElementById('paymentFullscreen').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
         clearInterval(countdownInterval);
+        stopPaymentPolling();
         openRegisterModal();
     }
 
@@ -4038,19 +4093,59 @@
             document.getElementById('paymentFullscreen').style.display = 'none';
             document.getElementById('mainContent').style.display = 'block';
             clearInterval(countdownInterval);
+            stopPaymentPolling();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
 
-    function confirmPayment() {
-        const btn = document.getElementById('btnConfirm');
-        btn.disabled = true;
-        btn.textContent = '⏳ Đang xử lý...';
+    let paymentPollingInterval = null;
 
+    function startPaymentPolling(orderCode, expectedAmount) {
+        // Stop any previous polling
+        stopPaymentPolling();
+
+        const checkUrl = CONFIG.GOOGLE_SHEET_URL + '?action=check&orderCode=' + encodeURIComponent(orderCode) + '&amount=' + expectedAmount;
+        let attempts = 0;
+        const maxAttempts = 900; // 15 phút (check mỗi giây)
+
+        paymentPollingInterval = setInterval(() => {
+            attempts++;
+            if (attempts > maxAttempts) {
+                stopPaymentPolling();
+                return;
+            }
+
+            fetch(checkUrl)
+                .then(r => r.json())
+                .then(data => {
+                    if (data && data.paid === true) {
+                        stopPaymentPolling();
+                        onPaymentConfirmed();
+                    }
+                })
+                .catch(() => {});
+        }, 1000); // check mỗi 1 giây
+    }
+
+    function stopPaymentPolling() {
+        if (paymentPollingInterval) {
+            clearInterval(paymentPollingInterval);
+            paymentPollingInterval = null;
+        }
+    }
+
+    function onPaymentConfirmed() {
         const data = currentFormData;
         const timestamp = new Date().toLocaleString('vi-VN');
 
-        // 1. Send to Google Sheets
+        // Show success state briefly
+        const waiting = document.getElementById('waitingPayment');
+        if (waiting) {
+            waiting.classList.add('success');
+            waiting.querySelector('.waiting-text').innerHTML = '<strong>✅ Đã nhận được thanh toán!</strong><p>Đang chuyển bạn qua trang xác nhận...</p>';
+        }
+
+        // Save to Sheets (for record-keeping)
         fetch(CONFIG.GOOGLE_SHEET_URL, {
             method: 'POST',
             mode: 'no-cors',
@@ -4061,11 +4156,13 @@
                 email: data.email,
                 course: data.courseName,
                 price: data.price,
-                timestamp: timestamp
+                orderCode: data.orderCode,
+                timestamp: timestamp,
+                status: 'PAID'
             })
         }).catch(() => {});
 
-        // 2. Send email via EmailJS
+        // Send email
         if (CONFIG.EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
             emailjs.send(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, {
                 to_name: data.name,
@@ -4076,14 +4173,20 @@
             }).catch(() => {});
         }
 
-        // 3. Show thank you page
+        // Navigate to thank you
         setTimeout(() => {
             document.getElementById('paymentFullscreen').style.display = 'none';
             document.getElementById('thankYouPage').style.display = 'block';
             document.getElementById('tyEmail').textContent = data.email;
             clearInterval(countdownInterval);
             window.scrollTo({ top: 0 });
-        }, 1000);
+
+            // Reset waiting UI for next time
+            if (waiting) {
+                waiting.classList.remove('success');
+                waiting.querySelector('.waiting-text').innerHTML = '<strong>Đang chờ bạn chuyển khoản...</strong><p>Sau khi chuyển xong, hệ thống sẽ tự động xác nhận trong vài giây</p>';
+            }
+        }, 2000);
     }
 
     function backToHome() {

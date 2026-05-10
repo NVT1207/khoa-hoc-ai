@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Hướng Dẫn Setup Auto-Detect Thanh Toán (SePay + Google Sheets)</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, sans-serif; color:#334155; line-height:1.7; padding:40px 20px; max-width:800px; margin:0 auto; }
+h1 { font-size:1.8rem; color:#1e293b; margin-bottom:8px; }
+h2 { font-size:1.3rem; margin:36px 0 16px; color:#4f46e5; border-bottom:2px solid #4f46e5; padding-bottom:8px; }
+h3 { margin:20px 0 8px; color:#334155; }
+p, li { margin-bottom:8px; }
+ol, ul { padding-left:20px; }
+code { background:#f1f5f9; padding:2px 6px; border-radius:4px; font-size:0.9rem; color:#dc2626; }
+pre { background:#1e293b; color:#e2e8f0; padding:16px; border-radius:8px; overflow-x:auto; margin:12px 0; font-size:0.85rem; line-height:1.5; }
+.note { background:#fffbeb; border-left:4px solid #f59e0b; padding:12px 16px; border-radius:0 8px 8px 0; margin:12px 0; }
+.success { background:#dcfce7; border-left:4px solid #10b981; padding:12px 16px; border-radius:0 8px 8px 0; margin:12px 0; }
+.warning { background:#fef2f2; border-left:4px solid #ef4444; padding:12px 16px; border-radius:0 8px 8px 0; margin:12px 0; }
+.step { background:#eef2ff; border-radius:8px; padding:16px 20px; margin:16px 0; }
+</style>
+</head>
+<body>
+
+<h1>🚀 Setup Auto-Detect Thanh Toán</h1>
+<p>Khi khách chuyển khoản xong, trang web tự phát hiện và chuyển qua trang cảm ơn. Không cần khách bấm nút.</p>
+
+<div class="warning">
+<strong>⚠️ Bảo mật:</strong> Không đăng các token/key lên GitHub. Chỉ paste vào Google Apps Script (private).
+</div>
+
+<h2>Bước 1: Deploy Google Apps Script</h2>
+
+<div class="step">
+<ol>
+<li>Vào <a href="https://sheets.google.com" target="_blank">Google Sheets</a> → Tạo file mới tên <strong>"Quang Thuong AI - Data"</strong></li>
+<li>Menu <strong>Extensions → Apps Script</strong></li>
+<li>Xoá code mặc định, paste toàn bộ code từ file <code>google-apps-script.js</code></li>
+<li>Bấm <strong>Save</strong> (biểu tượng đĩa mềm)</li>
+<li>Bấm <strong>Deploy → New deployment</strong>
+<ul>
+<li>Type: <strong>Web app</strong></li>
+<li>Execute as: <strong>Me</strong></li>
+<li>Who has access: <strong>Anyone</strong></li>
+</ul>
+</li>
+<li>Bấm <strong>Deploy</strong> → Lần đầu sẽ hỏi cấp quyền → <strong>Review Permissions</strong> → chọn tài khoản → <strong>Advanced → Go to project (unsafe) → Allow</strong></li>
+<li>Copy <strong>URL Web App</strong> (dạng <code>https://script.google.com/macros/s/ABC.../exec</code>)</li>
+</ol>
+</div>
+
+<div class="success">
+<strong>✅ Ghi nhớ URL này</strong> — anh sẽ cần ở Bước 2 và Bước 3.
+</div>
+
+<h2>Bước 2: Gắn URL vào Landing Page</h2>
+
+<div class="step">
+<ol>
+<li>Mở file <code>index.html</code></li>
+<li>Tìm đoạn <code>GOOGLE_SHEET_URL</code></li>
+<li>Thay <code>https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec</code> bằng URL vừa copy</li>
+<li>Save → commit → push lên GitHub</li>
+</ol>
+</div>
+
+<h2>Bước 3: Cấu Hình Webhook SePay</h2>
+
+<div class="step">
+<ol>
+<li>Đăng nhập <a href="https://my.sepay.vn" target="_blank">my.sepay.vn</a></li>
+<li>Vào menu <strong>Công ty → Cấu hình chung → Webhooks</strong></li>
+<li>Bấm <strong>Thêm Webhook</strong></li>
+<li>Điền:
+<ul>
+<li><strong>URL:</strong> paste URL Apps Script của anh (ở Bước 1)</li>
+<li><strong>Chỉ cho tài khoản:</strong> chọn VietinBank 101872834062</li>
+<li><strong>Trigger:</strong> chọn <strong>"Tiền vào tài khoản"</strong> (money_in)</li>
+<li><strong>Method:</strong> POST</li>
+<li><strong>Authorization header:</strong> để trống hoặc ghi <code>Apikey ZKB8XAVZ05HNUMO73SXFYWGQ3GILNBVQPCJIKFBUE49H2AADBEVKNAJ1PTSWHWLY</code></li>
+</ul>
+</li>
+<li>Bấm <strong>Lưu</strong></li>
+</ol>
+</div>
+
+<h2>Bước 4: Test</h2>
+
+<div class="step">
+<ol>
+<li>Vào lại <strong>my.sepay.vn → Webhooks</strong></li>
+<li>Bấm <strong>Test webhook</strong> → chọn sự kiện mẫu → Send</li>
+<li>Mở Google Sheets → kiểm tra sheet <code>Transactions</code> có dòng mới không</li>
+<li>Nếu có ✅ → webhook OK</li>
+<li>Test thử landing page: đăng ký 1 gói → chuyển khoản 1.000đ (test) → web tự chuyển qua trang cảm ơn</li>
+</ol>
+</div>
+
+<h2>Cách Hoạt Động</h2>
+
+<pre>
+Khách điền form → QR với mã đơn hàng duy nhất (QTAI...)
+                         ↓
+Khách chuyển khoản (nội dung có QTAI...)
+                         ↓
+VietinBank nhận tiền → SePay phát hiện → gửi webhook
+                         ↓
+Google Apps Script lưu vào sheet "Transactions"
+                         ↓
+Landing page đang polling mỗi giây → thấy có giao dịch match orderCode + đủ tiền
+                         ↓
+Tự động chuyển qua trang cảm ơn + gửi email
+</pre>
+
+<h2>Xử Lý Sự Cố</h2>
+
+<h3>Webhook không chạy?</h3>
+<ul>
+<li>Kiểm tra URL Apps Script: mở trực tiếp trong trình duyệt phải trả về "OK"</li>
+<li>Kiểm tra quyền deployment: phải là "Anyone"</li>
+<li>Thử deploy lại: <strong>Deploy → Manage deployments → Edit → New version</strong></li>
+</ul>
+
+<h3>Web không tự chuyển trang sau khi chuyển khoản?</h3>
+<ul>
+<li>Check Google Sheets tab <code>Transactions</code> xem có giao dịch không</li>
+<li>Nội dung chuyển khoản phải có đúng mã <code>QTAI...</code> (SePay so khớp theo nội dung)</li>
+<li>Số tiền chuyển phải ≥ giá gói</li>
+</ul>
+
+<h3>Khách chuyển thiếu tiền?</h3>
+<ul>
+<li>Code đang check <code>amount >= expectedAmount</code> → chỉ match khi đủ tiền</li>
+<li>Nếu khách chuyển thiếu → không tự chuyển trang → anh phải liên hệ xử lý</li>
+</ul>
+
+<div class="note">
+<strong>Chi phí:</strong> SePay free tier đủ dùng cho 30+ giao dịch/ngày. Google Apps Script: miễn phí 20.000 request/ngày. Đủ cho giai đoạn đầu.
+</div>
+
+</body>
+</html>
