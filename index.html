@@ -2490,6 +2490,26 @@
             font-weight: 700;
             font-size: 0.85rem;
         }
+        .gifts-cta {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .gifts-cta .btn-cta {
+            background: linear-gradient(135deg, var(--accent), #d97706);
+            box-shadow: 0 10px 40px rgba(245, 158, 11, 0.4);
+            font-size: 1.1rem;
+            padding: 18px 40px;
+        }
+
+        /* Form highlight when package selected */
+        .form-highlight {
+            animation: formPulse 2s ease;
+            box-shadow: 0 0 0 4px var(--primary);
+        }
+        @keyframes formPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);}
+            50% { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.3);}
+        }
 
         /* Confirm Payment Button */
         .btn-confirm-payment {
@@ -2585,7 +2605,7 @@
 <!-- Hero -->
 <section class="hero">
     <div class="container">
-        <div class="hero-badge">Nhận setup ngay hôm nay <span>Giảm 10 triệu gói 1 năm</span></div>
+        <div class="hero-badge">Ưu đãi hôm nay <span>Tiết kiệm 40+ giờ mỗi tháng</span></div>
         <h1>Trợ Lý AI Cá Nhân<br><span class="highlight">Làm Thay Bạn 24/7</span></h1>
         <p>Gửi ảnh, gửi file, ra lệnh bằng giọng nói — trợ lý AI riêng của bạn tự làm xong mọi việc lặp lại. Setup bằng OpenClaw + Claude AI, tiết kiệm 40+ giờ mỗi tháng cho công việc của bạn.</p>
         <div class="hero-buttons">
@@ -2613,7 +2633,7 @@
 
 <!-- Urgency Banner -->
 <div class="urgency-banner">
-    Ưu đãi hôm nay: Gói 1 năm giảm từ <span>29.999.000đ</span> → <span>19.999.000đ</span> — Chỉ trong 24 giờ
+    Ưu đãi hôm nay: Gói 1 năm <span>19.999.000đ</span> — Giá gốc <span>29.999.000đ</span> — Chỉ trong 24 giờ
 </div>
 
 <!-- About -->
@@ -3212,47 +3232,51 @@
 <section class="gifts-section" id="gifts">
     <div class="container">
         <div class="section-title animate-on-scroll">
-            <div class="section-label">Quà tặng</div>
-            <h2>Đăng Ký Hôm Nay — Nhận Ngay Bộ Quà Trị Giá 5.000.000đ</h2>
-            <p>Tất cả đều MIỄN PHÍ khi đăng ký bất kỳ gói nào</p>
+            <div class="section-label">🎁 Quà tặng độc quyền</div>
+            <h2>Chỉ Khách Gói 1 Năm — Nhận Quà Trị Giá 10.000.000đ</h2>
+            <p>Độc quyền cho khách đăng ký gói 1 năm hôm nay — không áp dụng cho các gói ngắn hạn</p>
         </div>
         <div class="gifts-grid animate-on-scroll">
             <div class="gift-card">
-                <div class="gift-icon">📋</div>
-                <h3>100+ Prompt Templates</h3>
-                <p>Bộ prompt chuyên nghiệp cho Content, Marketing, Sales, HR, Kế toán — dùng ngay, không cần nghĩ</p>
-                <div class="gift-value">Trị giá 1.500.000đ</div>
+                <div class="gift-icon">⚙️</div>
+                <h3>Setup 2 Kênh Telegram + Zalo</h3>
+                <p>Setup trợ lý AI trên CẢ Telegram & Zalo (khách khác chỉ được 1 kênh) — dùng đâu tiện đó</p>
+                <div class="gift-value">Trị giá 3.000.000đ</div>
             </div>
             <div class="gift-card">
                 <div class="gift-icon">🤖</div>
-                <h3>Bộ Automation Templates</h3>
-                <p>5 workflow tự động hoá có sẵn: xử lý email, lên lịch content, chăm sóc khách, báo cáo, quản lý task</p>
+                <h3>10+ Workflow Automation Cao Cấp</h3>
+                <p>Workflow riêng cho công việc của bạn: xử lý email hàng loạt, auto đăng FB, chốt đơn, báo cáo doanh thu</p>
+                <div class="gift-value">Trị giá 2.500.000đ</div>
+            </div>
+            <div class="gift-card">
+                <div class="gift-icon">🎯</div>
+                <h3>Tuỳ Chỉnh Theo Ngành Nghề</h3>
+                <p>AI được huấn luyện riêng theo ngành (bán hàng, dịch vụ, tư vấn...) — hiểu đúng nghiệp vụ, không generic</p>
                 <div class="gift-value">Trị giá 2.000.000đ</div>
             </div>
             <div class="gift-card">
-                <div class="gift-icon">🎥</div>
-                <h3>Video Hướng Dẫn Đầy Đủ</h3>
-                <p>Thư viện video hướng dẫn sử dụng từng tính năng AI — xem lại bất cứ lúc nào</p>
-                <div class="gift-value">Trị giá 500.000đ</div>
-            </div>
-            <div class="gift-card">
-                <div class="gift-icon">💬</div>
-                <h3>Group Hỗ Trợ VIP Vĩnh Viễn</h3>
-                <p>Tham gia nhóm Zalo VIP của khách hàng, hỏi đáp 24/7, cập nhật tính năng mới liên tục</p>
-                <div class="gift-value">Vô giá</div>
-            </div>
-            <div class="gift-card">
                 <div class="gift-icon">📞</div>
-                <h3>Hỗ Trợ 1-1 Trong 30 Ngày</h3>
-                <p>Được team Quang Thưởng AI hỗ trợ 1-1 qua Zalo trong 30 ngày đầu sau setup</p>
-                <div class="gift-value">Trị giá 1.000.000đ</div>
+                <h3>Hỗ Trợ VIP 1-1 Vô Thời Hạn</h3>
+                <p>Được team hỗ trợ riêng qua Zalo bất cứ lúc nào trong suốt 12 tháng — ưu tiên trả lời trước</p>
+                <div class="gift-value">Trị giá 1.500.000đ</div>
             </div>
             <div class="gift-card">
                 <div class="gift-icon">🔄</div>
-                <h3>Cập Nhật Miễn Phí Trọn Đời</h3>
-                <p>AI thay đổi liên tục — bạn sẽ được cập nhật bài giảng mới, tính năng mới hoàn toàn miễn phí</p>
+                <h3>Upgrade Tính Năng Miễn Phí</h3>
+                <p>AI ra tính năng mới, bạn được upgrade miễn phí toàn bộ 12 tháng — không tốn thêm đồng nào</p>
+                <div class="gift-value">Trị giá 1.000.000đ</div>
+            </div>
+            <div class="gift-card">
+                <div class="gift-icon">💬</div>
+                <h3>Nhóm Zalo VIP Riêng</h3>
+                <p>Chỉ khách 1 năm mới được vào — networking với chủ shop, CEO khác đang dùng AI</p>
                 <div class="gift-value">Vô giá</div>
             </div>
+        </div>
+
+        <div class="gifts-cta animate-on-scroll">
+            <a href="#register" class="btn btn-cta" onclick="setPackage('1nam')">🎁 Đăng Ký Gói 1 Năm — Nhận Quà Ngay</a>
         </div>
     </div>
 </section>
@@ -3299,6 +3323,72 @@
                     </div>
                 </div>
             </div>
+            <div class="testimonial-card animate-on-scroll">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"Mình làm freelance content, trước viết 5 bài/ngày đã mệt. Giờ AI viết 30 bài/ngày, mình chỉ duyệt. Thu nhập x3 trong 2 tháng. Không tin được!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">LP</div>
+                    <div class="testimonial-info">
+                        <h4>Chị Lan Phương</h4>
+                        <span>Freelance Content Creator</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card animate-on-scroll">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"Nhà hàng có 500+ khách/tháng, mình không thể nhớ sinh nhật từng người. AI tự nhớ, tự gửi voucher chúc mừng. Khách cảm động, quay lại đông hơn hẳn."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">DV</div>
+                    <div class="testimonial-info">
+                        <h4>Anh Dũng</h4>
+                        <span>Chủ chuỗi nhà hàng</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card animate-on-scroll">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"Mình 52 tuổi, không rành công nghệ, tưởng phức tạp lắm. Team setup xong trong 1 ngày, mình chỉ nói chuyện với Zalo là xong. Quá đơn giản!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">CH</div>
+                    <div class="testimonial-info">
+                        <h4>Cô Hồng</h4>
+                        <span>Chủ spa 52 tuổi</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card animate-on-scroll">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"Trước mình tốn 2h/ngày chỉ để phân tích doanh thu các kênh bán hàng. Giờ gửi file Excel, AI trả insight trong 30 giây + đề xuất chiến lược. Tiết kiệm 60h/tháng."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">KH</div>
+                    <div class="testimonial-info">
+                        <h4>Anh Khang</h4>
+                        <span>Giám đốc kinh doanh</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card animate-on-scroll">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"Chạy 3 fanpage, mỗi ngày có 200+ comment. AI tự reply cá nhân hoá, tự inbox khách quan tâm. Tỷ lệ chuyển đổi từ comment ra đơn tăng 70%."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">NT</div>
+                    <div class="testimonial-info">
+                        <h4>Chị Ngân</h4>
+                        <span>Chủ shop mỹ phẩm</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card animate-on-scroll">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"Đã thử 3 dịch vụ AI trước nhưng đều phức tạp, phải ngồi máy tính. Quang Thưởng AI chỉ cần điện thoại, nói 1 câu là xong. Duy nhất phù hợp với dân không-tech."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">PT</div>
+                    <div class="testimonial-info">
+                        <h4>Anh Phúc</h4>
+                        <span>Chủ doanh nghiệp SME</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -3307,30 +3397,70 @@
 <section class="benefits" id="benefits">
     <div class="container">
         <div class="section-title animate-on-scroll">
-            <div class="section-label">Lợi ích</div>
-            <h2>Bạn Sẽ Nhận Được Gì?</h2>
-            <p>Không chỉ là công cụ — mà là trợ lý AI riêng làm thay bạn 24/7</p>
+            <div class="section-label">Bạn nhận được gì</div>
+            <h2>Thay Đổi Lớn Trong Công Việc & Cuộc Sống</h2>
+            <p>Không còn là một công cụ — mà là cách sống và làm việc hoàn toàn mới</p>
         </div>
         <div class="benefits-grid">
             <div class="benefit-item animate-on-scroll">
-                <div class="benefit-icon">&#x1F680;</div>
-                <h3>Tiết kiệm 40+ giờ/tháng</h3>
-                <p>Tự động hoá việc lặp, tập trung vào việc quan trọng</p>
+                <div class="benefit-icon">⏰</div>
+                <h3>Tiết kiệm 40-80 giờ/tháng</h3>
+                <p>Thoát khỏi 3-4 tiếng/ngày ngồi reply inbox, viết content, làm báo cáo. AI làm hết thay bạn.</p>
             </div>
             <div class="benefit-item animate-on-scroll">
-                <div class="benefit-icon">&#x1F4B0;</div>
-                <h3>Tăng doanh thu 30-40%</h3>
-                <p>Phản hồi khách nhanh hơn, chốt đơn nhiều hơn</p>
+                <div class="benefit-icon">💰</div>
+                <h3>Tăng doanh thu 30-50%</h3>
+                <p>Phản hồi khách trong 10 giây thay vì 1 tiếng. Không bỏ lỡ đơn hàng nào. Khách không chạy sang đối thủ.</p>
             </div>
             <div class="benefit-item animate-on-scroll">
-                <div class="benefit-icon">&#x1F465;</div>
-                <h3>Setup trong 1-2 ngày</h3>
-                <p>Không cần biết công nghệ — bọn mình lo hết</p>
+                <div class="benefit-icon">💸</div>
+                <h3>Tiết kiệm 10-30tr/tháng tiền lương</h3>
+                <p>Không cần thuê thêm người chỉ để reply tin nhắn, viết content, làm báo cáo — AI làm tốt hơn, rẻ hơn.</p>
             </div>
             <div class="benefit-item animate-on-scroll">
-                <div class="benefit-icon">&#x1F3AF;</div>
-                <h3>Hỗ trợ 24/7</h3>
-                <p>Có vấn đề là có ngay — ngay trên Zalo riêng</p>
+                <div class="benefit-icon">😌</div>
+                <h3>Không còn căng thẳng, burnout</h3>
+                <p>Hết cảnh ngồi máy tính đến 11h đêm vẫn chưa hết việc. Dành thời gian cho gia đình, sức khoẻ.</p>
+            </div>
+            <div class="benefit-item animate-on-scroll">
+                <div class="benefit-icon">🚀</div>
+                <h3>Tăng năng suất 5-10 lần</h3>
+                <p>1 người làm bằng 5 người. Bạn có thể mở rộng kinh doanh mà không cần thêm nhân sự.</p>
+            </div>
+            <div class="benefit-item animate-on-scroll">
+                <div class="benefit-icon">🌙</div>
+                <h3>Bán hàng cả khi đang ngủ</h3>
+                <p>AI chốt đơn 24/7 — kể cả 2h sáng cũng có tin nhắn đặt hàng vào. Tiền về đều đều, bạn vẫn ngủ ngon.</p>
+            </div>
+            <div class="benefit-item animate-on-scroll">
+                <div class="benefit-icon">😊</div>
+                <h3>Khách hàng hài lòng hơn</h3>
+                <p>Trả lời trong vài giây, cá nhân hoá từng người. Khách cảm thấy được chăm sóc, quay lại mua nhiều lần.</p>
+            </div>
+            <div class="benefit-item animate-on-scroll">
+                <div class="benefit-icon">🎯</div>
+                <h3>Focus vào việc quan trọng</h3>
+                <p>Không còn mất thời gian cho việc lặp. Tập trung vào chiến lược, ý tưởng, những thứ AI không làm được.</p>
+            </div>
+            <div class="benefit-item animate-on-scroll">
+                <div class="benefit-icon">📱</div>
+                <h3>Làm việc từ bất cứ đâu</h3>
+                <p>Đi du lịch, đi cà phê, đưa con đi chơi — chỉ cần điện thoại là quản lý được cả doanh nghiệp.</p>
+            </div>
+            <div class="benefit-item animate-on-scroll">
+                <div class="benefit-icon">🏆</div>
+                <h3>Vượt mặt đối thủ</h3>
+                <p>Khi đối thủ còn ngồi làm tay, bạn đã có AI chạy ngày đêm. Khoảng cách càng ngày càng xa.</p>
+            </div>
+            <div class="benefit-item animate-on-scroll">
+                <div class="benefit-icon">🧘</div>
+                <h3>Cân bằng cuộc sống</h3>
+                <p>Dành thời gian cho vợ/chồng, con cái, sở thích cá nhân. Không còn cảm giác tội lỗi khi nghỉ.</p>
+            </div>
+            <div class="benefit-item animate-on-scroll">
+                <div class="benefit-icon">🛡️</div>
+                <h3>Bảo vệ sự nghiệp tương lai</h3>
+                <p>AI đang thay thế những người KHÔNG biết dùng AI. Bạn làm chủ AI — bạn an toàn 5-10 năm tới.</p>
             </div>
         </div>
     </div>
@@ -3592,7 +3722,20 @@
 
     function setPackage(value) {
         const select = document.getElementById('inputCourse');
-        if (select) select.value = value;
+        if (select) {
+            select.value = value;
+            // Scroll smooth to form
+            const form = document.getElementById('register');
+            if (form) {
+                form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Highlight form briefly
+                const wrapper = document.getElementById('quoteForm');
+                if (wrapper) {
+                    wrapper.classList.add('form-highlight');
+                    setTimeout(() => wrapper.classList.remove('form-highlight'), 2000);
+                }
+            }
+        }
     }
 
     function toggleFaq(el) {
