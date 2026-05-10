@@ -3801,15 +3801,6 @@
                         <option value="1nam" data-price="19999000" data-original="29999000">Gói 1 Năm - 19.999.000đ (ưu đãi hôm nay - tiết kiệm 66%)</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Số lượng tài khoản</label>
-                    <select id="inputQuantity">
-                        <option>1 người (cá nhân)</option>
-                        <option>2-5 người (nhóm nhỏ)</option>
-                        <option>6-20 người (team)</option>
-                        <option>20+ người (doanh nghiệp)</option>
-                    </select>
-                </div>
                 <button type="submit" class="btn btn-primary">Tiếp tục thanh toán →</button>
             </form>
         </div>
@@ -3942,7 +3933,12 @@
         EMAILJS_PUBLIC_KEY: 'YOUR_EMAILJS_PUBLIC_KEY', // Thay bằng public key EmailJS
         EMAILJS_SERVICE_ID: 'YOUR_SERVICE_ID', // Thay bằng service ID
         EMAILJS_TEMPLATE_ID: 'YOUR_TEMPLATE_ID', // Thay bằng template ID
-        ZALO_GROUP_LINK: 'https://zalo.me/g/qghdoikqp1q1mulrx6vc' // Link nhóm Zalo khách hàng
+        ZALO_GROUP_LINKS: {
+            '1thang': 'https://zalo.me/g/vi3x1i3ui3psoxp26dri',
+            '3thang': 'https://zalo.me/g/7lnmkexu2dkzpkfszsqy',
+            '6thang': 'https://zalo.me/g/6oqssc48wkzzhaep1gjx',
+            '1nam': 'https://zalo.me/g/vxkxypnmiod8pgkpi5kc'
+        }
     };
 
     // Store form data for confirmPayment
@@ -4012,23 +4008,10 @@
         const selected = course.options[course.selectedIndex];
         const courseValue = selected.value;
 
-        // Check if this user already used the offer
-        const userKey = (phone + email).toLowerCase().replace(/\s/g, '');
-        const usedOffers = JSON.parse(localStorage.getItem('usedOffers') || '[]');
-        const isFirstTime = !usedOffers.includes(userKey);
-
-        let price, original;
-        if (isFirstTime) {
-            price = parseInt(selected.dataset.price);
-            original = parseInt(selected.dataset.original);
-            // Save to localStorage
-            usedOffers.push(userKey);
-            localStorage.setItem('usedOffers', JSON.stringify(usedOffers));
-        } else {
-            // Second time: full price, no discount
-            original = parseInt(selected.dataset.original);
-            price = original;
-        }
+        // Always use discounted price from data-price
+        const price = parseInt(selected.dataset.price);
+        const original = parseInt(selected.dataset.original);
+        const isFirstTime = true;
 
         const courseName = selected.text;
         const saving = original - price;
@@ -4074,7 +4057,7 @@
         }
 
         // Store for confirmPayment
-        currentFormData = { name, phone, email, courseName, price, original, saving, transferText, orderCode };
+        currentFormData = { name, phone, email, courseName, courseValue, price, original, saving, transferText, orderCode };
 
         // Start auto-detect payment
         startPaymentPolling(orderCode, price);
@@ -4162,6 +4145,9 @@
             })
         }).catch(() => {});
 
+        // Get Zalo link by package
+        const zaloLink = CONFIG.ZALO_GROUP_LINKS[data.courseValue] || CONFIG.ZALO_GROUP_LINKS['1thang'];
+
         // Send email
         if (CONFIG.EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
             emailjs.send(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, {
@@ -4169,7 +4155,7 @@
                 to_email: data.email,
                 course_name: data.courseName,
                 price: formatPrice(data.price),
-                zalo_link: CONFIG.ZALO_GROUP_LINK
+                zalo_link: zaloLink
             }).catch(() => {});
         }
 
@@ -4178,6 +4164,9 @@
             document.getElementById('paymentFullscreen').style.display = 'none';
             document.getElementById('thankYouPage').style.display = 'block';
             document.getElementById('tyEmail').textContent = data.email;
+            // Update Zalo button link
+            const zaloBtn = document.querySelector('.btn-zalo-group');
+            if (zaloBtn) zaloBtn.href = zaloLink;
             clearInterval(countdownInterval);
             window.scrollTo({ top: 0 });
 
