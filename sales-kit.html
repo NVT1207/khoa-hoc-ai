@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Kit - Khoá Học Claude & OpenClaw | AI Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+            --radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #334155;
+            line-height: 1.7;
+            background: white;
+        }
+
+        /* Print styles */
+        @media print {
+            .no-print, .toc-nav { display: none !important; }
+            body { font-size: 11pt; line-height: 1.5; }
+            .page-break { page-break-before: always; }
+            section { page-break-inside: avoid; }
+            h2 { page-break-after: avoid; }
+            .container { max-width: 100%; padding: 0; }
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+        /* TOC Navigation */
+        .toc-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 12px 24px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            overflow-x: auto;
+        }
+
+        .toc-nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-size: 0.82rem;
+            font-weight: 500;
+            white-space: nowrap;
+            padding: 4px 12px;
+            border-radius: 20px;
+            transition: all 0.2s;
+        }
+
+        .toc-nav a:hover { background: var(--light); color: var(--primary); }
+        .toc-nav .brand { font-weight: 700; color: var(--primary); font-size: 0.9rem; }
+
+        /* Header */
+        .kit-header {
+            margin-top: 70px;
+            padding: 60px 0 40px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .kit-header h1 { font-size: 2.2rem; color: var(--dark); margin-bottom: 8px; }
+        .kit-header p { color: var(--gray); font-size: 1rem; }
+
+        /* Sections */
+        section { padding: 48px 0; }
+
+        h2 {
+            font-size: 1.6rem;
+            color: var(--dark);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            color: var(--primary-dark);
+            margin: 24px 0 12px;
+        }
+
+        h4 {
+            font-size: 1rem;
+            color: var(--dark);
+            margin: 16px 0 8px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        /* Cards & Boxes */
+        .script-box {
+            background: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin: 16px 0;
+        }
+
+        .script-box.objection {
+            border-left-color: var(--secondary);
+            background: #fdf2f8;
+        }
+
+        .script-box.tip {
+            border-left-color: var(--success);
+            background: #ecfdf5;
+        }
+
+        .script-box.warning {
+            border-left-color: var(--accent);
+            background: #fffbeb;
+        }
+
+        .script-label {
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+
+        .script-box.objection .script-label { color: var(--secondary); }
+        .script-box.tip .script-label { color: var(--success); }
+
+        /* Lesson cards */
+        .lesson-card {
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius);
+            padding: 24px;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .lesson-card .lesson-num {
+            background: var(--primary);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-right: 10px;
+        }
+
+        .lesson-card .lesson-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dark);
+            display: inline;
+        }
+
+        .lesson-card .lesson-meta {
+            color: var(--gray);
+            font-size: 0.82rem;
+            margin: 8px 0 12px;
+        }
+
+        .lesson-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .lesson-card ul li {
+            padding: 4px 0 4px 20px;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .lesson-card ul li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .homework {
+            background: #f0f9ff;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: #0369a1;
+        }
+
+        .homework::before { content: "Bài tập: "; font-weight: 700; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.88rem;
+        }
+
+        th, td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Part dividers */
+        .part-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 40px;
+            border-radius: var(--radius);
+            margin: 40px 0 32px;
+            text-align: center;
+        }
+
+        .part-header.part2 {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+        }
+
+        .part-header h2 {
+            color: white;
+            border: none;
+            font-size: 1.8rem;
+            margin: 0;
+            padding: 0;
+            display: block;
+        }
+
+        .part-header p { color: rgba(255,255,255,0.85); margin: 8px 0 0; }
+
+        /* Conversation script */
+        .convo { margin: 12px 0; }
+        .convo .speaker {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 2px;
+        }
+        .convo .speaker.you { color: var(--primary); }
+        .convo .speaker.customer { color: var(--gray); }
+        .convo .line {
+            background: var(--light);
+            padding: 8px 14px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .convo .line.you-line { background: #eef2ff; margin-left: 20px; }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="toc-nav no-print">
+    <span class="brand">AI Academy</span>
+    <a href="#part1">Kịch bản bán hàng</a>
+    <a href="#opening">Mở đầu</a>
+    <a href="#discovery">Khám phá</a>
+    <a href="#value">Giá trị</a>
+    <a href="#objections">Xử lý từ chối</a>
+    <a href="#close">Chốt đơn</a>
+    <a href="#followup">Follow-up</a>
+    <a href="#part2">Slide dạy</a>
+    <a href="#basic">Cơ bản</a>
+    <a href="#advanced">Nâng cao</a>
+</nav>
+
+<div class="container">
+
+<!-- Header -->
+<header class="kit-header">
+    <h1>Sales Kit & Giáo Trình Giảng Dạy</h1>
+    <p>Khoá Học Claude AI & OpenClaw — Cơ Bản & Nâng Cao</p>
+</header>
+
+<!-- ==================== PHẦN 1: KỊCH BẢN BÁN HÀNG ==================== -->
+
+<div class="part-header" id="part1">
+    <h2>Phần 1: Kịch Bản Bán Hàng</h2>
+    <p>Quy trình tư vấn & chốt đơn từ A-Z</p>
+</div>
+
+<!-- Mở đầu -->
+<section id="opening">
+    <h2>1. Mở Đầu — Câu Hook & Chào Khách</h2>
+
+    <h3>Với khách cá nhân (Freelancer, nhân viên VP, sinh viên)</h3>
+    <div class="convo">
+        <div class="speaker you">Bạn:</div>
+        <div class="line you-line">Chào anh/chị [Tên]! Em là [Tên] bên AI Academy. Em thấy anh/chị quan tâm đến khoá học AI — cho em hỏi nhanh, hiện anh/chị đang làm lĩnh vực gì ạ?</div>
+    </div>
+
+    <div class="script-box tip">
+        <div class="script-label">Mẹo</div>
+        Luôn hỏi về CÔNG VIỆC trước, không pitch giá ngay. Mục tiêu: tìm pain point → match giải pháp.
+    </div>
+
+    <h3>Với khách doanh nghiệp (Owner, Manager, HR)</h3>
+    <div class="convo">
+        <div class="speaker you">Bạn:</div>
+        <div class="line you-line">Chào anh/chị [Tên]! Em là [Tên] từ AI Academy. Em hiểu bên anh/chị đang tìm giải pháp AI để tối ưu vận hành — em xin phép hỏi vài câu để tư vấn chính xác nhất cho team bên mình nhé?</div>
+    </div>
+
+    <div class="script-box">
+        <div class="script-label">Nguyên tắc vàng</div>
+        <strong>70% lắng nghe — 30% nói.</strong> Đặt câu hỏi mở, để khách tự kể vấn đề. Bạn chỉ cần gật đầu và ghi nhận.
+    </div>
+</section>
+
+<!-- Khám phá nhu cầu -->
+<section id="discovery">
+    <h2>2. Khám Phá Nhu Cầu — Câu Hỏi Mở</h2>
+
+    <h3>Câu hỏi cho cá nhân:</h3>
+    <table>
+        <tr><th>#</th><th>Câu hỏi</th><th>Mục đích</th></tr>
+        <tr><td>1</td><td>Hiện anh/chị dành bao nhiêu thời gian mỗi ngày cho việc soạn email, viết content, xử lý data?</td><td>Xác định thời gian lãng phí</td></tr>
+        <tr><td>2</td><td>Anh/chị đã dùng ChatGPT hay AI nào chưa? Thấy hạn chế gì?</td><td>Biết mức độ hiểu biết</td></tr>
+        <tr><td>3</td><td>Nếu có 1 trợ lý AI làm hết việc lặp cho mình, anh/chị sẽ dùng thời gian đó để làm gì?</td><td>Gợi mở giá trị tương lai</td></tr>
+        <tr><td>4</td><td>Budget anh/chị dành cho học tập phát triển bản thân khoảng bao nhiêu/tháng?</td><td>Kiểm tra khả năng chi trả</td></tr>
+    </table>
+
+    <h3>Câu hỏi cho doanh nghiệp:</h3>
+    <table>
+        <tr><th>#</th><th>Câu hỏi</th><th>Mục đích</th></tr>
+        <tr><td>1</td><td>Team bên mình có bao nhiêu người? Phòng ban nào cần AI nhất?</td><td>Xác định quy mô đào tạo</td></tr>
+        <tr><td>2</td><td>Quy trình nào đang tốn nhân lực nhất mà anh/chị muốn tự động hoá?</td><td>Tìm pain point cụ thể</td></tr>
+        <tr><td>3</td><td>Anh/chị kỳ vọng sau khi đào tạo, team có thể làm được gì?</td><td>Set expectation</td></tr>
+        <tr><td>4</td><td>Đã có budget training cho Q này chưa? Khoảng bao nhiêu/người?</td><td>Kiểm tra budget</td></tr>
+    </table>
+</section>
+
+<!-- Trình bày giá trị -->
+<section id="value">
+    <h2>3. Trình Bày Giá Trị — Pitch Chính</h2>
+
+    <h3>Câu pitch 30 giây (Elevator pitch)</h3>
+    <div class="script-box">
+        <div class="script-label">Script</div>
+        "Khoá học của bọn em khác biệt ở chỗ: anh/chị chỉ cần <strong>ra lệnh trên điện thoại</strong> — AI sẽ <strong>tự động làm hết</strong> — anh/chị <strong>chỉ duyệt kết quả</strong>. Không cần biết code, không cần ngồi máy tính. Sau 6 buổi, anh/chị sẽ tiết kiệm 3-4 tiếng mỗi ngày cho những việc lặp đi lặp lại."
+    </div>
+
+    <h3>So sánh Before/After</h3>
+    <table>
+        <tr><th>Trước khi học</th><th>Sau khi học</th></tr>
+        <tr><td>Viết content 2-3 tiếng/bài</td><td>Ra lệnh AI viết 5 bài trong 10 phút</td></tr>
+        <tr><td>Reply email thủ công cả ngày</td><td>AI tự tóm tắt + reply, mình chỉ duyệt</td></tr>
+        <tr><td>Thuê designer làm landing page</td><td>AI tạo trang web trong 3 phút</td></tr>
+        <tr><td>Xử lý data Excel mất nửa ngày</td><td>AI phân tích + tạo báo cáo tự động</td></tr>
+        <tr><td>Chăm sóc khách 1-1 rất tốn thời gian</td><td>Chatbot AI tự chăm sóc 24/7</td></tr>
+    </table>
+
+    <h3>ROI cụ thể</h3>
+    <div class="script-box tip">
+        <div class="script-label">Tính cho khách nghe</div>
+        "Nếu anh/chị tiết kiệm 3 tiếng/ngày × 22 ngày = <strong>66 tiếng/tháng</strong>. Nếu thu nhập 200k/giờ thì đó là <strong>13.2 triệu/tháng</strong> giá trị thời gian. Học phí chỉ <strong>6.999.000đ</strong> — dùng cả đời."
+    </div>
+
+    <h3>Demo nhanh (Live hoặc video)</h3>
+    <div class="script-box">
+        <div class="script-label">Demo 2 phút</div>
+        1. Mở điện thoại → nhắn vào Telegram/Zalo bot<br>
+        2. Ra lệnh: "Viết 3 bài post Facebook về khoá học AI, kèm hashtag"<br>
+        3. AI trả kết quả trong 30 giây<br>
+        4. Nói: "Anh/chị thấy không? Chỉ 1 câu lệnh, có ngay 3 bài content chất lượng."
+    </div>
+</section>
+
+<!-- Xử lý từ chối -->
+<section id="objections" class="page-break">
+    <h2>4. Xử Lý Từ Chối</h2>
+
+    <div class="script-box objection">
+        <div class="script-label">Từ chối #1: "Giá cao quá"</div>
+        <strong>Trả lời:</strong> "Em hiểu anh/chị cân nhắc về giá. Nhưng nếu tính ra, 6.999.000đ ÷ 12 tháng = chỉ 583k/tháng — bằng 2 ly cà phê/ngày. Đổi lại anh/chị tiết kiệm 3-4 tiếng MỖI NGÀY. Nếu so với việc thuê 1 nhân viên làm những việc này, chi phí ít nhất 8-10 triệu/tháng."
+    </div>
+
+    <div class="script-box objection">
+        <div class="script-label">Từ chối #2: "Để anh/chị suy nghĩ thêm"</div>
+        <strong>Trả lời:</strong> "Dạ anh/chị cứ suy nghĩ ạ. Nhưng em muốn chia sẻ thêm: hiện tại bên em đang có giá ưu đãi khai giảng, chỉ áp dụng cho [X] suất đầu tiên. Nếu anh/chị đăng ký trong hôm nay, em giữ giá này cho anh/chị. Mai em có thể gọi lại để hỗ trợ thêm không ạ?"
+    </div>
+
+    <div class="script-box objection">
+        <div class="script-label">Từ chối #3: "Tự học trên YouTube/Google được"</div>
+        <strong>Trả lời:</strong> "Đúng rồi anh/chị, kiến thức free rất nhiều. Nhưng vấn đề là: tự học mất 6 tháng-1 năm mới ráp nối được, mà vẫn thiếu phần thực hành với dự án thực. Khoá bọn em 6 buổi = có hệ thống, có mentor hỗ trợ, có template dùng ngay. Thời gian tiết kiệm được 5 tháng đó, anh/chị kiếm được bao nhiêu tiền?"
+    </div>
+
+    <div class="script-box objection">
+        <div class="script-label">Từ chối #4: "Anh/chị không rành công nghệ"</div>
+        <strong>Trả lời:</strong> "Đây chính là lý do bọn em thiết kế khoá học này! Anh/chị không cần biết code, không cần rành máy tính. Chỉ cần biết nhắn tin trên điện thoại là đủ. Bọn em có học viên 55 tuổi, chưa bao giờ dùng AI, sau 2 buổi đã tự tạo được chatbot chăm sóc khách hàng."
+    </div>
+
+    <div class="script-box objection">
+        <div class="script-label">Từ chối #5: "AI sẽ thay thế người, học làm gì?"</div>
+        <strong>Trả lời:</strong> "Chính xác! AI đang thay thế những người KHÔNG biết dùng AI. Người biết dùng AI sẽ thay thế người không biết — chứ AI không thay thế người. Học AI bây giờ = bảo vệ sự nghiệp của mình trong 5-10 năm tới."
+    </div>
+
+    <div class="script-box objection">
+        <div class="script-label">Từ chối #6: "Công ty chưa có budget"</div>
+        <strong>Trả lời:</strong> "Em hiểu. Vậy anh/chị có thể đề xuất lên sếp không? Em có thể gửi bản proposal chuyên nghiệp + case study ROI cụ thể để anh/chị dễ trình bày. Nhiều doanh nghiệp sau khi thấy ROI đã duyệt ngay trong tuần."
+    </div>
+
+    <div class="script-box objection">
+        <div class="script-label">Từ chối #7: "Đã dùng ChatGPT rồi, đủ xài"</div>
+        <strong>Trả lời:</strong> "ChatGPT free rất tốt cho hỏi-đáp cơ bản. Nhưng Claude + OpenClaw khác ở chỗ: nó tạo AUTOMATION — chạy tự động 24/7 mà không cần anh/chị ngồi đó. Ví dụ: email đến → AI tự tóm tắt → gửi Slack → auto reply. Tất cả không cần động tay."
+    </div>
+
+    <div class="script-box objection">
+        <div class="script-label">Từ chối #8: "Để khi nào rảnh anh/chị học"</div>
+        <strong>Trả lời:</strong> "Em hiểu anh/chị bận. Nhưng thực tế, học xong anh/chị sẽ CÓ thêm thời gian, không phải mất thời gian. Mỗi buổi chỉ 2 tiếng, có video replay xem lại bất cứ lúc nào. Và nếu đợi 'khi nào rảnh', thì đối thủ đã đi trước mình rồi."
+    </div>
+
+    <div class="script-box objection">
+        <div class="script-label">Từ chối #9: "Sợ học xong không áp dụng được"</div>
+        <strong>Trả lời:</strong> "Bọn em cam kết: 85% học viên áp dụng ngay TUẦN ĐẦU TIÊN. Vì sao? Vì mỗi buổi đều có bài tập thực hành trực tiếp trên công việc thật của anh/chị. Không lý thuyết suông. Và sau khoá vẫn được hỗ trợ trong group riêng vô thời hạn."
+    </div>
+
+    <div class="script-box objection">
+        <div class="script-label">Từ chối #10: "Giá combo vẫn cao, giảm thêm được không?"</div>
+        <strong>Trả lời:</strong> "Thật ra giá gốc 2 khoá là 26.999.000đ, combo đang giảm còn 17.999.000đ — tức giảm 9 triệu rồi anh/chị. Đây là mức tốt nhất bọn em có thể offer. Và chỉ áp dụng cho lần đăng ký đầu tiên thôi ạ."
+    </div>
+</section>
+
+<!-- Chốt đơn -->
+<section id="close">
+    <h2>5. Chốt Đơn — Kỹ Thuật Close</h2>
+
+    <h3>Kỹ thuật 1: Giả định chốt (Assumptive Close)</h3>
+    <div class="convo">
+        <div class="speaker you">Bạn:</div>
+        <div class="line you-line">"Vậy anh/chị muốn bắt đầu với khoá cơ bản hay lấy luôn combo để tiết kiệm 9 triệu ạ?"</div>
+    </div>
+
+    <h3>Kỹ thuật 2: Urgency (Tạo cấp bách)</h3>
+    <div class="convo">
+        <div class="speaker you">Bạn:</div>
+        <div class="line you-line">"Giá ưu đãi này chỉ còn [X] suất cuối cùng. Sau khi hết suất, giá sẽ quay về mức gốc. Anh/chị muốn em giữ chỗ luôn không ạ?"</div>
+    </div>
+
+    <h3>Kỹ thuật 3: Social Proof</h3>
+    <div class="convo">
+        <div class="speaker you">Bạn:</div>
+        <div class="line you-line">"Tuần này có 12 người đã đăng ký rồi anh/chị, trong đó có 3 chủ doanh nghiệp giống anh/chị. Mọi người đều nói giá như vậy quá hời so với giá trị nhận được."</div>
+    </div>
+
+    <h3>Kỹ thuật 4: Upsell Combo</h3>
+    <div class="script-box tip">
+        <div class="script-label">Script upsell</div>
+        "Nếu anh/chị lấy combo cả 2 khoá, em tặng thêm: [1] Template automation trị giá 2 triệu, [2] Hỗ trợ 1-1 trong 30 ngày, [3] Giảm thêm 9 triệu so với mua lẻ. Tổng tiết kiệm hơn 11 triệu. Anh/chị muốn em gửi link thanh toán combo không ạ?"
+    </div>
+
+    <h3>Sau khi khách đồng ý:</h3>
+    <div class="script-box">
+        <div class="script-label">Quy trình</div>
+        1. Gửi link landing page (có form đăng ký + QR thanh toán)<br>
+        2. Hướng dẫn điền form → hiện QR code<br>
+        3. Xác nhận thanh toán trong 15 phút (countdown)<br>
+        4. Gửi email/Zalo xác nhận + tài liệu pre-course<br>
+        5. Add vào group học viên
+    </div>
+</section>
+
+<!-- Follow-up -->
+<section id="followup">
+    <h2>6. Follow-up — Quy Trình Chăm Sóc</h2>
+
+    <h3>Khách đã chốt đơn:</h3>
+    <table>
+        <tr><th>Thời điểm</th><th>Hành động</th></tr>
+        <tr><td>Ngay sau thanh toán</td><td>Gửi tin nhắn cảm ơn + lịch học + group link</td></tr>
+        <tr><td>1 ngày trước khai giảng</td><td>Nhắc lịch + gửi tài liệu chuẩn bị</td></tr>
+        <tr><td>Sau buổi 1</td><td>Hỏi feedback, hỗ trợ bài tập</td></tr>
+        <tr><td>Sau buổi 3</td><td>Check-in tiến độ, gợi ý nâng cao</td></tr>
+        <tr><td>Sau khoá</td><td>Xin testimonial + giới thiệu khoá nâng cao</td></tr>
+    </table>
+
+    <h3>Khách chưa chốt:</h3>
+    <table>
+        <tr><th>Thời điểm</th><th>Hành động</th></tr>
+        <tr><td>Sau 2 tiếng</td><td>Nhắn nhẹ: "Anh/chị còn thắc mắc gì không ạ?"</td></tr>
+        <tr><td>Sau 1 ngày</td><td>Gửi case study/testimonial của học viên cũ</td></tr>
+        <tr><td>Sau 3 ngày</td><td>Gửi video demo ngắn hoặc bài viết giá trị miễn phí</td></tr>
+        <tr><td>Sau 7 ngày</td><td>Offer ưu đãi cuối: "Còn 2 suất giá cũ, em giữ cho anh/chị nhé?"</td></tr>
+        <tr><td>Sau 14 ngày</td><td>Nurture: share content hay về AI, không pitch</td></tr>
+    </table>
+</section>
+
+<!-- ==================== PHẦN 2: SLIDE DẠY ==================== -->
+
+<div class="part-header part2 page-break" id="part2">
+    <h2>Phần 2: Giáo Trình Giảng Dạy</h2>
+    <p>Chi tiết 12 buổi: Cơ bản (6 buổi) + Nâng cao (6 buổi)</p>
+</div>
+
+<!-- KHOÁ CƠ BẢN -->
+<section id="basic">
+    <h2>Khoá Cơ Bản — Claude & OpenClaw (6 buổi × 2 tiếng)</h2>
+    <p><strong>Mục tiêu tổng:</strong> Học viên tự tin sử dụng Claude AI + OpenClaw cho công việc hàng ngày, tiết kiệm 2-3 tiếng/ngày.</p>
+
+    <div class="lesson-card">
+        <span class="lesson-num">1</span>
+        <span class="lesson-title">Giới Thiệu AI & Mindset Đúng</span>
+        <div class="lesson-meta">Buổi 1 • 2 tiếng • Mục tiêu: Hiểu AI, cài đặt xong môi trường</div>
+        <ul>
+            <li>AI là gì? Tại sao 2025-2026 là thời điểm vàng?</li>
+            <li>Claude vs ChatGPT vs Gemini — so sánh thực tế</li>
+            <li>Đăng ký tài khoản Claude + OpenClaw</li>
+            <li>Cài đặt Telegram/Zalo bot kết nối AI</li>
+            <li>Demo live: ra lệnh trên điện thoại → AI làm việc</li>
+            <li>Mindset: AI là trợ lý, bạn là sếp — cách ra lệnh hiệu quả</li>
+        </ul>
+        <div class="homework">Cài đặt thành công bot AI trên điện thoại, gửi 10 lệnh đầu tiên và screenshot kết quả.</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="lesson-num">2</span>
+        <span class="lesson-title">Prompt Engineering — Nghệ Thuật Ra Lệnh</span>
+        <div class="lesson-meta">Buổi 2 • 2 tiếng • Mục tiêu: Viết prompt chất lượng, nhận output chuẩn</div>
+        <ul>
+            <li>Cấu trúc prompt hoàn hảo: Role + Context + Task + Format</li>
+            <li>5 sai lầm phổ biến khi viết prompt (và cách fix)</li>
+            <li>Prompt cho viết content (Facebook, email, blog)</li>
+            <li>Prompt cho tóm tắt & phân tích</li>
+            <li>Prompt cho brainstorm & lên ý tưởng</li>
+            <li>Thực hành: Viết 10 prompt cho công việc thật của học viên</li>
+        </ul>
+        <div class="homework">Tạo bộ 5 prompt template cho công việc cá nhân, dùng thử và chấm điểm output (1-10).</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="lesson-num">3</span>
+        <span class="lesson-title">OpenClaw Platform — Setup & Tích Hợp</span>
+        <div class="lesson-meta">Buổi 3 • 2 tiếng • Mục tiêu: Thành thạo OpenClaw, kết nối với Claude</div>
+        <ul>
+            <li>OpenClaw là gì? Tổng quan platform</li>
+            <li>Tạo project đầu tiên trên OpenClaw</li>
+            <li>Kết nối Claude AI vào OpenClaw workflow</li>
+            <li>Templates có sẵn: content, email, báo cáo, chăm sóc khách</li>
+            <li>Cài đặt trigger: khi nào AI tự chạy?</li>
+            <li>Thực hành: Tạo workflow viết content tự động</li>
+        </ul>
+        <div class="homework">Tạo 1 workflow hoàn chỉnh: nhận input → AI xử lý → output gửi qua Telegram.</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="lesson-num">4</span>
+        <span class="lesson-title">Ứng Dụng Thực Tế #1 — Content & Marketing</span>
+        <div class="lesson-meta">Buổi 4 • 2 tiếng • Mục tiêu: Tạo content chất lượng nhanh gấp 10x</div>
+        <ul>
+            <li>Viết bài Facebook: hook → body → CTA (batch 5-10 bài/lần)</li>
+            <li>Viết email marketing cá nhân hoá</li>
+            <li>Tạo kịch bản video ngắn (Reels, TikTok)</li>
+            <li>SEO content: viết blog chuẩn SEO với AI</li>
+            <li>Lên lịch content cả tuần chỉ trong 15 phút</li>
+            <li>Thực hành: Tạo content plan 7 ngày cho business thật</li>
+        </ul>
+        <div class="homework">Tạo 7 bài post Facebook + 3 email marketing cho business cá nhân, đăng thử 1 bài và đo engagement.</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="lesson-num">5</span>
+        <span class="lesson-title">Ứng Dụng Thực Tế #2 — Văn Phòng & Quản Lý</span>
+        <div class="lesson-meta">Buổi 5 • 2 tiếng • Mục tiêu: Tự động hoá công việc văn phòng</div>
+        <ul>
+            <li>Xử lý email: tóm tắt + phân loại + reply tự động</li>
+            <li>Tạo báo cáo từ data (Excel/Google Sheets → insight)</li>
+            <li>Soạn văn bản, hợp đồng, proposal tự động</li>
+            <li>Meeting notes: ghi chú + action items tự động</li>
+            <li>Quản lý lịch & nhắc việc thông minh</li>
+            <li>Thực hành: Setup hệ thống xử lý email tự động</li>
+        </ul>
+        <div class="homework">Setup workflow xử lý email (tóm tắt 5 email thật → gửi báo cáo qua Telegram).</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="lesson-num">6</span>
+        <span class="lesson-title">Tổng Kết & Xây Dựng Hệ Thống Cá Nhân</span>
+        <div class="lesson-meta">Buổi 6 • 2 tiếng • Mục tiêu: Có hệ thống AI hoàn chỉnh cho riêng mình</div>
+        <ul>
+            <li>Review lại toàn bộ kiến thức 5 buổi</li>
+            <li>Xây dựng "AI Dashboard" cá nhân: 1 nơi quản lý mọi thứ</li>
+            <li>Best practices: bảo mật, tối ưu chi phí, tránh sai sót</li>
+            <li>Q&A: giải đáp mọi thắc mắc</li>
+            <li>Demo dự án cá nhân của học viên</li>
+            <li>Hướng dẫn tiếp tục phát triển sau khoá học</li>
+        </ul>
+        <div class="homework">Hoàn thiện hệ thống AI cá nhân, quay video 2 phút demo workflow và chia sẻ trong group.</div>
+    </div>
+</section>
+
+<!-- KHOÁ NÂNG CAO -->
+<section id="advanced" class="page-break">
+    <h2>Khoá Nâng Cao — Claude & OpenClaw (6 buổi × 2 tiếng)</h2>
+    <p><strong>Mục tiêu tổng:</strong> Xây dựng AI Agent, automation phức tạp, tích hợp API — kiếm tiền từ kỹ năng AI.</p>
+    <p><strong>Yêu cầu:</strong> Đã hoàn thành khoá cơ bản hoặc có kiến thức tương đương.</p>
+
+    <div class="lesson-card">
+        <span class="lesson-num">1</span>
+        <span class="lesson-title">Claude API & SDK — Lập Trình Với AI</span>
+        <div class="lesson-meta">Buổi 1 • 2 tiếng • Mục tiêu: Gọi API Claude, hiểu SDK cơ bản</div>
+        <ul>
+            <li>API là gì? Tại sao cần API thay vì chat tay?</li>
+            <li>Đăng ký API key, cấu trúc request/response</li>
+            <li>System prompt, temperature, max_tokens — tuning output</li>
+            <li>So sánh models: Haiku (nhanh/rẻ) vs Sonnet vs Opus (mạnh)</li>
+            <li>Thực hành: Gọi API đầu tiên (dùng tool no-code)</li>
+            <li>Tính chi phí API & tối ưu budget</li>
+        </ul>
+        <div class="homework">Gọi thành công 20 API calls với các system prompt khác nhau, so sánh kết quả giữa models.</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="lesson-num">2</span>
+        <span class="lesson-title">Tool Use & Function Calling</span>
+        <div class="lesson-meta">Buổi 2 • 2 tiếng • Mục tiêu: AI gọi function, kết nối dịch vụ ngoài</div>
+        <ul>
+            <li>Concept: cho AI "tay chân" — gọi function thực tế</li>
+            <li>Thiết kế tool schema (JSON format)</li>
+            <li>Ví dụ: AI check thời tiết, giá cổ phiếu, gửi email</li>
+            <li>Kết nối Telegram API: bot nhận lệnh + phản hồi</li>
+            <li>Kết nối Google Sheets: đọc/ghi data tự động</li>
+            <li>Thực hành: Tạo AI bot đọc dữ liệu từ Google Sheets</li>
+        </ul>
+        <div class="homework">Tạo bot Telegram có thể nhận lệnh và truy vấn Google Sheets (VD: "Doanh thu tháng 5?").</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="lesson-num">3</span>
+        <span class="lesson-title">OpenClaw Automation Nâng Cao</span>
+        <div class="lesson-meta">Buổi 3 • 2 tiếng • Mục tiêu: Xây pipeline phức tạp, multi-step workflow</div>
+        <ul>
+            <li>Multi-step workflow: chuỗi hành động tuần tự</li>
+            <li>Conditional logic: if/else trong automation</li>
+            <li>Scheduling: chạy tự động theo lịch (daily, weekly)</li>
+            <li>Error handling: xử lý khi AI sai hoặc service lỗi</li>
+            <li>Webhook: nhận event từ bên ngoài → trigger workflow</li>
+            <li>Thực hành: Pipeline chăm sóc khách hàng tự động</li>
+        </ul>
+        <div class="homework">Xây pipeline: Form đăng ký → Gửi email welcome → Add vào CRM → Nhắc follow-up sau 3 ngày.</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="lesson-num">4</span>
+        <span class="lesson-title">RAG & Knowledge Base — AI Hiểu Dữ Liệu Của Bạn</span>
+        <div class="lesson-meta">Buổi 4 • 2 tiếng • Mục tiêu: AI trả lời dựa trên tài liệu riêng của bạn</div>
+        <ul>
+            <li>RAG là gì? Tại sao AI cần "bộ nhớ" riêng?</li>
+            <li>Upload tài liệu: PDF, Word, website → vector database</li>
+            <li>Chatbot FAQ: trả lời dựa trên data công ty</li>
+            <li>Chatbot bán hàng: tư vấn sản phẩm dựa trên catalogue</li>
+            <li>Chatbot nội bộ: hỗ trợ nhân viên tra cứu quy trình</li>
+            <li>Thực hành: Tạo chatbot FAQ cho business thật</li>
+        </ul>
+        <div class="homework">Upload 5-10 tài liệu công ty → tạo chatbot trả lời câu hỏi khách hàng, test với 20 câu hỏi.</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="lesson-num">5</span>
+        <span class="lesson-title">Xây Dựng AI Agent Hoàn Chỉnh</span>
+        <div class="lesson-meta">Buổi 5 • 2 tiếng • Mục tiêu: Tạo AI Agent tự động xử lý công việc end-to-end</div>
+        <ul>
+            <li>AI Agent vs Chatbot: khác biệt gì?</li>
+            <li>Thiết kế Agent: mục tiêu, tools, memory, planning</li>
+            <li>Agent bán hàng: tự tư vấn, chốt đơn, follow-up</li>
+            <li>Agent quản lý: tự phân việc, nhắc deadline, báo cáo</li>
+            <li>Agent content: tự nghiên cứu → viết → đăng → đo kết quả</li>
+            <li>Thực hành: Xây Agent cho use case cá nhân</li>
+        </ul>
+        <div class="homework">Xây 1 AI Agent hoạt động 24/7 cho business (VD: agent tự reply comment Facebook + inbox).</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="lesson-num">6</span>
+        <span class="lesson-title">Monetize — Kiếm Tiền Từ Kỹ Năng AI</span>
+        <div class="lesson-meta">Buổi 6 • 2 tiếng • Mục tiêu: Biến kỹ năng AI thành thu nhập</div>
+        <ul>
+            <li>5 cách kiếm tiền với AI: freelance, agency, SaaS, consulting, đào tạo</li>
+            <li>Nhận project automation cho doanh nghiệp (15-50tr/project)</li>
+            <li>Xây AI chatbot cho khách hàng (5-20tr/bot)</li>
+            <li>Tạo khoá học/content về AI (passive income)</li>
+            <li>Pricing & proposal: định giá dịch vụ AI</li>
+            <li>Demo dự án cuối khoá + Networking + Chứng chỉ</li>
+        </ul>
+        <div class="homework">Tạo portfolio 3 dự án AI + 1 proposal cho khách hàng tiềm năng. Chia sẻ trong group để nhận feedback.</div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer style="text-align: center; padding: 40px 0; color: var(--gray); font-size: 0.85rem; border-top: 1px solid #e2e8f0; margin-top: 40px;">
+    <p><strong>AI Academy</strong> — Khoá Học Claude & OpenClaw</p>
+    <p>Tài liệu nội bộ • Không chia sẻ bên ngoài</p>
+</footer>
+
+</div>
+</body>
+</html>

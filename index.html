@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khoá Học Claude & OpenClaw - Từ Cơ Bản Đến Nâng Cao</title>
+    <title>Quang Thưởng AI - Trợ Lý AI Làm Việc Thay Bạn Trên Telegram & Zalo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -2217,6 +2217,248 @@
             }
         }
 
+        /* Pain Section */
+        .pain-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+        .pain-section .section-label { color: #dc2626; }
+        .pain-section h2 { color: var(--dark); }
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .pain-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .pain-number {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: rgba(99, 102, 241, 0.1);
+        }
+        .pain-before, .pain-after {
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+        .pain-before {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+        }
+        .pain-after {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+        }
+        .pain-label {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .before-label { background: #ef4444; color: white; }
+        .after-label { background: #10b981; color: white; }
+        .pain-before h3, .pain-after h3 {
+            font-size: 1rem;
+            margin-bottom: 6px;
+            color: var(--dark);
+        }
+        .pain-before p, .pain-after p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+        .pain-time {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #fecaca;
+            color: #991b1b;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+        .pain-time.success {
+            background: #bbf7d0;
+            color: #166534;
+        }
+        .pain-proof {
+            margin-top: 12px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .pain-chat {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .tg-chat { background: #0e1621; }
+        .zalo-chat { background: #e8ecf0; }
+        .pain-chat .msg-bubble {
+            max-width: 90%;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+        .pain-summary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 48px;
+            text-align: center;
+        }
+        .pain-summary h3 { color: white; font-size: 1.4rem; margin-bottom: 12px; }
+        .pain-summary p { font-size: 1rem; color: rgba(255,255,255,0.9); }
+        .pain-summary strong { color: var(--accent); }
+
+        /* Pricing Cards */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .pricing-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 32px 24px;
+            position: relative;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .pricing-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
+            border-color: var(--primary);
+        }
+        .pricing-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #eef2ff 0%, #fce7f3 100%);
+            transform: scale(1.03);
+        }
+        .pricing-card.year-card {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+        .pricing-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+        .year-card .pricing-badge { background: var(--accent); }
+        .pricing-price { margin: 16px 0 12px; display: flex; flex-direction: column; gap: 4px; }
+        .price-old {
+            color: var(--gray);
+            text-decoration: line-through;
+            font-size: 1rem;
+        }
+        .price-main {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1;
+        }
+        .year-card .price-main { color: #b45309; }
+        .price-per-month {
+            font-size: 0.82rem;
+            color: var(--gray);
+        }
+        .pricing-save {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+        .pricing-desc {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px;
+            flex: 1;
+        }
+        .pricing-features li {
+            padding: 6px 0 6px 24px;
+            position: relative;
+            font-size: 0.88rem;
+            color: #475569;
+        }
+        .pricing-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 700;
+        }
+        .pricing-cta {
+            display: block;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+        .pricing-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        .pricing-cta.cta-highlight {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+        .flash-tag {
+            position: absolute;
+            top: -12px;
+            right: 16px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            animation: pulse 2s infinite;
+        }
+        @media (max-width: 768px) {
+            .pricing-card.featured { transform: none; }
+        }
+
         /* Gifts Section */
         .gifts-section {
             padding: 80px 0;
@@ -2327,12 +2569,13 @@
 <div id="mainContent">
 <nav>
     <div class="container">
-        <div class="logo">AI Academy</div>
+        <div class="logo">Quang Thưởng AI</div>
         <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
         <ul class="nav-links">
             <li><a href="#about">Giới thiệu</a></li>
-            <li><a href="#courses">Khoá học</a></li>
-            <li><a href="#testimonials">Học viên nói gì</a></li>
+            <li><a href="#pain">Nỗi đau thời gian</a></li>
+            <li><a href="#courses">Bảng giá</a></li>
+            <li><a href="#testimonials">Khách hàng nói gì</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#register" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Đăng ký ngay</a></li>
         </ul>
@@ -2342,12 +2585,12 @@
 <!-- Hero -->
 <section class="hero">
     <div class="container">
-        <div class="hero-badge">Khai giảng khoá mới <span>Tháng 6/2026</span></div>
-        <h1>Làm Chủ <span class="highlight">Claude AI</span> &<br><span class="highlight">OpenClaw</span> Trong 6 Tuần</h1>
-        <p>Khoá học thực chiến giúp bạn khai thác toàn bộ sức mạnh của AI — tăng năng suất 10x, xây dựng sản phẩm AI, và bứt phá sự nghiệp</p>
+        <div class="hero-badge">Ưu đãi hôm nay <span>Giảm 10 triệu gói 1 năm</span></div>
+        <h1>Ra Lệnh Trên Điện Thoại —<br><span class="highlight">AI Làm Hết Thay Bạn</span></h1>
+        <p>Quang Thưởng AI biến Telegram & Zalo thành trợ lý ảo 24/7 — gửi email, đăng bài, chăm sóc khách, phân tích data. Bạn chỉ ra lệnh, AI làm, bạn duyệt.</p>
         <div class="hero-buttons">
-            <a href="#register" class="btn btn-cta">Xem học phí & Đăng ký</a>
-            <a href="#courses" class="btn btn-outline" style="border-color: rgba(255,255,255,0.3); color: white;">Xem khoá học</a>
+            <a href="#register" class="btn btn-cta">Nhận Ưu Đãi Hôm Nay</a>
+            <a href="#pain" class="btn btn-outline" style="border-color: rgba(255,255,255,0.3); color: white;">Xem AI Làm Được Gì</a>
         </div>
         <div class="hero-trust">
             <div class="hero-stats">
@@ -2623,45 +2866,343 @@
     </div>
 </section>
 
-<!-- Courses -->
+<!-- Nỗi đau thời gian -->
+<section class="pain-section" id="pain">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <div class="section-label">Nỗi đau thời gian</div>
+            <h2>Bạn Đang Tốn Bao Nhiêu Tiếng Mỗi Ngày Cho Những Việc Lặp?</h2>
+            <p>8 ví dụ thực tế — so sánh <strong>TRƯỚC</strong> (làm tay) và <strong>SAU</strong> (dùng Quang Thưởng AI)</p>
+        </div>
+
+        <div class="pain-grid animate-on-scroll">
+            <!-- Pain 1 -->
+            <div class="pain-card">
+                <div class="pain-number">01</div>
+                <div class="pain-before">
+                    <div class="pain-label before-label">TRƯỚC ❌</div>
+                    <h3>Gửi 50 email cá nhân hoá</h3>
+                    <p>Soạn riêng cho từng người, copy-paste, sửa tên, gửi lần lượt</p>
+                    <div class="pain-time">⏱ 3-4 tiếng</div>
+                </div>
+                <div class="pain-after">
+                    <div class="pain-label after-label">SAU ✅</div>
+                    <h3>Ra lệnh 1 câu trên Telegram</h3>
+                    <p>AI soạn toàn bộ 50 email cá nhân hoá → gửi preview → duyệt → auto gửi</p>
+                    <div class="pain-time success">⚡ 5 phút</div>
+                </div>
+                <div class="pain-proof">
+                    <div class="messenger-header telegram-header" style="border-radius: 10px 10px 0 0;">
+                        <div class="messenger-avatar tg-avatar">QT</div>
+                        <div class="messenger-info">
+                            <div class="messenger-name">Quang Thưởng AI</div>
+                            <div class="messenger-status">online</div>
+                        </div>
+                    </div>
+                    <div class="pain-chat tg-chat">
+                        <div class="msg msg-out"><div class="msg-bubble tg-out">Gửi email cảm ơn 50 khách mua hàng tuần này, mỗi người 1 nội dung riêng theo sản phẩm họ mua</div></div>
+                        <div class="msg msg-in"><div class="msg-bubble tg-in">✅ Đã soạn 50 email cá nhân hoá. Xem trước và duyệt nhé anh → [Preview]</div></div>
+                        <div class="msg msg-out"><div class="msg-bubble tg-out">OK gửi hết đi</div></div>
+                        <div class="msg msg-in"><div class="msg-bubble tg-in">📧 Đã gửi 50/50 email thành công!<br>⏱ Tổng thời gian: 4 phút 32 giây</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pain 2 -->
+            <div class="pain-card">
+                <div class="pain-number">02</div>
+                <div class="pain-before">
+                    <div class="pain-label before-label">TRƯỚC ❌</div>
+                    <h3>Đăng bài Facebook kèm ảnh</h3>
+                    <p>Mở ChatGPT soạn caption → copy → vào FB → upload ảnh → chỉnh → đăng</p>
+                    <div class="pain-time">⏱ 30-45 phút/bài</div>
+                </div>
+                <div class="pain-after">
+                    <div class="pain-label after-label">SAU ✅</div>
+                    <h3>Gửi folder ảnh cho AI</h3>
+                    <p>AI phân tích ảnh → viết caption phù hợp → preview → duyệt → auto đăng FB</p>
+                    <div class="pain-time success">⚡ 2 phút/bài</div>
+                </div>
+                <div class="pain-proof">
+                    <div class="messenger-header zalo-header" style="border-radius: 10px 10px 0 0;">
+                        <div class="messenger-avatar zalo-avatar">QT</div>
+                        <div class="messenger-info">
+                            <div class="messenger-name">Quang Thưởng AI</div>
+                            <div class="messenger-status">Đang hoạt động</div>
+                        </div>
+                    </div>
+                    <div class="pain-chat zalo-chat">
+                        <div class="msg msg-out"><div class="msg-bubble zalo-out">[Gửi folder 10 ảnh sản phẩm] Đăng Facebook hết nhé</div></div>
+                        <div class="msg msg-in"><div class="msg-bubble zalo-in">🖼 Đã phân tích 10 ảnh. Caption preview:<br>📸 Ảnh 1: "Áo thun cotton mát mẻ mùa hè..."<br>📸 Ảnh 2: "Đầm dạ hội thanh lịch..."<br>...<br>Duyệt hết?</div></div>
+                        <div class="msg msg-out"><div class="msg-bubble zalo-out">Duyệt hết</div></div>
+                        <div class="msg msg-in"><div class="msg-bubble zalo-in">✅ Đã đăng 10 bài lên Facebook Page!</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pain 3 -->
+            <div class="pain-card">
+                <div class="pain-number">03</div>
+                <div class="pain-before">
+                    <div class="pain-label before-label">TRƯỚC ❌</div>
+                    <h3>Reply 100 inbox Zalo/Fb mỗi ngày</h3>
+                    <p>Ngồi reply từng người, trả lời lặp lại câu hỏi giống nhau</p>
+                    <div class="pain-time">⏱ Cả ngày</div>
+                </div>
+                <div class="pain-after">
+                    <div class="pain-label after-label">SAU ✅</div>
+                    <h3>AI chatbot tự chăm sóc 24/7</h3>
+                    <p>AI tư vấn, chốt đơn, xử lý khiếu nại — bạn chỉ xem báo cáo cuối ngày</p>
+                    <div class="pain-time success">⚡ 0 phút</div>
+                </div>
+                <div class="pain-proof">
+                    <div class="messenger-header zalo-header" style="border-radius: 10px 10px 0 0;">
+                        <div class="messenger-avatar zalo-avatar">QT</div>
+                        <div class="messenger-info">
+                            <div class="messenger-name">Báo cáo chăm sóc khách</div>
+                            <div class="messenger-status">Auto</div>
+                        </div>
+                    </div>
+                    <div class="pain-chat zalo-chat">
+                        <div class="msg msg-in"><div class="msg-bubble zalo-in">📊 Báo cáo hôm nay:<br>• 127 khách inbox<br>• 89 khách AI đã tư vấn xong<br>• 15 đơn hàng chốt thành công (tổng 28tr)<br>• 23 khách cần anh xác nhận giá</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pain 4 -->
+            <div class="pain-card">
+                <div class="pain-number">04</div>
+                <div class="pain-before">
+                    <div class="pain-label before-label">TRƯỚC ❌</div>
+                    <h3>Nhắc sinh nhật 30 khách VIP</h3>
+                    <p>Check lịch → nhớ tên → soạn tin chúc mừng cá nhân → gửi từng người</p>
+                    <div class="pain-time">⏱ 2 tiếng</div>
+                </div>
+                <div class="pain-after">
+                    <div class="pain-label after-label">SAU ✅</div>
+                    <h3>AI tự nhớ và gửi</h3>
+                    <p>Đúng ngày sinh nhật, AI gửi tin cá nhân hoá + voucher tự động</p>
+                    <div class="pain-time success">⚡ 0 phút (tự động)</div>
+                </div>
+                <div class="pain-proof">
+                    <div class="messenger-header telegram-header" style="border-radius: 10px 10px 0 0;">
+                        <div class="messenger-avatar tg-avatar">QT</div>
+                        <div class="messenger-info">
+                            <div class="messenger-name">Nhắc sinh nhật</div>
+                            <div class="messenger-status">Auto • 8:00 sáng</div>
+                        </div>
+                    </div>
+                    <div class="pain-chat tg-chat">
+                        <div class="msg msg-in"><div class="msg-bubble tg-in">🎂 Hôm nay có 2 khách VIP sinh nhật:<br>• Chị Hương (đã từng mua 3 đơn)<br>• Anh Tuấn (khách thân thiết)<br>Đã gửi tin chúc + voucher 20%. ✅</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pain 5 -->
+            <div class="pain-card">
+                <div class="pain-number">05</div>
+                <div class="pain-before">
+                    <div class="pain-label before-label">TRƯỚC ❌</div>
+                    <h3>Phân tích file Excel sales</h3>
+                    <p>Mở file → làm PivotTable → tạo biểu đồ → viết báo cáo → gửi sếp</p>
+                    <div class="pain-time">⏱ 2-3 tiếng</div>
+                </div>
+                <div class="pain-after">
+                    <div class="pain-label after-label">SAU ✅</div>
+                    <h3>Gửi file cho AI trên Zalo</h3>
+                    <p>AI tự phân tích → insight → so sánh tháng trước → đề xuất chiến lược</p>
+                    <div class="pain-time success">⚡ 1 phút</div>
+                </div>
+                <div class="pain-proof">
+                    <div class="messenger-header zalo-header" style="border-radius: 10px 10px 0 0;">
+                        <div class="messenger-avatar zalo-avatar">QT</div>
+                        <div class="messenger-info">
+                            <div class="messenger-name">Quang Thưởng AI</div>
+                            <div class="messenger-status">Đang hoạt động</div>
+                        </div>
+                    </div>
+                    <div class="pain-chat zalo-chat">
+                        <div class="msg msg-out"><div class="msg-bubble zalo-out">[File: Sales_T11.xlsx] Phân tích giúp</div></div>
+                        <div class="msg msg-in"><div class="msg-bubble zalo-in">📊 Phân tích doanh thu T11:<br>• Tổng: 2.3 tỷ (+18% vs T10)<br>• Top SP: Áo khoác (450tr)<br>• Điểm yếu: Phụ kiện giảm 12%<br>💡 Đề xuất: Đẩy combo áo+phụ kiện</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pain 6 -->
+            <div class="pain-card">
+                <div class="pain-number">06</div>
+                <div class="pain-before">
+                    <div class="pain-label before-label">TRƯỚC ❌</div>
+                    <h3>Lên content cả tuần cho FB/TikTok</h3>
+                    <p>Brainstorm chủ đề → viết 7 bài → tìm ảnh → lên lịch đăng</p>
+                    <div class="pain-time">⏱ Cả buổi chiều</div>
+                </div>
+                <div class="pain-after">
+                    <div class="pain-label after-label">SAU ✅</div>
+                    <h3>Ra 1 chủ đề → AI lên full kế hoạch</h3>
+                    <p>7 bài khác nhau, caption + hashtag + lịch đăng tối ưu → duyệt → auto đăng</p>
+                    <div class="pain-time success">⚡ 10 phút</div>
+                </div>
+                <div class="pain-proof">
+                    <div class="messenger-header telegram-header" style="border-radius: 10px 10px 0 0;">
+                        <div class="messenger-avatar tg-avatar">QT</div>
+                        <div class="messenger-info">
+                            <div class="messenger-name">Quang Thưởng AI</div>
+                            <div class="messenger-status">online</div>
+                        </div>
+                    </div>
+                    <div class="pain-chat tg-chat">
+                        <div class="msg msg-out"><div class="msg-bubble tg-out">Lên content tuần này chủ đề: Thời trang mùa đông</div></div>
+                        <div class="msg msg-in"><div class="msg-bubble tg-in">📅 Kế hoạch tuần 48:<br>T2 9:00 - "5 items must-have..."<br>T3 19:00 - "Mix đồ đi làm..."<br>T4 12:00 - "Review áo khoác..."<br>...7/7 bài đã sẵn sàng. Duyệt?</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pain 7 -->
+            <div class="pain-card">
+                <div class="pain-number">07</div>
+                <div class="pain-before">
+                    <div class="pain-label before-label">TRƯỚC ❌</div>
+                    <h3>Trả lời 100 comment FB dưới bài</h3>
+                    <p>Ngồi reply từng comment, trả lời câu hỏi lặp lại</p>
+                    <div class="pain-time">⏱ 2-3 tiếng</div>
+                </div>
+                <div class="pain-after">
+                    <div class="pain-label after-label">SAU ✅</div>
+                    <h3>AI tự reply cá nhân hoá</h3>
+                    <p>Mỗi comment được trả lời riêng theo nội dung, tự inbox khách quan tâm</p>
+                    <div class="pain-time success">⚡ Tự động 24/7</div>
+                </div>
+                <div class="pain-proof">
+                    <div class="messenger-header zalo-header" style="border-radius: 10px 10px 0 0;">
+                        <div class="messenger-avatar zalo-avatar">QT</div>
+                        <div class="messenger-info">
+                            <div class="messenger-name">Auto Reply FB</div>
+                            <div class="messenger-status">Đang chạy</div>
+                        </div>
+                    </div>
+                    <div class="pain-chat zalo-chat">
+                        <div class="msg msg-in"><div class="msg-bubble zalo-in">🔔 Báo cáo 1 tiếng gần đây:<br>• 47 comment mới<br>• AI đã reply cá nhân hoá 47/47<br>• 12 người hỏi giá → đã inbox<br>• 3 khách sẵn sàng chốt → chuyển anh xử lý</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pain 8 -->
+            <div class="pain-card">
+                <div class="pain-number">08</div>
+                <div class="pain-before">
+                    <div class="pain-label before-label">TRƯỚC ❌</div>
+                    <h3>Follow-up khách tiềm năng</h3>
+                    <p>Nhớ từng khách → nhắc đúng thời điểm → soạn tin → gửi thủ công</p>
+                    <div class="pain-time">⏱ 1-2 tiếng/ngày</div>
+                </div>
+                <div class="pain-after">
+                    <div class="pain-label after-label">SAU ✅</div>
+                    <h3>AI tự nhắc đúng timing</h3>
+                    <p>Khách chưa chốt → AI nhắc sau 2h, 1 ngày, 3 ngày — cá nhân hoá từng tin</p>
+                    <div class="pain-time success">⚡ 0 phút</div>
+                </div>
+                <div class="pain-proof">
+                    <div class="messenger-header telegram-header" style="border-radius: 10px 10px 0 0;">
+                        <div class="messenger-avatar tg-avatar">QT</div>
+                        <div class="messenger-info">
+                            <div class="messenger-name">Follow-up Auto</div>
+                            <div class="messenger-status">Đang chạy</div>
+                        </div>
+                    </div>
+                    <div class="pain-chat tg-chat">
+                        <div class="msg msg-in"><div class="msg-bubble tg-in">📈 Follow-up hôm nay:<br>• Đã nhắc lại 23 khách chưa chốt<br>• 8 khách phản hồi tích cực<br>• 5 khách chốt đơn mới (47tr)<br>• 3 khách cần anh tư vấn thêm</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pain-summary animate-on-scroll">
+            <h3>⏰ Tính tổng: Bạn đang MẤT bao nhiêu TIỀN?</h3>
+            <p>Nếu giá trị thời gian của bạn là <strong>200.000đ/giờ</strong>, mỗi ngày tiết kiệm <strong>3-4 tiếng</strong> = <strong>18-24 triệu/tháng</strong> giá trị. Gói 1 năm chỉ <strong>19.999.000đ</strong> — hoàn vốn trong vòng 1 tháng đầu tiên.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Packages -->
 <section class="courses" id="courses">
     <div class="container">
         <div class="section-title animate-on-scroll">
-            <div class="section-label">Khoá học</div>
-            <h2>Chọn Lộ Trình Phù Hợp Với Bạn</h2>
-            <p>Từ người mới bắt đầu đến chuyên gia, chúng tôi có khoá học cho bạn</p>
+            <div class="section-label">Gói hỗ trợ</div>
+            <h2>Chọn Gói Phù Hợp Với Bạn</h2>
+            <p>Sử dụng Quang Thưởng AI trên Telegram & Zalo để AI làm việc thay bạn 24/7</p>
         </div>
-        <div class="courses-grid" style="grid-template-columns: 1fr 1fr;">
-            <div class="course-card animate-on-scroll">
-                <span class="course-badge badge-basic">Cơ bản</span>
-                <h3>Claude & OpenClaw - Cơ Bản</h3>
-                <p>Nắm vững nền tảng sử dụng Claude AI kết hợp OpenClaw cho công việc hàng ngày</p>
-                <ul class="course-topics">
-                    <li>Prompt engineering cơ bản & nâng cao</li>
-                    <li>Viết nội dung chất lượng với Claude</li>
-                    <li>Giới thiệu & cài đặt OpenClaw platform</li>
-                    <li>Tích hợp Claude + OpenClaw vào workflow</li>
-                    <li>Tạo và quản lý project với templates</li>
-                    <li>Phân tích dữ liệu & tóm tắt thông minh</li>
-                    <li>Best practices & mẹo từ chuyên gia</li>
+        <div class="pricing-grid">
+            <div class="pricing-card animate-on-scroll">
+                <div class="pricing-badge">1 Tháng</div>
+                <div class="pricing-price">
+                    <span class="price-main">4.999.000đ</span>
+                </div>
+                <div class="pricing-desc">Trải nghiệm toàn bộ tính năng</div>
+                <ul class="pricing-features">
+                    <li>Trợ lý AI trên Telegram & Zalo</li>
+                    <li>Ra lệnh bằng giọng nói hoặc văn bản</li>
+                    <li>Gửi email hàng loạt tự động</li>
+                    <li>Viết caption + đăng Facebook</li>
+                    <li>Chăm sóc khách tự động</li>
+                    <li>Hỗ trợ 24/7 qua Zalo</li>
                 </ul>
-                <a href="#register" class="course-cta">Xem học phí &rarr;</a>
+                <a href="#register" class="pricing-cta" onclick="setPackage('1thang')">Đăng ký ngay →</a>
             </div>
-            <div class="course-card featured animate-on-scroll">
-                <span class="popular-tag">Phổ biến nhất</span>
-                <span class="course-badge badge-advanced">Nâng cao</span>
-                <h3>Claude & OpenClaw - Nâng Cao</h3>
-                <p>Xây dựng ứng dụng AI mạnh mẽ với Claude API & OpenClaw automation</p>
-                <ul class="course-topics">
-                    <li>Claude API, SDK & Authentication</li>
-                    <li>Tool Use & Function Calling</li>
-                    <li>Custom workflows & pipelines (OpenClaw)</li>
-                    <li>RAG & Knowledge Base</li>
-                    <li>Automation & scheduling nâng cao</li>
-                    <li>Xây dựng AI Agent hoàn chỉnh</li>
-                    <li>Enterprise deployment & scaling</li>
+
+            <div class="pricing-card animate-on-scroll">
+                <div class="pricing-badge">3 Tháng</div>
+                <div class="pricing-price">
+                    <span class="price-main">9.999.000đ</span>
+                    <span class="price-per-month">≈ 3.333k/tháng</span>
+                </div>
+                <div class="pricing-save">Tiết kiệm 33%</div>
+                <div class="pricing-desc">Đủ thời gian master mọi tính năng</div>
+                <ul class="pricing-features">
+                    <li>Tất cả quyền lợi gói 1 tháng</li>
+                    <li>Template automation mở rộng</li>
+                    <li>Hướng dẫn cá nhân 1-1</li>
+                    <li>Phân tích tối ưu workflow</li>
                 </ul>
-                <a href="#register" class="course-cta">Xem học phí &rarr;</a>
+                <a href="#register" class="pricing-cta" onclick="setPackage('3thang')">Đăng ký ngay →</a>
+            </div>
+
+            <div class="pricing-card featured animate-on-scroll">
+                <span class="popular-tag">Phổ biến nhất</span>
+                <div class="pricing-badge">6 Tháng</div>
+                <div class="pricing-price">
+                    <span class="price-main">14.999.000đ</span>
+                    <span class="price-per-month">≈ 2.500k/tháng</span>
+                </div>
+                <div class="pricing-save">Tiết kiệm 50%</div>
+                <div class="pricing-desc">Lựa chọn tối ưu nhất</div>
+                <ul class="pricing-features">
+                    <li>Tất cả quyền lợi gói 3 tháng</li>
+                    <li>Ưu tiên hỗ trợ 1-1 không giới hạn</li>
+                    <li>Cập nhật tính năng mới miễn phí</li>
+                    <li>Tặng bộ template cao cấp</li>
+                </ul>
+                <a href="#register" class="pricing-cta" onclick="setPackage('6thang')">Đăng ký ngay →</a>
+            </div>
+
+            <div class="pricing-card year-card animate-on-scroll">
+                <span class="flash-tag">🔥 Ưu đãi hôm nay</span>
+                <div class="pricing-badge">1 Năm</div>
+                <div class="pricing-price">
+                    <span class="price-old">29.999.000đ</span>
+                    <span class="price-main">19.999.000đ</span>
+                    <span class="price-per-month">≈ 1.666k/tháng</span>
+                </div>
+                <div class="pricing-save">Tiết kiệm 66% — Rẻ nhất</div>
+                <div class="pricing-desc">Đầu tư 1 lần, dùng cả năm</div>
+                <ul class="pricing-features">
+                    <li>Tất cả quyền lợi gói 6 tháng</li>
+                    <li>Tặng 6 gói quà trị giá 5.000.000đ</li>
+                    <li>Access VIP group vĩnh viễn</li>
+                    <li>Hỗ trợ triển khai cho doanh nghiệp</li>
+                    <li>Ưu tiên testing tính năng mới</li>
+                </ul>
+                <a href="#register" class="pricing-cta cta-highlight" onclick="setPackage('1nam')">Đăng ký ngay →</a>
             </div>
         </div>
     </div>
@@ -2804,10 +3345,10 @@
             <p>Không chỉ dạy lý thuyết, mà chia sẻ kinh nghiệm từ dự án thật</p>
         </div>
         <div class="instructor-card animate-on-scroll">
-            <div class="instructor-avatar">AI</div>
-            <h3>AI Academy Team</h3>
-            <p class="role">AI Engineers & Consultants</p>
-            <p>Đội ngũ giảng viên với nhiều năm kinh nghiệm triển khai AI cho doanh nghiệp từ startup đến enterprise. Chúng tôi chia sẻ kinh nghiệm thực tế từ hàng chục dự án đã hoàn thành.</p>
+            <div class="instructor-avatar">QT</div>
+            <h3>Quang Thưởng</h3>
+            <p class="role">Founder Quang Thưởng AI</p>
+            <p>Chuyên gia AI thực chiến với nhiều năm triển khai automation cho cá nhân và doanh nghiệp. Đặc biệt giỏi ứng dụng OpenClaw + Claude vào Telegram và Zalo — biến điện thoại thành trợ lý AI làm việc thay bạn.</p>
             <div class="instructor-stats">
                 <div class="instructor-stat">
                     <div class="num">50+</div>
@@ -2873,8 +3414,8 @@
     <div class="container">
         <div class="section-title animate-on-scroll">
             <div class="section-label">Đăng ký</div>
-            <h2>Nhận Báo Giá Ưu Đãi</h2>
-            <p>Điền thông tin để nhận báo giá đặc biệt chỉ dành cho bạn</p>
+            <h2>Đăng Ký Gói Hỗ Trợ</h2>
+            <p>Điền thông tin để nhận gói ưu đãi + link vào nhóm Zalo</p>
         </div>
         <div class="quote-wrapper animate-on-scroll" id="quoteForm">
             <form onsubmit="submitForm(event)" id="registerForm">
@@ -2893,12 +3434,13 @@
                     <input type="email" id="inputEmail" placeholder="email@example.com" required>
                 </div>
                 <div class="form-group">
-                    <label>Khoá học quan tâm *</label>
+                    <label>Gói hỗ trợ *</label>
                     <select id="inputCourse" required>
-                        <option value="">-- Chọn khoá học --</option>
-                        <option value="co-ban" data-price="6999000" data-original="9999000">Claude & OpenClaw - Cơ bản</option>
-                        <option value="nang-cao" data-price="13999000" data-original="19999000">Claude & OpenClaw - Nâng cao</option>
-                        <option value="combo" data-price="17999000" data-original="26999000">Combo 2 khoá (Cơ bản + Nâng cao)</option>
+                        <option value="">-- Chọn gói hỗ trợ --</option>
+                        <option value="1thang" data-price="4999000" data-original="4999000">Gói 1 Tháng - 4.999.000đ</option>
+                        <option value="3thang" data-price="9999000" data-original="14999000">Gói 3 Tháng - 9.999.000đ (tiết kiệm 33%)</option>
+                        <option value="6thang" data-price="14999000" data-original="29999000">Gói 6 Tháng - 14.999.000đ (tiết kiệm 50%)</option>
+                        <option value="1nam" data-price="19999000" data-original="29999000">Gói 1 Năm - 19.999.000đ (ưu đãi hôm nay - tiết kiệm 66%)</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -2919,8 +3461,8 @@
 <!-- Footer -->
 <footer>
     <div class="container">
-        <div class="logo">AI Academy</div>
-        <p>&copy; 2026 AI Academy. Khoá học Claude & OpenClaw. All rights reserved.</p>
+        <div class="logo">Quang Thưởng AI</div>
+        <p>&copy; 2026 Quang Thưởng AI. All rights reserved.</p>
     </div>
 </footer>
 </div><!-- end mainContent -->
@@ -3022,7 +3564,7 @@
                 </div>
             </div>
 
-            <a href="https://zalo.me/g/LINK_NHOM_ZALO" target="_blank" class="btn-zalo-group">
+            <a href="https://zalo.me/g/qghdoikqp1q1mulrx6vc" target="_blank" class="btn-zalo-group">
                 Vào Nhóm Zalo Khoá Học →
             </a>
 
@@ -3038,7 +3580,7 @@
         EMAILJS_PUBLIC_KEY: 'YOUR_EMAILJS_PUBLIC_KEY', // Thay bằng public key EmailJS
         EMAILJS_SERVICE_ID: 'YOUR_SERVICE_ID', // Thay bằng service ID
         EMAILJS_TEMPLATE_ID: 'YOUR_TEMPLATE_ID', // Thay bằng template ID
-        ZALO_GROUP_LINK: 'https://zalo.me/g/LINK_NHOM_ZALO' // Thay bằng link nhóm Zalo
+        ZALO_GROUP_LINK: 'https://zalo.me/g/qghdoikqp1q1mulrx6vc' // Link nhóm Zalo khoá học
     };
 
     // Store form data for confirmPayment
@@ -3046,6 +3588,11 @@
 
     function toggleMenu() {
         document.querySelector('.nav-links').classList.toggle('active');
+    }
+
+    function setPackage(value) {
+        const select = document.getElementById('inputCourse');
+        if (select) select.value = value;
     }
 
     function toggleFaq(el) {

@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "WebSearch"
+      "WebSearch",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(env)",
+      "Bash(git config *)",
+      "Bash(networksetup -getwebproxy \"Wi-Fi\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://github.com)",
+      "Bash(ssh -T git@github.com)"
     ]
   }
 }

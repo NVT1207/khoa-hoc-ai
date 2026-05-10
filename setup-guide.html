@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Setup Google Sheets + EmailJS</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, sans-serif; color: #334155; line-height: 1.8; padding: 40px 20px; max-width: 800px; margin: 0 auto; }
+        h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        h2 { font-size: 1.3rem; margin: 36px 0 16px; color: #4f46e5; border-bottom: 2px solid #4f46e5; padding-bottom: 8px; }
+        h3 { margin: 20px 0 8px; }
+        p, li { margin-bottom: 8px; }
+        ol { padding-left: 20px; }
+        code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; }
+        pre { background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 12px 0; font-size: 0.85rem; line-height: 1.5; }
+        .note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; }
+    </style>
+</head>
+<body>
+
+<h1>Hướng Dẫn Setup</h1>
+<p>Kết nối landing page với Google Sheets (lưu data) + EmailJS (gửi email tự động).</p>
+
+<!-- GOOGLE SHEETS -->
+<h2>Phần 1: Google Sheets — Lưu Data Đăng Ký</h2>
+
+<ol>
+    <li>Vào <a href="https://sheets.google.com" target="_blank">Google Sheets</a> → tạo spreadsheet mới tên <strong>"Đăng Ký Khoá Học"</strong></li>
+    <li>Ở dòng 1, ghi header: <code>Tên</code> | <code>SĐT</code> | <code>Email</code> | <code>Khoá học</code> | <code>Giá</code> | <code>Thời gian</code></li>
+    <li>Vào menu <strong>Extensions → Apps Script</strong></li>
+    <li>Xoá code mặc định, paste code bên dưới:</li>
+</ol>
+
+<pre>
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+
+  sheet.appendRow([
+    data.name,
+    data.phone,
+    data.email,
+    data.course,
+    data.price,
+    data.timestamp
+  ]);
+
+  return ContentService
+    .createTextOutput(JSON.stringify({status: 'ok'}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+</pre>
+
+<ol start="5">
+    <li>Bấm <strong>Deploy → New deployment</strong></li>
+    <li>Type: chọn <strong>"Web app"</strong></li>
+    <li>Execute as: <strong>"Me"</strong></li>
+    <li>Who has access: <strong>"Anyone"</strong></li>
+    <li>Bấm <strong>Deploy</strong> → Copy URL (dạng <code>https://script.google.com/macros/s/ABC.../exec</code>)</li>
+    <li>Paste URL đó vào file <code>index.html</code>, thay <code>YOUR_SCRIPT_ID</code> trong CONFIG</li>
+</ol>
+
+<div class="note">
+    <strong>Lưu ý:</strong> Lần đầu deploy, Google sẽ hỏi cấp quyền. Bấm "Review Permissions" → chọn tài khoản → "Advanced" → "Go to (unsafe)" → "Allow".
+</div>
+
+<!-- EMAILJS -->
+<h2>Phần 2: EmailJS — Gửi Email Xác Nhận Tự Động</h2>
+
+<ol>
+    <li>Vào <a href="https://www.emailjs.com/" target="_blank">emailjs.com</a> → Đăng ký free (200 email/tháng)</li>
+    <li><strong>Email Services</strong> → Add New Service → chọn <strong>Gmail</strong> → kết nối Gmail của anh → Save. Ghi nhớ <strong>Service ID</strong></li>
+    <li><strong>Email Templates</strong> → Create New Template</li>
+    <li>Thiết kế template email:
+        <ul>
+            <li>Subject: <code>Xác nhận đăng ký khoá {{course_name}} - AI Academy</code></li>
+            <li>To Email: <code>{{to_email}}</code></li>
+            <li>Content (paste vào body):</li>
+        </ul>
+    </li>
+</ol>
+
+<pre>
+Xin chào {{to_name}},
+
+Cảm ơn bạn đã đăng ký khoá {{course_name}}!
+
+Thông tin đăng ký:
+- Khoá học: {{course_name}}
+- Học phí: {{price}}
+
+Bước tiếp theo:
+1. Bọn mình sẽ xác nhận thanh toán trong 1-2 giờ
+2. Tham gia nhóm Zalo khoá học: {{zalo_link}}
+3. Nhận tài liệu pre-course trong nhóm
+
+Nếu có thắc mắc, reply email này hoặc inbox Zalo nhé!
+
+Trân trọng,
+AI Academy
+</pre>
+
+<ol start="5">
+    <li>Save template → ghi nhớ <strong>Template ID</strong></li>
+    <li>Vào <strong>Account</strong> → copy <strong>Public Key</strong></li>
+    <li>Mở file <code>index.html</code>, thay 3 giá trị trong CONFIG:
+        <ul>
+            <li><code>EMAILJS_PUBLIC_KEY</code> = Public Key</li>
+            <li><code>EMAILJS_SERVICE_ID</code> = Service ID</li>
+            <li><code>EMAILJS_TEMPLATE_ID</code> = Template ID</li>
+        </ul>
+    </li>
+</ol>
+
+<!-- ZALO -->
+<h2>Phần 3: Link Nhóm Zalo</h2>
+
+<ol>
+    <li>Mở Zalo → tạo nhóm khoá học (hoặc dùng nhóm có sẵn)</li>
+    <li>Vào nhóm → Settings → <strong>"Link tham gia nhóm"</strong> → Copy link</li>
+    <li>Mở file <code>index.html</code>, thay <code>LINK_NHOM_ZALO</code> trong CONFIG và trong thẻ <code>&lt;a&gt;</code> của trang cảm ơn</li>
+</ol>
+
+<!-- TEST -->
+<h2>Phần 4: Test Thử</h2>
+
+<ol>
+    <li>Mở <code>index.html</code> trong browser</li>
+    <li>Điền form → bấm gửi → hiện QR</li>
+    <li>Bấm "Tôi đã thanh toán"</li>
+    <li>Kiểm tra:
+        <ul>
+            <li>✅ Google Sheets có dòng mới</li>
+            <li>✅ Email đến inbox (check spam nếu không thấy)</li>
+            <li>✅ Trang cảm ơn hiện đúng + link Zalo hoạt động</li>
+        </ul>
+    </li>
+</ol>
+
+<div class="note">
+    <strong>EmailJS free:</strong> 200 email/tháng. Nếu cần nhiều hơn, upgrade $9/tháng = 1000 email. Đủ dùng cho giai đoạn đầu.
+</div>
+
+</body>
+</html>

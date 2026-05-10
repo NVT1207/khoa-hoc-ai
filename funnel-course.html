@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kịch Bản Khoá Phễu — AI Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #6366f1; --secondary: #ec4899; --accent: #f59e0b; --dark: #1e293b; --light: #f8fafc; --gray: #64748b; --success: #10b981; --radius: 12px; }
+        body { font-family: 'Inter', sans-serif; color: #334155; line-height: 1.7; background: white; }
+        @media print { .no-print { display: none !important; } body { font-size: 11pt; } .container { max-width: 100%; padding: 0; } }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+        .kit-header { padding: 60px 0 40px; text-align: center; border-bottom: 2px solid var(--primary); }
+        .kit-header h1 { font-size: 2rem; color: var(--dark); margin-bottom: 8px; }
+        .kit-header p { color: var(--gray); }
+        .kit-header .badge { display: inline-block; background: var(--secondary); color: white; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 12px; }
+
+        section { padding: 36px 0; }
+        h2 { font-size: 1.4rem; color: var(--dark); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 3px solid var(--primary); display: inline-block; }
+        h3 { font-size: 1.05rem; color: var(--primary); margin: 18px 0 8px; }
+
+        .phase-card {
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius);
+            padding: 24px;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .phase-card .phase-num {
+            background: var(--primary);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+        .phase-card .phase-title { font-weight: 700; font-size: 1.05rem; color: var(--dark); }
+        .phase-card .phase-time { color: var(--gray); font-size: 0.82rem; margin: 6px 0 12px; }
+
+        .script-box {
+            background: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 14px 18px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin: 12px 0;
+            font-size: 0.92rem;
+        }
+        .script-box.hot { border-left-color: var(--secondary); background: #fdf2f8; }
+        .script-box.proof { border-left-color: var(--success); background: #ecfdf5; }
+        .script-box.warn { border-left-color: var(--accent); background: #fffbeb; }
+        .script-label { font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; color: var(--primary); }
+        .script-box.hot .script-label { color: var(--secondary); }
+        .script-box.proof .script-label { color: var(--success); }
+        .script-box.warn .script-label { color: var(--accent); }
+
+        .demo-list { list-style: none; padding: 0; }
+        .demo-list li { padding: 8px 0 8px 24px; position: relative; font-size: 0.92rem; }
+        .demo-list li::before { content: "→"; position: absolute; left: 0; color: var(--primary); font-weight: 700; }
+
+        table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.88rem; }
+        th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { background: var(--light); font-weight: 600; }
+
+        .flow-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .flow-step {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: white;
+            text-align: center;
+        }
+        .flow-arrow { font-size: 1.2rem; color: var(--gray); padding: 0 8px; }
+        .flow-step:nth-child(1) { background: var(--primary); }
+        .flow-step:nth-child(3) { background: var(--accent); }
+        .flow-step:nth-child(5) { background: var(--success); }
+        .flow-step:nth-child(7) { background: var(--secondary); }
+
+        footer { text-align: center; padding: 40px 0; color: var(--gray); font-size: 0.85rem; border-top: 1px solid #e2e8f0; margin-top: 40px; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<header class="kit-header">
+    <div class="badge">KHOÁ PHỄU — KỊCH BẢN CHỐT SALE</div>
+    <h1>Kịch Bản Khoá Phễu</h1>
+    <p>Show AI làm được gì → Kích thích nhu cầu → Bằng chứng → Chốt sale</p>
+</header>
+
+<!-- FLOW -->
+<section>
+    <h2>Flow Tổng Thể</h2>
+    <div class="flow-visual">
+        <div class="flow-step">SHOW<br><small style="font-weight:400;font-size:0.7rem;">Demo AI live</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">KÍCH THÍCH<br><small style="font-weight:400;font-size:0.7rem;">Tạo khao khát</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">CHỨNG MINH<br><small style="font-weight:400;font-size:0.7rem;">Bằng chứng thật</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">CHỐT<br><small style="font-weight:400;font-size:0.7rem;">Đăng ký ngay</small></div>
+    </div>
+
+    <div class="script-box warn">
+        <div class="script-label">Nguyên tắc</div>
+        Không dạy. Không giải thích kỹ thuật. Chỉ SHOW kết quả → khiến họ MUỐN → CHỨNG MINH người khác đã thành công → ĐƯA link mua.
+    </div>
+</section>
+
+<!-- ====== KỊCH BẢN CHI TIẾT ====== -->
+<section>
+    <h2>Kịch Bản Chi Tiết (45-60 phút)</h2>
+
+    <!-- Phase 1: SHOW -->
+    <div class="phase-card">
+        <span class="phase-num">1</span>
+        <span class="phase-title">SHOW — Demo AI Làm Được Gì</span>
+        <div class="phase-time">0:00 - 0:20 (20 phút) — Chiếm 40% thời lượng</div>
+
+        <h3>Mở đầu gây sốc (2 phút)</h3>
+        <div class="script-box">
+            <div class="script-label">Script mở</div>
+            "Sáng nay trước khi vào đây, mình đã: viết xong 7 bài Facebook, reply 15 email, tạo 1 landing page bán hàng, và lên kế hoạch content cả tuần. Tất cả trong lúc lái xe đến quán cà phê. Mình không đụng tay vào máy tính 1 lần nào cả. Để mình show cho mọi người xem."
+        </div>
+
+        <h3>Demo live trên điện thoại (18 phút)</h3>
+        <p><strong>Share màn hình điện thoại — làm thật, không fake:</strong></p>
+        <ul class="demo-list">
+            <li><strong>Demo 1 (3 phút):</strong> Mở Telegram → ra lệnh bằng voice "Viết 5 bài post Facebook quảng cáo khoá học, kèm hashtag" → AI trả kết quả 30 giây → Show kết quả đẹp, dùng được ngay</li>
+            <li><strong>Demo 2 (3 phút):</strong> "Tạo cho anh 1 landing page bán hàng có form đăng ký, responsive mobile" → AI code xong → Mở browser show trang web hoàn chỉnh</li>
+            <li><strong>Demo 3 (3 phút):</strong> "Khách hàng Nguyễn Văn A vừa inbox hỏi giá, trả lời chuyên nghiệp kèm ưu đãi tháng này" → AI reply ngay → "Khách đã đọc và rep cảm ơn"</li>
+            <li><strong>Demo 4 (3 phút):</strong> "Tóm tắt 10 email hôm nay, reply giúp cái nào cần gấp" → AI làm xong cả 10 email</li>
+            <li><strong>Demo 5 (3 phút):</strong> "Phân tích file doanh thu tháng này, so sánh tháng trước, đưa ra 3 đề xuất tăng trưởng" → AI trả insight chuyên sâu</li>
+            <li><strong>Demo 6 (3 phút):</strong> Show automation đang chạy 24/7: chatbot tự reply inbox Zalo, tự chốt đơn — không cần động tay</li>
+        </ul>
+
+        <div class="script-box">
+            <div class="script-label">Sau mỗi demo nói</div>
+            "[X] giây. Bình thường việc này mất [Y] tiếng. Mọi người tưởng tượng mỗi ngày tiết kiệm 3-4 tiếng như vậy, 1 tháng là bao nhiêu tiếng? Bao nhiêu tiền?"
+        </div>
+    </div>
+
+    <!-- Phase 2: KÍCH THÍCH -->
+    <div class="phase-card">
+        <span class="phase-num">2</span>
+        <span class="phase-title">KÍCH THÍCH — Tạo Khao Khát "Mình Cần Cái Này"</span>
+        <div class="phase-time">0:20 - 0:30 (10 phút)</div>
+
+        <h3>Đánh vào pain (3 phút)</h3>
+        <div class="script-box hot">
+            <div class="script-label">Script</div>
+            "Mọi người đang dành bao nhiêu tiếng/ngày cho những việc LẶP ĐI LẶP LẠI? Viết content, reply tin nhắn, soạn email, làm báo cáo... Nếu 1 ngày mất 3 tiếng, 1 tháng là 66 tiếng. 1 năm là gần 800 tiếng. Gần 1 THÁNG RƯỠI liên tục ngồi làm những việc mà AI làm trong vài giây."
+        </div>
+
+        <h3>Đánh vào FOMO (3 phút)</h3>
+        <div class="script-box hot">
+            <div class="script-label">Script</div>
+            "Đối thủ của mọi người đang dùng AI rồi. Họ ra content nhanh hơn, chăm sóc khách nhanh hơn, scale nhanh hơn. Không phải họ giỏi hơn — họ chỉ có ĐÚNG CÔNG CỤ. Và trong 6 tháng tới, khoảng cách sẽ càng xa. Câu hỏi là: mọi người muốn đứng bên nào?"
+        </div>
+
+        <h3>Đánh vào ước mơ (4 phút)</h3>
+        <div class="script-box hot">
+            <div class="script-label">Script</div>
+            "Tưởng tượng: sáng dậy, mở điện thoại — AI đã xử lý email đêm qua, đã reply khách, đã đăng bài Facebook lúc 6h sáng, đã chuẩn bị báo cáo cho meeting 9h. Mình chỉ cần duyệt qua, bấm OK. Còn lại? Đi cà phê. Đi gym. Dành thời gian cho gia đình. Hoặc focus vào việc KIẾM TIỀN thay vì việc lặp.<br><br>Đây không phải tương lai. Đây là thứ học viên bọn mình đang làm MỖI NGÀY."
+        </div>
+    </div>
+
+    <!-- Phase 3: CHỨNG MINH -->
+    <div class="phase-card">
+        <span class="phase-num">3</span>
+        <span class="phase-title">CHỨNG MINH — Bằng Chứng & Nhân Chứng</span>
+        <div class="phase-time">0:30 - 0:42 (12 phút)</div>
+
+        <h3>Testimonial #1 — Chủ shop online (3 phút)</h3>
+        <div class="script-box proof">
+            <div class="script-label">Nhân chứng</div>
+            <strong>Chị Hương — Chủ shop thời trang online</strong><br>
+            "Trước đây chị ngồi reply inbox từ 8h sáng đến 11h đêm. Giờ AI reply hết, chốt được 15 đơn/ngày mà chị không cần trả lời 1 tin nhắn. Doanh thu tăng 40% vì phản hồi nhanh hơn, khách không chạy sang shop khác."<br>
+            → <em>Show screenshot Zalo chatbot đang tự reply + số đơn</em>
+        </div>
+
+        <h3>Testimonial #2 — Nhân viên văn phòng (3 phút)</h3>
+        <div class="script-box proof">
+            <div class="script-label">Nhân chứng</div>
+            <strong>Anh Minh — Marketing Manager</strong><br>
+            "Trước mất 3-4 tiếng/ngày viết content + báo cáo. Giờ ra lệnh AI sáng sớm, đến lúc vào office mọi thứ đã xong. Sếp khen năng suất tăng gấp đôi, vừa được tăng lương."<br>
+            → <em>Show screenshot output AI: 7 bài content + báo cáo tuần hoàn chỉnh</em>
+        </div>
+
+        <h3>Testimonial #3 — Chủ doanh nghiệp (3 phút)</h3>
+        <div class="script-box proof">
+            <div class="script-label">Nhân chứng</div>
+            <strong>Anh Tuấn — CEO công ty dịch vụ, 15 nhân viên</strong><br>
+            "Trước thuê 2 người chỉ để reply email + chăm sóc khách. Giờ AI làm hết, tiết kiệm 25 triệu/tháng tiền lương. ROI khoá học gấp 30 lần trong tháng đầu tiên."<br>
+            → <em>Show bảng so sánh chi phí trước/sau</em>
+        </div>
+
+        <h3>Số liệu tổng (3 phút)</h3>
+        <div class="script-box proof">
+            <div class="script-label">Bằng chứng số</div>
+            → 85% học viên áp dụng ngay tuần đầu tiên<br>
+            → Trung bình tiết kiệm 3-4 tiếng/ngày<br>
+            → Học viên trẻ nhất: 19 tuổi (sinh viên) — già nhất: 55 tuổi (chủ DN)<br>
+            → Không cần biết code, chỉ cần biết nhắn tin<br>
+            → Show screenshot group học viên đang trao đổi sôi nổi
+        </div>
+    </div>
+
+    <!-- Phase 4: CHỐT -->
+    <div class="phase-card">
+        <span class="phase-num">4</span>
+        <span class="phase-title">CHỐT SALE — Đưa Offer & Close</span>
+        <div class="phase-time">0:42 - 0:55 (13 phút)</div>
+
+        <h3>Transition vào pitch (2 phút)</h3>
+        <div class="script-box">
+            <div class="script-label">Script</div>
+            "OK mọi người đã thấy: AI làm được tất cả những việc đó. Câu hỏi là: LÀM SAO để setup được hệ thống như vậy cho riêng mình?<br><br>Nếu tự mày mò — có thể mất 6 tháng đến 1 năm, và vẫn không chắc đúng cách.<br><br>Hoặc — mọi người để bọn mình cầm tay chỉ việc, 6 buổi là xong. Và hôm nay mình có 1 offer ĐẶC BIỆT chỉ dành cho ai ở đây."
+        </div>
+
+        <h3>Đưa giá + offer (4 phút)</h3>
+        <div class="script-box hot">
+            <div class="script-label">Bảng giá</div>
+            <strong>Khoá Cơ Bản:</strong> <s>9.999.000đ</s> → 6.999.000đ (chỉ hôm nay)<br>
+            <strong>Khoá Nâng Cao:</strong> <s>19.999.000đ</s> → 13.999.000đ (chỉ hôm nay)<br>
+            <strong>Combo cả 2:</strong> <s>26.999.000đ</s> → 17.999.000đ (tiết kiệm 9 triệu)<br><br>
+            🎁 <strong>Bonus chỉ cho người tham dự hôm nay:</strong><br>
+            → Template automation trị giá 2 triệu (miễn phí)<br>
+            → Hỗ trợ 1-1 trong 30 ngày đầu<br>
+            → Truy cập group VIP vĩnh viễn
+        </div>
+
+        <h3>Tạo urgency (3 phút)</h3>
+        <div class="script-box hot">
+            <div class="script-label">Script urgency</div>
+            "Giá này mình CHỈ giữ trong 24 giờ kể từ bây giờ. Sau đó quay về giá gốc, không có ngoại lệ.<br><br>Và mỗi khoá mình chỉ nhận tối đa 20 người để đảm bảo chất lượng. Hiện đã có [X] người đăng ký từ các buổi trước, còn [Y] suất.<br><br>Link đăng ký mình gửi ở chat NGAY BÂY GIỜ. Ai nhanh tay thì còn suất."
+        </div>
+
+        <h3>CTA rõ ràng (2 phút)</h3>
+        <div class="script-box hot">
+            <div class="script-label">Script CTA</div>
+            "Mọi người bấm vào link → điền form → thanh toán luôn để giữ chỗ. Ai đăng ký xong reaction 🔥 cho mình nhé!<br><br>Không cần suy nghĩ lâu — 6.999.000đ cho kỹ năng dùng CẢ ĐỜI, tiết kiệm hàng trăm giờ mỗi năm. Đây là quyết định đầu tư, không phải chi tiêu."
+        </div>
+
+        <h3>Xử lý nhanh câu hỏi cuối (2 phút)</h3>
+        <table>
+            <tr><th>Câu hỏi</th><th>Trả lời nhanh</th></tr>
+            <tr><td>"Có trả góp không?"</td><td>"Có! Inbox mình hỗ trợ trả 2-3 đợt."</td></tr>
+            <tr><td>"Học online hay offline?"</td><td>"Online qua Zoom, có replay xem lại."</td></tr>
+            <tr><td>"Không biết code được không?"</td><td>"Chắc chắn! Chỉ cần biết nhắn tin trên ĐT."</td></tr>
+            <tr><td>"Bao giờ khai giảng?"</td><td>"Tuần sau! Đăng ký hôm nay để giữ giá ưu đãi."</td></tr>
+        </table>
+    </div>
+
+    <!-- Kết -->
+    <div class="phase-card">
+        <span class="phase-num">5</span>
+        <span class="phase-title">KẾT — Cảm Ơn & Last Call</span>
+        <div class="phase-time">0:55 - 1:00 (5 phút)</div>
+
+        <div class="script-box">
+            <div class="script-label">Script kết</div>
+            "Cảm ơn mọi người đã ở đây hôm nay! Mình hy vọng mọi người đã thấy AI có thể thay đổi cách làm việc như thế nào.<br><br>Link đăng ký mình gửi lần cuối ở đây. Nhớ: giá ưu đãi chỉ 24h, và còn [Y] suất.<br><br>Ai chưa quyết được — cứ inbox mình, mình tư vấn riêng. Không pressure gì cả. Nhưng đừng để giá ưu đãi hết rồi mới tiếc nhé!<br><br>Hẹn gặp mọi người trong khoá chính! 🚀"
+        </div>
+    </div>
+</section>
+
+<!-- SAU BUỔI -->
+<section>
+    <h2>Follow-up Sau Buổi Phễu</h2>
+    <table>
+        <tr><th>Thời điểm</th><th>Hành động</th><th>Kênh</th></tr>
+        <tr><td>Ngay sau</td><td>Gửi lại link + "Cảm ơn mọi người! Link đăng ký đây nè"</td><td>Group chat</td></tr>
+        <tr><td>2h sau</td><td>Nhắn riêng người active: "Anh/chị có muốn em tư vấn thêm không?"</td><td>Inbox</td></tr>
+        <tr><td>6h sau</td><td>"Đã có [X] người đăng ký sau buổi sáng! Còn [Y] suất ưu đãi"</td><td>Group chat</td></tr>
+        <tr><td>12h sau</td><td>Gửi thêm 1 testimonial video/screenshot</td><td>Group chat</td></tr>
+        <tr><td>20h sau</td><td>"Còn 4 tiếng nữa hết ưu đãi! Ai chưa đăng ký tranh thủ nhé"</td><td>Group chat</td></tr>
+        <tr><td>24h</td><td>"Hết ưu đãi rồi! Ai lỡ hẹn inbox mình xem còn giúp được gì không"</td><td>Group chat</td></tr>
+        <tr><td>3 ngày sau</td><td>Những ai chưa mua → mời vào buổi phễu tiếp theo</td><td>Inbox</td></tr>
+    </table>
+</section>
+
+<!-- CHECKLIST -->
+<section>
+    <h2>Checklist Trước Buổi</h2>
+    <table>
+        <tr><td>☐</td><td>Demo đã test 2-3 lần, chạy mượt không lỗi</td></tr>
+        <tr><td>☐</td><td>Testimonial + screenshot sẵn sàng show</td></tr>
+        <tr><td>☐</td><td>Link landing page hoạt động, form + thanh toán OK</td></tr>
+        <tr><td>☐</td><td>Zoom/Meet setup, mic + camera + share screen test</td></tr>
+        <tr><td>☐</td><td>Script pitch đã thuộc (không đọc nguyên văn)</td></tr>
+        <tr><td>☐</td><td>Số suất còn lại đã cập nhật (tạo urgency thật)</td></tr>
+        <tr><td>☐</td><td>Backup plan nếu demo lỗi (video đã quay sẵn)</td></tr>
+    </table>
+</section>
+
+<footer>
+    <p><strong>AI Academy</strong> — Kịch Bản Khoá Phễu</p>
+    <p>Tài liệu nội bộ • Không chia sẻ</p>
+</footer>
+
+</div>
+</body>
+</html>
